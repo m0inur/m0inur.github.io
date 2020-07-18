@@ -122,6 +122,7 @@ function setup() {
   game_over_img.hide();
   cactus_img.hide();
   ground_img.hide();
+  cloud_img.hide();
 
   var lastCard = $("#last-card");
   var lastW = lastCard.innerWidth() - 29;

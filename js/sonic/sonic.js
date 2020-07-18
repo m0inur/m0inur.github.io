@@ -46,7 +46,7 @@ class Sonic {
       cactus.vx = 0;
       groundVel = 0;
 
-      image(game_over_img, width / 2 - 140, height / 2 - 135, 250, 250)
+      image(game_over_img, width / 2 - 125, height / 2 - 140, 250, 250)
       text('Score: ' + score, width / 2, height / 2 + 25);
 
     }
