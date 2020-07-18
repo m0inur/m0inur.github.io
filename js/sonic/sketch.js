@@ -92,7 +92,7 @@ function preload() {
 
   // Game property images
   game_over_img = loadImage('js/sonic/assets/game_over.png');
-  cactus_img = loadImage('js/sonic/assets/cactus.png');
+  cactus_img = loadImage('https://github.com/m0inur/m0inur.github.io/blob/master/js/sonic/assets/Cactus.png');
   cloud_img = loadImage('js/sonic/assets/colored_cloud.png');
   ground_img = loadImage('js/sonic/assets/ground.png');
 
