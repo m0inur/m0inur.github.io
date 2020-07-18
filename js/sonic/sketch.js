@@ -113,6 +113,16 @@ function preload() {
 }
 
 function setup() {
+  sonic_run_1_img.hide();
+  sonic_run_2_img.hide();
+  sonic_run_3_img.hide();
+  sonic_run_4_img.hide();
+  sonic_jump_1_img.hide();
+  sonic_death_img.hide();
+  game_over_img.hide();
+  cactus_img.hide();
+  ground_img.hide();
+
   var lastCard = $("#last-card");
   var lastW = lastCard.innerWidth() - 29;
   var lastH = lastCard.innerHeight();
