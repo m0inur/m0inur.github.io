@@ -47,7 +47,7 @@ class Sonic {
       groundVel = 0;
 
       image(game_over_img, width / 2 - 140, height / 2 - 135, 250, 250)
-      text('Score: ' + score, width / 2 - 3, height / 2 + 25);
+      text('Score: ' + score, width / 2, height / 2 + 25);
 
     }
 
