@@ -31,7 +31,7 @@
     <div class="container" id="first_card">
       <div class="row justify-content-center" style="padding-top: 100px;">
         <div class="ml-4 col-xl-7 col-lg-8 col-sm-12 col-12" id="first-card">
-          <div class="card">
+          <div class="card" id="first-card-fade">
 
             <div class="card-body" style="text-align:center;">
 
@@ -200,14 +200,23 @@
     });
 
     $(document).ready(function () {
+
       $("#logo").click(function () {
+        $("#first-card-fade").toggleClass("first-card")
+        $("#logo").animate({
+          left: "200px",
+          opacity: 0
+        });
+
         $(".full-name").animate({
           left: "200px",
           opacity: 0
         });
 
-
-        $(".faded-text").toggleClass("faded-text-game")
+        $(".faded-text").animate({
+          left: "200px",
+          opacity: 0
+        });
       });
     });
 
@@ -219,6 +228,7 @@
     // renderer.parent("first_card");
   </script>
 
+
   <!-- Sonic game scripts -->
   <script src="js/sonic/sketch.js"></script>
   <script src="js/sonic/sonic.js"></script>
@@ -226,12 +236,15 @@
   <script src="js/sonic/ground.js"></script>
   <script src="js/sonic/cloud.js"></script>
 
-  <!-- Sonic game scripts -->
-  <!-- <script src="js/brick-breaker/brick-breaker.js"></script>
+  <script src="js/brick-breaker/brick-breaker.js"></script>
   <script src="js/brick-breaker/brick.js"></script>
   <script src="js/brick-breaker/ball.js"></script>
   <script src="js/brick-breaker/color-generator.js"></script>
-  <script src="js/brick-breaker/paddle.js"></script> -->
+  <script src="js/brick-breaker/paddle.js"></script>
+
+
+
+
 </body data-spy="scroll" data-target="#navbarResponsive">
 
 </html>

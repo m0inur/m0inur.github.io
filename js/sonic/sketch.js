@@ -83,46 +83,46 @@ var cactus = {
 // Load Images
 function preload() {
   // Sonic
-  sonic_run_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_1.png');
-  sonic_run_2_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_2.png');
-  sonic_run_3_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_3.png');
-  sonic_run_4_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_4.png');
-  sonic_jump_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_jump_1.png');
-  sonic_death_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_death.png');
+  // sonic_run_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_1.png', 'sonic');
+  // sonic_run_2_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_2.png', 'sonic');
+  // sonic_run_3_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_3.png', 'sonic');
+  // sonic_run_4_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_4.png', 'sonic');
+  // sonic_jump_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_jump_1.png', 'sonic');
+  // sonic_death_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_death.png', 'sonic');
 
   // Game property images
-  game_over_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/game_over.png');
-  cactus_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/Cactus.png');
-  cloud_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/colored_cloud.png');
-  ground_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/ground.png');
+  // game_over_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/game_over.png', 'sonic');
+  // cactus_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/Cactus.png', 'sonic');
+  // cloud_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/colored_cloud.png', 'sonic');
+  // ground_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/ground.png', 'sonic');
 
-  // sonic_run_1_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_1.png');
-  // sonic_run_2_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_2.png');
-  // sonic_run_3_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_3.png');
-  // sonic_run_4_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_4.png');
-  // sonic_jump_1_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_jump_1.png');
-  // sonic_death_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_death.png');
+  sonic_run_1_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_1.png');
+  sonic_run_2_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_2.png');
+  sonic_run_3_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_3.png');
+  sonic_run_4_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_4.png');
+  sonic_jump_1_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_jump_1.png');
+  sonic_death_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_death.png');
 
   // Game property images
-  // game_over_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/game_over.png');
-  // cactus_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/Cactus.png');
-  // cloud_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/colored_cloud.png');
-  // ground_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/ground.png');
+  game_over_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/game_over.png');
+  cactus_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/Cactus.png');
+  cloud_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/colored_cloud.png');
+  ground_img = loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/ground.png');
 
   // Sound Effects
 }
 
 function setup() {
-  sonic_run_1_img.hide();
-  sonic_run_2_img.hide();
-  sonic_run_3_img.hide();
-  sonic_run_4_img.hide();
-  sonic_jump_1_img.hide();
-  sonic_death_img.hide();
-  game_over_img.hide();
-  cactus_img.hide();
-  ground_img.hide();
-  cloud_img.hide();
+  // sonic_run_1_img.hide();
+  // sonic_run_2_img.hide();
+  // sonic_run_3_img.hide();
+  // sonic_run_4_img.hide();
+  // sonic_jump_1_img.hide();
+  // sonic_death_img.hide();
+  // game_over_img.hide();
+  // cactus_img.hide();
+  // ground_img.hide();
+  // cloud_img.hide();
 
   var lastCard = $("#last-card");
   var lastW = lastCard.innerWidth() - 29;
@@ -166,15 +166,6 @@ function setup() {
 
   textAlign(CENTER, CENTER);
 }
-
-// function type(type) {
-//   if (type == "play") {
-//     $("#last-play-btn").html("Pause")
-//     isPlaying = true;
-//   } else if (type == "pause") {
-//     isPlaying = false;
-//   }
-// }
 
 function draw() {
   background(255);
@@ -226,8 +217,8 @@ function draw() {
         }
       }
       if (!playerIsDead) {
-        textSize(20);
-        text('Score: ' + score, width - 100, 25);
+        textSize(15);
+        text('Score: ' + score, width - 40, 25);
       }
 
       // Object Properties

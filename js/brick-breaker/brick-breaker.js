@@ -7,6 +7,19 @@ let gameState
 function setup() {
   createCanvas(617, 250)
 
+  var firstCard = $("#first-card");
+  var firstW = firstCard.innerWidth() - 29;
+  var firstH = firstCard.innerHeight();
+
+  var firstX = firstCard.position();
+  // console.log(firstW)
+
+  cnv = createCanvas(firstW, firstH);
+  cnv.parent = $('#first-card');
+
+  cnv.position(firstX.left + 38, firstX.top);
+  cnv.style('z-index', -1);
+
   let colors = createColors()
   gameState = 'playing'
   paddle = new Paddle()
@@ -31,20 +44,21 @@ function createBricks(colors) {
   const brickWidth = width / bricksPerRow
   for (let row = 0; row < rows; row++) {
     for (let i = 0; i < bricksPerRow; i++) {
-      brick = new Brick(createVector(brickWidth * i, 25 * row), brickWidth, 25, colors[floor(random(0, colors.length))])
-      bricks.push(brick) 
+      console.log(colors[floor(random(0, colors.length))]);
+      brick = new Brick(createVector(brickWidth * i, 15 * row), brickWidth, 15, colors[floor(random(0, colors.length))])
+      bricks.push(brick)
     }
   }
   return bricks
 }
 
 function draw() {
-  if(gameState === 'playing') {
-    background(0)
+  if (gameState === 'playing') {
+    background(255)
 
     ball.bounceEdge()
     ball.bouncePaddle()
-    
+
     ball.update()
 
     if (keyIsDown(LEFT_ARROW)) {
@@ -84,3 +98,16 @@ function draw() {
     text(`You ${gameState}!!!`, width / 2 - 220, height / 2)
   }
 }
+
+$(document).ready(function () {
+  $(window).resize(function () {
+    var firstCard = $("#first-card");
+    var firstW = firstCard.innerWidth() - 29;
+    var firstH = firstCard.innerHeight();
+
+    var firstX = firstCard.position();
+
+    resizeCanvas(firstW, firstH);
+    cnv.position(firstX.left + 38, firstX.top);
+  });
+});
