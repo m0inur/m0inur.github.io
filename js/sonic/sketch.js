@@ -83,18 +83,18 @@ var cactus = {
 // Load Images
 function preload() {
   // Sonic
-  sonic_run_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/blob/master/js/sonic/assets/sonic_run_1.png');
-  sonic_run_2_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/blob/master/js/sonic/assets/sonic_run_2.png');
-  sonic_run_3_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/blob/master/js/sonic/assets/sonic_run_3.png');
-  sonic_run_4_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/blob/master/js/sonic/assets/sonic_run_4.png');
-  sonic_jump_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/blob/master/js/sonic/assets/sonic_jump_1.png');
-  sonic_death_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/blob/master/js/sonic/assets/sonic_death.png');
+  sonic_run_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_1.png');
+  sonic_run_2_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_2.png');
+  sonic_run_3_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_3.png');
+  sonic_run_4_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_4.png');
+  sonic_jump_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_jump_1.png');
+  sonic_death_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_death.png');
 
   // Game property images
-  game_over_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/blob/master/js/sonic/assets/game_over.png');
-  cactus_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/blob/master/js/sonic/assets/Cactus.png');
-  cloud_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/blob/master/js/sonic/assets/colored_cloud.png');
-  ground_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/blob/master/js/sonic/assets/ground.png');
+  game_over_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/game_over.png');
+  cactus_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/Cactus.png');
+  cloud_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/colored_cloud.png');
+  ground_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/ground.png');
 
   // Sound Effects
 }
