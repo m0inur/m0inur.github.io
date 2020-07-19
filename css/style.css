@@ -49,6 +49,7 @@ body {
   background-color: transparent;
   background-clip: border-box;
   border-radius: 0.25rem;
+
 }
 
 .last-card:hover {
@@ -65,6 +66,9 @@ body {
   background-color: transparent;
   background-clip: border-box;
   border-radius: 0.25rem;
+
+  height: 255px;
+
 }
 
 .card:hover {

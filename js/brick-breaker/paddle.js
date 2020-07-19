@@ -1,28 +1,30 @@
 class Paddle {
-  constructor() {
-    this.width = 125
-    this.height = 25
-    this.color = color(255)
-    this.location = createVector((width / 2) - (this.width / 2), height - 35)
+  constructor(c) {
+    this.width = 100
+    this.height = 15
+    this.color = c.color(255)
+    this.location = c.createVector((c.width / 2) - (this.width / 2), c.height - 35)
     const speed = 8
     this.speed = {
-      right: createVector(speed, 0),
-      left: createVector(speed * -1, 0)
+      right: c.createVector(speed, 0),
+      left: c.createVector(speed * -1, 0)
     }
   }
 
-  display() {
-    fill(this.color)
-    rect(this.location.x, this.location.y, this.width, this.height)
+  display(c) {
+    c.fill(0, 155, 167)
+    // c.stroke();
+    // c.fill(materialColor())
+    c.rect(this.location.x, this.location.y, this.width, this.height)
   }
 
-  move(direction) {
-    this.location.add(this.speed[direction])
+  move(c) {
+    this.location.x = c.mouseX - 60;
 
-    if(this.location.x < 0) {
+    if (this.location.x < 0) {
       this.location.x = 0
-    } else if(this.location.x + this.width > width) {
-      this.location.x = width - this.width   
+    } else if (this.location.x + this.width > c.width) {
+      this.location.x = c.width - this.width
     }
   }
 }

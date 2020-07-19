@@ -7,19 +7,21 @@ class Brick {
     this.points = 1
   }
 
-  display() {
-    fill(this.color)
-    rect(this.location.x, this.location.y, this.width, this.height)
+  display(c) {
+    var squareColor = c.color(this.color);
+    squareColor.setAlpha(254)
+    c.fill(squareColor)
+    c.noStroke();
+    c.rect(this.location.x, this.location.y, this.width, this.height)
   }
 
-  isColliding(ball) {
+  isColliding(c, ball) {
     // collide with brick
-    // AABB axis aligned bounding box
-    if(ball.location.y - ball.radius <= this.location.y + this.height &&
-        ball.location.y + ball.radius >= this.location.y &&
-        ball.location.x + ball.radius >= this.location.x &&
-        ball.location.x - ball.radius <= this.location.x + this.width) {
-          return true
-        }
+    if (ball.location.y - ball.radius + 20 <= this.location.y + this.height &&
+      ball.location.y + ball.radius >= this.location.y &&
+      ball.location.x + ball.radius >= this.location.x &&
+      ball.location.x - ball.radius + 20 <= this.location.x + this.width) {
+      return true
+    }
   }
 }

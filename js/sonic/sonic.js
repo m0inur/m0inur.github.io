@@ -39,6 +39,7 @@ class Sonic {
 
     } else {
       c.graphics = c.sonic_death_img;
+      c.playerIsDead = true;
       cloudVel = 2;
       this.y += 2
 
@@ -84,7 +85,7 @@ class Sonic {
     // return collideRectRect(this.x, this.y, this.c.width, this.height, c.x, c.y, c.c.width, c.height);
   }
 
-  draw(c, cloudVel, cactusVel, groundVel) {
+  draw(c) {
     // console.log(this.isDead)
     if (!this.isDead) {
 
@@ -92,16 +93,6 @@ class Sonic {
         this.isGrounded = true;
       }
 
-    } else {
-      c.graphics = c.sonic_death_img;
-      cloudVel = 2;
-      this.y += 2
-
-      cactusVel = 0;
-      groundVel = 0;
-
-      c.image(c.game_over_img, c.width / 2 - 125, c.height / 2 - 140, 250, 250)
-      c.text('Score: ' + c.score, c.width / 2, c.height / 2 + 25);
     }
 
     if (this.isGrounded == true && !this.isDead) {

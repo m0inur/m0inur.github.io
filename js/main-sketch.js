@@ -2,38 +2,20 @@ const sonicSketch = c => {
     // Objects
     var sonic;
     var ground;
-    var prevCactus;
+    var ground = [];
+    var cactuses = [];
+    var clouds = [];
+
     var cactusWaitime = 2;
     var minCactusWaitTime = 2;
 
     // Boolean vars
     var isCactusTime = true;
-    var hit = false;
     var isPlaying = false;
     c.playerIsDead = false;
     var isTimerDone = false;
 
-    // Array of Objects
-    var ground = [];
-    var cactuses = [];
-    var clouds = [];
-
-    // Sonic Images
-    var sonic_run_1_img;
-    var sonic_run_2_img;
-    var sonic_run_3_img;
-    var sonic_run_4_img;
-    var sonic_jump_1_img;
-    var sonic_death_img;
-
-    // Other Images
-    var game_over_img;
-    var cactus_img;
-    var cloud_img;
     var ground_img;
-
-    // Sound Effects
-    var jumpSound;
 
     // Other variables
     var graphics;
@@ -43,7 +25,7 @@ const sonicSketch = c => {
     var button;
     var cnv;
     var isGameLaunched = false;
-    var timer = 5;
+    var timer = 2;
 
     // Object Properies
     var sonic = {
@@ -251,7 +233,7 @@ const sonicSketch = c => {
 
                 // Sonic
                 sonic.draw(c, cloud.vx, cactus.vx, groundVel);
-                sonic.move(c, cloud.vx, cactus.vx, groundVel);
+                sonic.move(c);
 
                 // Cactus
                 if (0.01 > c.random(1)) {
@@ -284,6 +266,14 @@ const sonicSketch = c => {
                         cactuses.splice(i, 1);
                     }
                 }
+
+                if (c.playerIsDead) {
+                    setInterval(reload, 2000)
+                }
+
+                function reload() {
+                    window.location.reload();
+                }
             }
         }
     }
@@ -303,7 +293,7 @@ const sonicSketch = c => {
     // User Inputs
 
     c.keyPressed = function () {
-        if (key == ' ') {
+        if (c.key == ' ') {
             sonic.jump();
             // console.log('spacebar');
         }
@@ -321,4 +311,223 @@ const sonicSketch = c => {
     }
 }
 
+
+// Brick breaker gameee
+
+
+const brickBreakerSketch = c => {
+    let playerScore = 0
+    let paddle
+    let ball
+    let bricks
+    let gameState
+
+    var won = 0;
+    var pause = true;
+    var isPlaying = false;
+    var isDead = false;
+    var hasCollided = false;
+    var collidable = true;
+    var ball_img;
+    var ballVel = c.createVector(4, -4);
+    var brick = {
+        row: 4,
+        bricksPerRow: 6
+    }
+    c.preload = function () {
+        c.ball_img = c.loadImage("../img/icon2.png")
+    }
+
+    c.setup = function () {
+        // c.createCanvas(617, 250)
+        c.frameRate(60)
+
+        var firstCard = $("#first-card");
+        var firstW = firstCard.innerWidth() - 29;
+        var firstH = firstCard.innerHeight();
+
+        var firstX = firstCard.position();
+        // console.log(firstW)
+        cnv = c.createCanvas(firstW, firstH);
+        cnv.parent = $('#first-card');
+        // c.canvas = cnv
+
+        cnv.position(firstX.left + 38, firstX.top + 40);
+        cnv.style('z-index', -1);
+
+        let colors = createColors()
+        paddle = new Paddle(c)
+        ball = new Ball(ballVel, c, paddle)
+
+        $("#logo").click(function () {
+            gameState = "playing";
+            isPlaying = true;
+
+        });
+
+        bricks = createBricks(brick.row, brick.bricksPerRow, colors)
+    }
+    c.draw = function () {
+        c.background(255, 255)
+        if (isPlaying) {
+            if (pause) {
+                c.loop();
+                if (c.frameCount % 60 == 0) {
+                    pause = false;
+                }
+            }
+            if (!pause) {
+
+                var logo = $("#logo").position();
+                ball.bounceEdge(c)
+                ball.bouncePaddle()
+
+                ball.update()
+
+                paddle.move(c)
+
+
+                for (let i = bricks.length - 1; i >= 0; i--) {
+                    if (collidable) {
+                        const brick = bricks[i]
+                        if (brick.isColliding(c, ball)) {
+                            ball.reverse('y')
+                            bricks.splice(i, 1)
+                        } else {
+                            brick.display(c)
+                        }
+                    }
+                }
+
+                paddle.display(c)
+                ball.display(c)
+                if (ball.belowBottom(c)) {
+                    isDead = true;
+                }
+                if (ball.belowPaddle(c, paddle)) {
+                    collidable = false;
+                }
+
+                if (bricks.length === 0) {
+                    let colors = createColors()
+                    won += 1;
+                    if (won == 1) {
+                        brick.row = 6;
+                        brick.brickPerRow = 8;
+                        ballVel = c.createVector(6, -6);
+
+                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                        ball = new Ball(ballVel, c, paddle)
+                    }
+
+                    if (won == 2) {
+                        brick.row = 7;
+                        brick.brickPerRow = 10;
+                        ballVel = c.createVector(7, -7);
+
+                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                        ball = new Ball(ballVel, c, paddle)
+                    }
+
+                    if (won == 3) {
+                        brick.row = 8;
+                        brick.brickPerRow = 11;
+                        ballVel = c.createVector(8, -8);
+
+                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                        ball = new Ball(ballVel, c, paddle)
+                    }
+
+                    if (won == 4) {
+                        brick.row = 9;
+                        brick.brickPerRow = 12;
+                        ballVel = c.createVector(9, -9);
+
+                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                        ball = new Ball(ballVel, c, paddle)
+                    }
+                    // for (var i = 1; i < 10; i++) {
+                    //     var incRow = 1,
+                    //         incBrick = 2,
+                    //         incBallVel = 1;
+
+                    //     if (won == i) {
+                    //         console.log("won: " + i)
+                    //         brick.row += incRow
+                    //         brick.brickPerRow += incBrick
+                    //         ballVel = c.createVector(6 + incBallVel, -6 + -incBallVel)
+
+                    //         bricks = createBricks(brick.row, brick.brickPerRow, colors);
+
+                    //         ball = new Ball(ballVel, c, paddle)
+                    //     }
+                    // }
+                }
+
+                if (isDead) {
+                    c.fill(0)
+                    c.noLoop();
+                    c.textSize(50)
+                    c.text("You Lose", c.width / 2 - 100, c.height / 2 + 30);
+                    setTimeout(reload, 2000)
+                }
+            }
+        }
+    }
+
+    function createColors() {
+        const colors = []
+
+        for (let i = 0; i < 10; i++) {
+            colors.push(materialColor());
+        }
+        return colors
+    }
+
+    function reload() {
+        window.location.reload()
+    }
+
+    function createBricks(row, brickPerRow, colors) {
+        const bricks = []
+        // const rows = 4
+        // const bricksPerRow = 6
+        const rows = row
+        const bricksPerRow = brickPerRow
+        const brickWidth = c.width / bricksPerRow
+        for (let row = 0; row < rows; row++) {
+            for (let i = 0; i < bricksPerRow; i++) {
+                brick = new Brick(c.createVector(brickWidth * i, 15 * row), brickWidth, 15, colors[c.floor(c.random(0, colors.length))])
+                bricks.push(brick)
+            }
+        }
+        return bricks
+    }
+
+    $(document).ready(function () {
+        $(window).resize(function () {
+            var firstCard = $("#first-card");
+            var firstW = firstCard.innerWidth() - 29;
+            var firstH = firstCard.innerHeight();
+
+            var firstX = firstCard.position();
+
+            c.resizeCanvas(firstW, firstH);
+            cnv.position(firstX.left + 38, firstX.top + 40);
+        });
+    });
+
+    // $(document).ready(function () {
+    //     $(window).resize(function () {
+    //         var firstCard = $("#first-card");
+    //         var firstW = firstCard.innerWidth() - 29;
+    //         var firstH = firstCard.innerHeight();
+
+    //         c.resizeCanvas(firstW, firstH);
+    //         c.canvas.position(firstX.left + 38, firstX.top + 40);
+
+    //     });
+    // });
+}
+var myp5_brickBreakerSketch = new p5(brickBreakerSketch);
 var myp5_sonicSketch = new p5(sonicSketch);
