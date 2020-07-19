@@ -12,8 +12,9 @@ class Cloud {
     this.x -= this.vx;
   }
 
-  draw() {
-    image(cloud_img, this.x, this.y, this.w, this.h);
+  draw(c) {
+    // c.image(c.cloud_img, this.x, c.height - 45);
+    c.image(c.cloud_img, this.x, this.y, this.w, this.h);
     // console.log(this.spaceBetween);
     // image(graphics, this.x, height - graphics.height);
   }

@@ -99,7 +99,7 @@ canvas {
 }
 
 .card-text-faded {
-  font-size: 15px;
+  font-size: 16px;
   color: grey;
 
   -webkit-user-select: none;
@@ -114,7 +114,7 @@ canvas {
 
 .card-text-gold {
   font-weight: 100;
-  font-size: 19px;
+  font-size: 21px;
   color: #AAA500;
 
 
@@ -129,7 +129,7 @@ canvas {
 }
 
 .card-text-paragraph {
-  font-size: 16px;
+  font-size: 17px;
 
   -webkit-user-select: none;
   /* Safari */

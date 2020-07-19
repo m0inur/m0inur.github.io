@@ -6,12 +6,13 @@ class Cactus {
     this.vx = vx;
   }
 
-  move() {
-    if (!playerIsDead) {
+  move(c) {
+    if (!c.playerIsDead) {
       this.x -= this.vx;
     }
   }
-  draw() {
-    image(cactus_img, this.x, this.y + this.r - 10, this.r + 10, this.r + 15);
+  draw(c) {
+    // c.image(c.ground_img, this.x, c.height - 45);
+    c.image(c.cactus_img, this.x, this.y + this.r - 10, this.r + 10, this.r + 15);
   }
 }

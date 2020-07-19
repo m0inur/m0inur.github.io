@@ -134,7 +134,7 @@ function setup() {
   cnv = createCanvas(lastW, lastH);
   cnv.parent = $('#last-card');
 
-  cnv.position(lastX.left + 38, lastX.top);
+  cnv.position(lastX.left + 38, lastX.top + 40);
   cnv.style('z-index', -1);
 
   // Ground Properties
@@ -303,11 +303,10 @@ $(document).ready(function () {
     var lastCard = $("#last-card");
     var lastW = lastCard.innerWidth() - 29;
     var lastH = lastCard.innerHeight();
-
     var lastX = lastCard.position();
 
     resizeCanvas(lastW, lastH);
-    cnv.position(lastX.left + 38, lastX.top);
+    cnv.position(lastX.left + 38, lastX.top + 40);
   });
 });
 // User Inputs

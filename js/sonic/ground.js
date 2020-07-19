@@ -1,16 +1,22 @@
-function Ground() {
-    var graphics = loadImage('js/sonic/assets/ground.png');
+function Ground(c) {
+    // var ground_img = c.loadImage('js/sonic/assets/ground.png');
+    // var graphics = c.ground_img;
     this.x = 0;
 
     this.move = function (vx) {
-        this.x += -vx;
+        if (!c.playerIsDead) {
+            this.x += -vx;
 
-        if (this.x <= -width - 38) {
-            this.x = 0;
+            if (this.x <= -c.width - 38) {
+                this.x = 0;
+            }
+        } else {
+            vx = 0;
         }
     }
 
     this.draw = function () {
-        image(graphics, this.x, height - 45);
+
+        c.image(c.ground_img, this.x, c.height - 45);
     }
 }
