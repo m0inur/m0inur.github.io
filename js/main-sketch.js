@@ -13,18 +13,18 @@ const sonicSketch = c => {
     var isCactusTime = true;
     var isPlaying = false;
     c.playerIsDead = false;
-    var isTimerDone = false;
+    c.hasReloaded = false;
+    c.isTimerDone = false;
+    var isGameLaunched = false;
 
     var ground_img;
 
     // Other variables
-    var graphics;
     c.graphics;
+    var frameCounter = 0;
     // Collsion
     c.score = 0;
-    var button;
     var cnv;
-    var isGameLaunched = false;
     var timer = 2;
 
     // Object Properies
@@ -129,19 +129,25 @@ const sonicSketch = c => {
 
         ground = new Ground(c, ground_img);
         var btnTxt = document.getElementById("last-play-btn").textContent;
+        console.log("setup is called")
+
+        // if (c.hasReloaded) {
+        //     if (!isGameLaunched) {
+        //         isGameLaunched = true;
+        //         isPlaying = true;
+
+        //         $("#last-play-btn").toggleClass("hidden");
+        //     }
+        // }
 
         $("#last-play-btn").click(function () {
 
             if (!isGameLaunched) {
-                console.log("game launched")
                 isGameLaunched = true;
-                btnTxt = "Reset!";
                 isPlaying = true;
-                // noLoop();
 
-                $("#game-icon").toggleClass("hidden");
-                // isPlaying = true;
             }
+            $("#last-play-btn").toggleClass("hidden");
         });
 
         // Sonic 
@@ -152,9 +158,12 @@ const sonicSketch = c => {
 
     c.draw = function () {
         c.background(255);
+        $("#last-card").hover(function () {
+            $("#last-play-btn").removeClass("show")
+        });
 
         if (isPlaying) {
-            if (!isTimerDone) {
+            if (!c.isTimerDone) {
                 c.textSize(40)
                 if (timer > 0) {
                     c.text("" + timer, c.width / 2, c.height / 2);
@@ -164,11 +173,11 @@ const sonicSketch = c => {
                     c.text("" + timer, c.width / 2, c.height / 2);
                 }
                 if (timer == 0) {
-                    isTimerDone = true;
-                    c.text("Ready?", c.width / 2, c.height / 2);
+                    c.isTimerDone = true;
                 }
             }
-            if (isTimerDone) {
+            // console.log(c.isTimerDone)
+            if (c.isTimerDone) {
                 //         // c.Score increments per second
                 if (c.frameCount % 10 == 0) {
                     if (!c.playerIsDead) {
@@ -194,6 +203,7 @@ const sonicSketch = c => {
                         speed = 22
                     }
                 }
+                // console.log(c.playerIsDead)
                 if (!c.playerIsDead) {
                     c.textSize(15);
                     c.text('Score: ' + c.score, c.width - 40, 25);
@@ -215,7 +225,6 @@ const sonicSketch = c => {
 
                 ground.draw();
                 ground.move(groundVel);
-
                 // Cloud
                 if (0.005 > c.random(1)) {
                     cloud.spaceBetween = c.random(50, 100);
@@ -266,13 +275,38 @@ const sonicSketch = c => {
                         cactuses.splice(i, 1);
                     }
                 }
+                // console.log(c.playerIsDead)
 
                 if (c.playerIsDead) {
-                    setInterval(reload, 2000)
-                }
+                    frameCounter++;
+                    // console.log("reload function was called")
+                    if (frameCounter % 120 == 0) {
+                        c.playerIsDead = false;
+                        c.hasReloaded = true;
+                        isGameLaunched = false;
+                        isPlaying = false;
+                        c.isTimerDone = false;
 
-                function reload() {
-                    window.location.reload();
+                        c.score = 0;
+
+                        cactuses = [];
+                        clouds = [];
+                        $("#last-play-btn").click(function () {
+                            c.setup();
+                            $("#last-play-btn").toggleClass("hidden");
+                        });
+
+
+                        $("#contact-brand").animate({
+                            left: "10px",
+                            opacity: 1
+                        });
+
+                        $("#contact-info").animate({
+                            top: '0px'
+                        });
+                    }
+
                 }
             }
         }
@@ -303,11 +337,6 @@ const sonicSketch = c => {
         if (c.mouseX < c.width && c.mouseX > 0 && c.mouseY < c.height && c.mouseY > 0) {
             sonic.jump(c);
         }
-        if (c.playerIsDead) {
-            if (c.mouseX < c.width && c.mouseX > 0 && c.mouseY < c.height && c.mouseY > 0) {
-                window.location.reload()
-            }
-        }
     }
 }
 
@@ -325,7 +354,8 @@ const brickBreakerSketch = c => {
     var won = 0;
     var pause = true;
     var isPlaying = false;
-    var isDead = false;
+    c.isDead = false;
+    c.hasReloaded = false;
     var hasCollided = false;
     var collidable = true;
     var ball_img;
@@ -380,16 +410,18 @@ const brickBreakerSketch = c => {
 
                 var logo = $("#logo").position();
                 ball.bounceEdge(c)
-                ball.bouncePaddle()
+                if (collidable) {
+                    ball.bouncePaddle()
+                }
 
                 ball.update()
 
                 paddle.move(c)
 
-
                 for (let i = bricks.length - 1; i >= 0; i--) {
                     if (collidable) {
                         const brick = bricks[i]
+
                         if (brick.isColliding(c, ball)) {
                             ball.reverse('y')
                             bricks.splice(i, 1)
@@ -398,82 +430,113 @@ const brickBreakerSketch = c => {
                         }
                     }
                 }
+            }
 
-                paddle.display(c)
-                ball.display(c)
-                if (ball.belowBottom(c)) {
-                    isDead = true;
-                }
-                if (ball.belowPaddle(c, paddle)) {
-                    collidable = false;
-                }
 
-                if (bricks.length === 0) {
-                    let colors = createColors()
-                    won += 1;
-                    if (won == 1) {
-                        brick.row = 6;
-                        brick.brickPerRow = 8;
-                        ballVel = c.createVector(6, -6);
+            paddle.display(c)
+            ball.display(c)
+            if (ball.belowBottom(c)) {
+                c.isDead = true;
+                collidable = false;
+            }
 
-                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
-                        ball = new Ball(ballVel, c, paddle)
-                    }
+            if (bricks.length === 0) {
+                let colors = createColors()
+                won += 1;
+                if (won == 1) {
+                    brick.row = 6;
+                    brick.brickPerRow = 8;
+                    ballVel = c.createVector(6, -6);
 
-                    if (won == 2) {
-                        brick.row = 7;
-                        brick.brickPerRow = 10;
-                        ballVel = c.createVector(7, -7);
-
-                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
-                        ball = new Ball(ballVel, c, paddle)
-                    }
-
-                    if (won == 3) {
-                        brick.row = 8;
-                        brick.brickPerRow = 11;
-                        ballVel = c.createVector(8, -8);
-
-                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
-                        ball = new Ball(ballVel, c, paddle)
-                    }
-
-                    if (won == 4) {
-                        brick.row = 9;
-                        brick.brickPerRow = 12;
-                        ballVel = c.createVector(9, -9);
-
-                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
-                        ball = new Ball(ballVel, c, paddle)
-                    }
-                    // for (var i = 1; i < 10; i++) {
-                    //     var incRow = 1,
-                    //         incBrick = 2,
-                    //         incBallVel = 1;
-
-                    //     if (won == i) {
-                    //         console.log("won: " + i)
-                    //         brick.row += incRow
-                    //         brick.brickPerRow += incBrick
-                    //         ballVel = c.createVector(6 + incBallVel, -6 + -incBallVel)
-
-                    //         bricks = createBricks(brick.row, brick.brickPerRow, colors);
-
-                    //         ball = new Ball(ballVel, c, paddle)
-                    //     }
-                    // }
+                    bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                    ball = new Ball(ballVel, c, paddle)
                 }
 
-                if (isDead) {
-                    c.fill(0)
-                    c.noLoop();
-                    c.textSize(50)
-                    c.text("You Lose", c.width / 2 - 100, c.height / 2 + 30);
-                    setTimeout(reload, 2000)
+                if (won == 2) {
+                    brick.row = 7;
+                    brick.brickPerRow = 10;
+                    ballVel = c.createVector(7, -7);
+
+                    bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                    ball = new Ball(ballVel, c, paddle)
                 }
+
+                if (won == 3) {
+                    brick.row = 8;
+                    brick.brickPerRow = 11;
+                    ballVel = c.createVector(8, -8);
+
+                    bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                    ball = new Ball(ballVel, c, paddle)
+                }
+
+                if (won == 4) {
+                    brick.row = 9;
+                    brick.brickPerRow = 12;
+                    ballVel = c.createVector(9, -9);
+
+                    bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                    ball = new Ball(ballVel, c, paddle)
+                }
+                // for (var i = 1; i < 10; i++) {
+                //     var incRow = 1,
+                //         incBrick = 2,
+                //         incBallVel = 1;
+
+                //     if (won == i) {
+                //         console.log("won: " + i)
+                //         brick.row += incRow
+                //         brick.brickPerRow += incBrick
+                //         ballVel = c.createVector(6 + incBallVel, -6 + -incBallVel)
+
+                //         bricks = createBricks(brick.row, brick.brickPerRow, colors);
+
+                //         ball = new Ball(ballVel, c, paddle)
+                //     }
+                // }
+            }
+
+            if (c.isDead) {
+                if (c.frameCount % 120 == 0) {
+                    c.isDead = false;
+                    c.hasReloaded = true;
+                    isGameLaunched = false;
+                    isPlaying = false;
+                    c.isTimerDone = false;
+
+                    c.score = 0;
+
+                    ball = c.NULL;
+                    bricks = [];
+
+                    $("#logo").click(function () {
+                        c.setup();
+                    });
+
+                    $("#logo").removeClass("hidden");
+
+                    $("#logo").animate({
+                        left: "0px",
+                        top: "0px",
+                        height: "100",
+                        width: "100",
+                    });
+
+                    $(".full-name").animate({
+                        left: "0px",
+                        opacity: 1
+                    });
+
+                    $(".faded-text").animate({
+                        left: "0px",
+                        opacity: 1
+                    });
+                }
+
             }
         }
     }
+
 
     function createColors() {
         const colors = []
@@ -482,10 +545,6 @@ const brickBreakerSketch = c => {
             colors.push(materialColor());
         }
         return colors
-    }
-
-    function reload() {
-        window.location.reload()
     }
 
     function createBricks(row, brickPerRow, colors) {
@@ -503,31 +562,30 @@ const brickBreakerSketch = c => {
         }
         return bricks
     }
-
-    $(document).ready(function () {
-        $(window).resize(function () {
-            var firstCard = $("#first-card");
-            var firstW = firstCard.innerWidth() - 29;
-            var firstH = firstCard.innerHeight();
-
-            var firstX = firstCard.position();
-
-            c.resizeCanvas(firstW, firstH);
-            cnv.position(firstX.left + 38, firstX.top + 40);
-        });
-    });
-
-    // $(document).ready(function () {
-    //     $(window).resize(function () {
-    //         var firstCard = $("#first-card");
-    //         var firstW = firstCard.innerWidth() - 29;
-    //         var firstH = firstCard.innerHeight();
-
-    //         c.resizeCanvas(firstW, firstH);
-    //         c.canvas.position(firstX.left + 38, firstX.top + 40);
-
-    //     });
-    // });
 }
+// $(document).ready(function () {
+//     $(window).resize(function () {
+//         var firstCard = $("#first-card");
+//         var firstW = firstCard.innerWidth() - 29;
+//         var firstH = firstCard.innerHeight();
+
+//         var firstX = firstCard.position();
+
+//         c.resizeCanvas(firstW, firstH);
+//         cnv.position(firstX.left + 38, firstX.top + 40);
+//     });
+// });
+
+// $(document).ready(function () {
+//     $(window).resize(function () {
+//         var firstCard = $("#first-card");
+//         var firstW = firstCard.innerWidth() - 29;
+//         var firstH = firstCard.innerHeight();
+
+//         c.resizeCanvas(firstW, firstH);
+//         c.canvas.position(firstX.left + 38, firstX.top + 40);
+
+//     });
+// });
 var myp5_brickBreakerSketch = new p5(brickBreakerSketch);
 var myp5_sonicSketch = new p5(sonicSketch);

@@ -38,6 +38,7 @@ class Sonic {
       }
 
     } else {
+      // if (!c.hasReloaded) {
       c.graphics = c.sonic_death_img;
       c.playerIsDead = true;
       cloudVel = 2;
@@ -48,7 +49,7 @@ class Sonic {
 
       c.image(c.game_over_img, c.width / 2 - 125, c.height / 2 - 140, 250, 250)
       c.text('Score: ' + c.score, c.width / 2, c.height / 2 + 25);
-
+      // }
     }
 
     // Make player jump

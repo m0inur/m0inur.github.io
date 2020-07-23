@@ -29,8 +29,6 @@ class Ball {
       this.reverse('y')
     }
   }
-
-
   display(c) {
     // c.fill(this.color)
     // c.ellipse(this.location.x - 5, this.location.y, this.size, this.size)
@@ -46,14 +44,6 @@ class Ball {
   }
 
   belowBottom(c) {
-    return this.location.y - this.radius > c.height
-  }
-
-  belowPaddle(c, paddle) {
-    console.log(paddle.x);
-    if (this.y > paddle.x) {
-      console.log('below paddle')
-      return true;
-    }
+    return this.location.y - this.radius > c.height - 50
   }
 }
