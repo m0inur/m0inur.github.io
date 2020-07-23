@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Moinur Rahman</title>
+  <link rel="icon" href="img/icon2.png" type="image/x-icon">
+  <meta name="description" content="I am a high school student learning different things.">
+  <meta name="author" content="Moinur Rahman" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="js/sonic/p5.js"></script>
+  <script src="js/sonic/p5.sound.min.js"></script>
+  <script src="js/sonic/p5.collide2d.min.js"></script>
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/gh/bmoren/p5.collide2D/p5.collide2d.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body data-spy="scroll" data-target="#navbarResponsive">
+
+  <div class="loader">
+    <p>Loading...</p>
+  </div>
+  <!-- particles.js container -->
+  <div id="particles-js"></div>
+
+  <div class="body-particles">
+    <div class="container" id="first_card">
+      <div class="row justify-content-center" style="padding-top: 100px;">
+        <div class="ml-4 col-xl-7 col-lg-8 col-sm-12 col-12" id="first-card">
+          <div class="card" id="first-card-fade">
+
+            <div class="card-body" style="text-align:center;">
+
+              <img id="logo" src="img/icon.png" class="icon" style="position: relative;">
+              <br>
+              <p class="card-text full-name" style="position: relative;">Moinur Rahman Najib</p>
+              <p class="card-text-faded faded-text" style="position: relative;">
+                <i class="fa fa-angle-left"></i> Programming Hobbyist <i class="fa fa-angle-right"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top: 20px;">
+      <div class="row justify-content-center">
+        <div class="ml-4 col-xl-7 col-lg-8 col-sm-12 col-12">
+          <div class="card">
+
+            <div class="card-body">
+
+
+              <p class="card-text-gold"><i class="fa fa-book"></i> Education</p>
+              <div style="margin-left: 30px; margin-right: 30px;">
+                <p class="card-text-education d-inline">
+                  Class 8
+                </p>
+                <p class="card-text-faded card-text-date">2020 -
+                  2021</p>
+                <div style="clear: both;">
+                  <p class="card-text-paragraph mb-0"> Govt. Model School Khulna <br>
+                    Khulna, Bangladesh</p>
+                  <p class="card-text-faded mt-0">Roll : 9</p>
+                </div>
+              </div>
+              <p class="card-text-gold d-block"><i class="fa fa-cog"></i> Projects</p>
+              <div style="margin-left: 30px; margin-right: 30px;">
+                <a class="card-text-link" href="https://github.com/moinur-najib/laravel-mina-ecommerce" target="_blank">
+                  E-commerce Site
+                </a>
+                <p class="mb-0 card-text-faded">Laravel e-commerce site with Login, Registration, Admin
+                  controls, Cart & Invoice System</p>
+
+                <hr class="mb-1 mt-1">
+
+                <a class="card-text-link" href="https://github.com/moinur-najib/js-canvas-gravity" target="_blank">
+                  Gravity System
+                </a>
+                <p class="card-text-faded">Using vanilla JS and HTML, CSS</p>
+
+                <hr class="mb-1 mt-1">
+
+                <a class="card-text-link"
+                  href="https://github.com/moinur-najib/php-mysqli-blog-site-from-the-net-ninja-tutorial"
+                  target="_blank">
+                  Blog Site [WIP]
+                </a>
+                <p class="card-text-faded">Personal Blog Using Php, MySQL</p>
+              </div>
+
+              <p class="card-text-gold d-block"><i class="fa fa-cog"></i> Skills </p>
+              <div style="margin-left: 30px; margin-right: 30px;">
+                <p class="card-text-paragraph mb-0">
+                  HTML5, CSS, Php, Laravel, JS, MySQL
+                </p>
+                <p class="mb-0 card-text-faded">Experience in creating e-commerce, blog with admin panel
+                  and
+                  auth system.</p>
+
+                <hr class="mb-1 mt-1">
+
+                <p class="card-text-paragraph mb-0">
+                  Version Control (Git)
+                </p>
+                <p class="mb-0 card-text-faded">Experience in CLI, GUI & Github</p>
+
+                <hr class="mb-1 mt-1">
+
+                <p class="card-text-paragraph mb-0">
+                  Game Development
+                </p>
+                <p class="mb-0 card-text-faded">Experience with P5 js, HTML Canvas</p>
+
+
+                <hr class="mb-1 mt-1">
+
+                <p class="card-text-paragraph mb-0">
+                  Adobe Premiere Pro
+                </p>
+                <p class="mb-0 card-text-faded">Editing videos for my YouTube channel.</p>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top: 20px; margin-bottom: 50px; background-color: transparent;">
+      <div class="row justify-content-center">
+        <div class="ml-4 col-xl-7 col-lg-8 col-sm-12 col-12" id="last-card">
+          <div class="card" id="last-card-fade">
+
+            <div class="card-body">
+              <p unselectable="on" id="contact-brand" class="card-text-gold mb-0 float-left"
+                style="position: relative;">
+                <i unselectable="on" class="fa fa-bullseye"></i>
+                Contact</p>
+              <div class="container">
+                <div id="contact-info" class="row justify-content-center" style="margin-top: 65px;
+  margin-bottom: 0px; position: relative;">
+                  <a unselectable="on" id="email" class="card-text-link d-inline mr-4"
+                    href="mailto:moinurnajib@gmail.com" target="_blank"><i class="fa fa-envelope"></i>
+                    E-Mail</a>
+
+                  <a unselectable="on" class="card-text-link d-inline mr-4" href="https://github.com/moinur-najib"
+                    target="_blank"><i class="fa fa-github"></i> Github </a>
+
+                  <a unselectable="on" class="card-text-link d-inline" href="https://www.youtube.com/c/Nixonokk/videos"
+                    target="_blank"><i class=" fa fa-youtube-play"></i>
+                    YouTube</a>
+
+
+                </div>
+              </div>
+            </div>
+            <p class="card-game-btn d-inline hidden"><i id="last-play-btn" class="fa fa-gamepad"></i></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p style="text-align: center;"><span style="color: red;text-align: center; display: inline-block;" class="fa fa-heart"
+      aria-hidden="true"></span></p>
+  <canvas></canvas>
+
+  <!-- scripts -->
+  <script src="js/particles.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/jquery.min.js"></script>
+
+  <script>
+    window.addEventListener("load", function () {
+      const loader = document.querySelector(".loader");
+      loader.className = "hidden"; // class "loader hidden"
+    });
+
+    $(document).ready(function () {
+
+      $("#logo").click(function () {
+
+        $("#first-card-fade").toggleClass("first-card")
+        $("#logo").animate({
+          left: "-18",
+          top: "125",
+          height: "25",
+          width: "25",
+        });
+
+        function removeIcon() {
+          $("#logo").toggleClass("hidden")
+        }
+
+        setTimeout(removeIcon, 400)
+
+        $(".full-name").animate({
+          left: "200px",
+          opacity: 0
+        });
+
+        $(".faded-text").animate({
+          left: "200px",
+          opacity: 0
+        });
+
+      });
+    });
+
+
+    $(document).ready(function () {
+      $("#last-play-btn").click(function () {
+        console.log("last play button was clicked")
+        $("#last-card-fade").addClass("last-card")
+
+        $("#contact-info").animate({
+          top: '70px',
+          left: "15px"
+        });
+
+        $("#contact-brand").animate({
+          left: "350px",
+          opacity: 0
+        });
+
+      });
+    });
+    $("#last-card").hover(function () {
+      $("#last-play-btn").toggleClass("show")
+    });
+
+
+    // let renderer = createCanvas(sketchWidth, sketchHeight);
+    // renderer.parent("first_card");
+  </script>
+
+
+  <script src="js/main-sketch.js"></script>
+
+
+
+  <!-- <script src="js/brick-breaker/brick-breaker.js"></script> -->
+  <script src="js/brick-breaker/p5.collide2d.min.js"></script>
+  <!-- Brick breaker game scripts -->
+  <script src="js/brick-breaker/brick.js"></script>
+  <script src="js/brick-breaker/ball.js"></script>
+  <script src="js/brick-breaker/color-generator.js"></script>
+  <script src="js/brick-breaker/paddle.js"></script>
+
+
+  <!-- Sonic game scripts -->
+  <script src="js/sonic/sonic.js"></script>
+  <script src="js/sonic/cactus.js"></script>
+  <script src="js/sonic/ground.js"></script>
+  <script src="js/sonic/cloud.js"></script>
+
+</body data-spy="scroll" data-target="#navbarResponsive">
+
+</html>
