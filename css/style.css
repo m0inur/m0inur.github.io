@@ -75,6 +75,20 @@ body {
   height: 255px;
 }
 
+.first-card {
+  z-index: -1;
+}
+
+.middle-card {
+  /* background-image: url(../img/card-background.png); */
+  /* background-color: transparent; */
+  z-index: -1;
+}
+
+.last-card {
+  z-index: -1;
+}
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
     0 6px 20px 0 rgba(0, 0, 0, 0.19);

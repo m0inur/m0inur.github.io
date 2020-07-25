@@ -51,8 +51,8 @@
 
     <div class="container" style="margin-top: 20px;">
       <div class="row justify-content-center">
-        <div class="ml-4 col-xl-7 col-lg-8 col-sm-12 col-12">
-          <div class="card">
+        <div class="ml-4 col-xl-7 col-lg-8 col-sm-12 col-12" id="middle-card">
+          <div class="card" id="middle-card-fade">
 
             <div class="card-body">
 
@@ -186,6 +186,20 @@
 
     $(document).ready(function () {
 
+      $("#middle-card-fade").click(function () {
+
+        $("#middle-card-fade").toggleClass("middle-card")
+
+        $("#middle-card-fade").animate({
+          left: "-18",
+          top: "125",
+          opacity: '0'
+        });
+      });
+    });
+
+    $(document).ready(function () {
+
       $("#logo").click(function () {
 
         $("#first-card-fade").toggleClass("first-card")
@@ -261,6 +275,14 @@
   <script src="js/sonic/cactus.js"></script>
   <script src="js/sonic/ground.js"></script>
   <script src="js/sonic/cloud.js"></script>
+
+  <!-- bubble popper game scripts -->
+  <script src="js/bubblepopper/bubble.js"></script>
+  <script src="js/bubblepopper/player.js"></script>
+  <script src="js/bubblepopper/bullet.js"></script>
+  <script src="js/bubblepopper/ship-bubs.js"></script>
+  <script src="js/bubblepopper/powerups.js"></script>
+  <script src="js/bubblepopper/particle.js"></script>
 
 </body data-spy="scroll" data-target="#navbarResponsive">
 

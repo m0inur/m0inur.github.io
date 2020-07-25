@@ -32,7 +32,9 @@ class Ball {
   display(c) {
     // c.fill(this.color)
     // c.ellipse(this.location.x - 5, this.location.y, this.size, this.size)
-    c.image(c.ball_img, this.location.x - 20, this.location.y, this.radius, this.radius)
+    // this.location.x = c.mouseX - 20;
+    // this.location.y = c.mouseY;
+    c.image(c.ball_img, this.location.x, this.location.y, this.radius, this.radius)
   }
 
   update() {
