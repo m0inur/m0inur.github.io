@@ -349,16 +349,17 @@ const brickBreakerSketch = c => {
     let paddle
     let ball
     let bricks
-    let gameState
 
+    // Game States
+    let gameState
     var won = 0;
     var pause = true;
     var isPlaying = false;
     c.isDead = false;
     c.hasReloaded = false;
-    var hasCollided = false;
+    var hasWon = false;
+
     var collidable = true;
-    var ball_img;
     var ballVel = c.createVector(4, -4);
     var brick = {
         row: 4,
@@ -385,7 +386,10 @@ const brickBreakerSketch = c => {
         cnv.position(firstX.left + 38, firstX.top + 40);
         cnv.style('z-index', -1);
 
-        let colors = createColors()
+        brick.row = 4;
+        brick.bricksPerRow = 6;
+
+        c.colors = createColors()
         paddle = new Paddle(c)
         ball = new Ball(ballVel, c, paddle)
 
@@ -394,8 +398,7 @@ const brickBreakerSketch = c => {
             isPlaying = true;
 
         });
-
-        bricks = createBricks(brick.row, brick.bricksPerRow, colors)
+        bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
     }
     c.draw = function () {
         c.background(255, 255)
@@ -416,7 +419,9 @@ const brickBreakerSketch = c => {
 
                 ball.update()
 
-                paddle.move(c)
+                if (!c.isDead) {
+                    paddle.move(c)
+                }
 
                 for (let i = bricks.length - 1; i >= 0; i--) {
                     if (collidable) {
@@ -441,6 +446,9 @@ const brickBreakerSketch = c => {
             }
 
             if (bricks.length === 0) {
+                hasWon = true;
+
+                // if (!c.hasReloaded) {
                 let colors = createColors()
                 won += 1;
                 if (won == 1) {
@@ -478,6 +486,7 @@ const brickBreakerSketch = c => {
                     bricks = createBricks(brick.row, brick.brickPerRow, colors);
                     ball = new Ball(ballVel, c, paddle)
                 }
+                console.log(won);
                 // for (var i = 1; i < 10; i++) {
                 //     var incRow = 1,
                 //         incBrick = 2,
@@ -494,6 +503,7 @@ const brickBreakerSketch = c => {
                 //         ball = new Ball(ballVel, c, paddle)
                 //     }
                 // }
+                // }
             }
 
             if (c.isDead) {
@@ -502,16 +512,17 @@ const brickBreakerSketch = c => {
                     c.hasReloaded = true;
                     isGameLaunched = false;
                     isPlaying = false;
+                    collidable = true;
                     c.isTimerDone = false;
 
                     c.score = 0;
 
                     ball = c.NULL;
-                    bricks = [];
 
                     $("#logo").click(function () {
                         c.setup();
                     });
+                    $("#first-card-fade").removeClass("first-card")
 
                     $("#logo").removeClass("hidden");
 
@@ -548,7 +559,7 @@ const brickBreakerSketch = c => {
     }
 
     function createBricks(row, brickPerRow, colors) {
-        const bricks = []
+        var bricks = []
         // const rows = 4
         // const bricksPerRow = 6
         const rows = row
@@ -562,30 +573,23 @@ const brickBreakerSketch = c => {
         }
         return bricks
     }
+
+    $(document).ready(function () {
+        $(window).resize(function () {
+            brick.row = 4;
+            brick.bricksPerRow = 6
+            bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
+
+            var firstCard = $("#first-card");
+            var firstW = firstCard.innerWidth() - 29;
+            var firstH = firstCard.innerHeight();
+
+            var firstX = firstCard.position();
+
+            c.resizeCanvas(firstW, firstH);
+            cnv.position(firstX.left + 38, firstX.top + 40);
+        });
+    });
 }
-// $(document).ready(function () {
-//     $(window).resize(function () {
-//         var firstCard = $("#first-card");
-//         var firstW = firstCard.innerWidth() - 29;
-//         var firstH = firstCard.innerHeight();
-
-//         var firstX = firstCard.position();
-
-//         c.resizeCanvas(firstW, firstH);
-//         cnv.position(firstX.left + 38, firstX.top + 40);
-//     });
-// });
-
-// $(document).ready(function () {
-//     $(window).resize(function () {
-//         var firstCard = $("#first-card");
-//         var firstW = firstCard.innerWidth() - 29;
-//         var firstH = firstCard.innerHeight();
-
-//         c.resizeCanvas(firstW, firstH);
-//         c.canvas.position(firstX.left + 38, firstX.top + 40);
-
-//     });
-// });
 var myp5_brickBreakerSketch = new p5(brickBreakerSketch);
 var myp5_sonicSketch = new p5(sonicSketch);
