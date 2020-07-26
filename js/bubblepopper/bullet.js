@@ -17,20 +17,20 @@ class Bullet {
 
       this.y -= this.vy;
 
-//       if (player.angle > 0) {
-//         this.vx = player.angle;
-//       }
-//       if(this.vx > 0) {
-//         this.x -= this.vx * 0.03
-//         this.angle = 30; 
-//       }
-//       if (player.angle < 0) {
-//         this.vx = -0.30;
-//       }
-//       if(this.vx < 0) {
-//         this.x -= this.vx * 20
-//         this.angle = 30; 
-//       }
+      if (player.angle > 0) {
+        this.vx = player.angle;
+      }
+      if (this.vx > 0) {
+        this.x -= this.vx * 0.03
+        this.angle = 30;
+      }
+      if (player.angle < 0) {
+        this.vx = -0.30;
+      }
+      if (this.vx < 0) {
+        this.x -= this.vx * 20
+        this.angle = 30;
+      }
     }
     if (this.type == "leftBullet") {
 
@@ -75,8 +75,8 @@ class Bullet {
     if (this.type == "centerBullet") {
       c.push();
       c.translate(this.x, this.y);
-        // console.log("angleeee");
-        c.rotate(this.angle);
+      // console.log("angleeee");
+      c.rotate(this.angle);
 
       c.image(c.bullet_img, 8, -50, this.radius, this.radius);
       c.pop()

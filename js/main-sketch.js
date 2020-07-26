@@ -39,6 +39,10 @@ const brickBreakerSketch = c => {
         cnv.position(firstX.left + 38, firstX.top + 40);
         cnv.style('z-index', 1);
 
+        console.log("Initial Top = " + firstX.top + " Initial left = " + firstX.left)
+        console.log("Initial width = " + firstW + " Initial height = " + firstH)
+
+
         brick.row = 4;
         brick.bricksPerRow = 6;
 
@@ -238,7 +242,6 @@ const brickBreakerSketch = c => {
 
             var firstX = firstCard.position();
 
-
             c.resizeCanvas(firstW, firstH);
             cnv.position(firstX.left + 38, firstX.top + 40);
         });
@@ -246,7 +249,7 @@ const brickBreakerSketch = c => {
 }
 
 // Bubble Popper
-const bubblePopper = c => {
+const bubblePopperSketch = c => {
     // Images
     var trippleBullets
     var doublebullets
@@ -419,6 +422,8 @@ const bubblePopper = c => {
         var middleH = middleCard.innerHeight();
 
         var middleX = middleCard.position();
+        // console.log("Initial Top = " + middleX.top + " Initial left = " + middleX.left)
+        // console.log("Initial width = " + middleW + " Initial height = " + middleH)
         cnv = c.createCanvas(middleW, middleH);
         cnv.parent = $('#middle-card');
         // c.canvas = cnv
@@ -446,7 +451,8 @@ const bubblePopper = c => {
         c.angleMode(c.DEGREES);
     }
     c.draw = function () {
-        c.background("#000");
+        // c.background('rgba(0,255,0, 0.25)')
+        c.background(255)
 
         if (isPlaying) {
 
@@ -578,8 +584,8 @@ const bubblePopper = c => {
             if (c.score > 100) {
                 showMaxBubbles = 9
 
-                powerupHP = powerup.hp = c.random(2, 3)
-                bubbleHP = bubbleHittable = c.random(2, 3)
+                powerupHP = powerup.hp = c.random(3, 5)
+                bubbleHP = bubbleHittable = c.random(3, 5)
 
                 if (bubbles.length < showMaxBubbles) {
                     if (0.03 > c.random(1)) {
@@ -592,8 +598,8 @@ const bubblePopper = c => {
             if (c.score > 200) {
                 showMaxBubbles = 9
 
-                powerupHP = powerup.hp = c.random(2, 3)
-                bubbleHP = bubbleHittable = c.random(2, 3)
+                powerupHP = powerup.hp = c.random(5, 8)
+                bubbleHP = bubbleHittable = c.random(5, 8)
 
                 if (bubbles.length < showMaxBubbles) {
                     if (0.03 > c.random(1)) {
@@ -705,7 +711,7 @@ const bubblePopper = c => {
                             bParticles.colors = bubbles[i].colors;
 
                             if (!spawnDoubleScore) {
-                                c.score += c.round(bubble.hp);
+                                c.score += c.round(bubbleHP);
                             } else if (spawnDoubleScore) {
                                 showText(c, "Double Score");
 
@@ -865,7 +871,7 @@ const bubblePopper = c => {
 
         function showText(c, s) {
             if (c.textFrames == 0) {
-                c.powerTextY = c.height / 2 - 20;
+                c.powerTextY = c.height / 2 - 50;
                 c.textColor = 0;
                 textFillColor = c.bubbleColors[Math.floor(Math.random() * c.bubbleColors.length)]
                 // textFillColor = c.color(0);
@@ -934,23 +940,6 @@ const bubblePopper = c => {
 
             c.resizeCanvas(middleW, middleH);
             cnv.position(middleX.left + 38, middleX.top + 41);
-
-            // var middleCard = $("#middle-card");
-            // var middleW = middleCard.innerWidth() - 29;
-            // var middleH = middleCard.innerHeight();
-
-            // var middleX = middleCard.position();
-
-
-            // c.resizeCanvas(middleW, middleH);
-            // cnv.position(middleX.left + 38, middleX.top + 41);
-
-            //  var middleX = middleCard.position();
-            //  cnv = c.createCanvas(middleW, middleH);
-            //  cnv.parent = $('#middle-card');
-            //  // c.canvas = cnv
-
-            //  cnv.position(middleX.left + 38, middleX.top + 41);
         });
     });
 }
@@ -1024,19 +1013,6 @@ const sonicSketch = c => {
     // Load Images
     c.preload = function () {
         // Sonic
-        // sonic_run_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_1.png', 'sonic');
-        // sonic_run_2_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_2.png', 'sonic');
-        // sonic_run_3_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_3.png', 'sonic');
-        // sonic_run_4_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_4.png', 'sonic');
-        // sonic_jump_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_jump_1.png', 'sonic');
-        // sonic_death_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_death.png', 'sonic');
-
-        // // Game property images
-        // game_over_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/game_over.png', 'sonic');
-        // cactus_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/Cactus.png', 'sonic');
-        // cloud_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/colored_cloud.png', 'sonic');
-        // ground_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/ground.png', 'sonic');
-
         c.sonic_run_1_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_1.png');
         c.sonic_run_2_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_2.png');
         c.sonic_run_3_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_3.png');
@@ -1050,6 +1026,8 @@ const sonicSketch = c => {
         c.cloud_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/colored_cloud.png');
         c.ground_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/ground.png');
 
+        c.orbi = c.loadFont('../fonts/Orbitron-Bold.ttf');
+        c.numberFont = c.loadFont('../fonts/Superstar-M54.ttf');
     };
     c.setup = function () {
 
@@ -1122,10 +1100,12 @@ const sonicSketch = c => {
             if (!c.isTimerDone) {
                 c.textSize(40)
                 if (timer > 0) {
+                    c.textFont(c.numberFont)
                     c.text("" + timer, c.width / 2, c.height / 2);
                 }
                 if (c.frameCount % 60 == 0 && timer > 0) { // if the c.frameCount is divisible by 60, then a second has passed. it will stop at 0
                     timer -= 1;
+                    c.textFont(c.numberFont)
                     c.text("" + timer, c.width / 2, c.height / 2);
                 }
                 if (timer == 0) {
@@ -1159,8 +1139,9 @@ const sonicSketch = c => {
                     }
                 }
                 if (!c.playerIsDead) {
-                    c.textSize(15);
-                    c.text('Score: ' + c.score, c.width - 40, 25);
+                    c.textSize(17);
+                    c.textFont(c.orbi)
+                    c.text('Score: ' + c.score, c.width - 70, 25);
                 }
 
                 // Object Properties
@@ -1291,6 +1272,6 @@ const sonicSketch = c => {
         }
     }
 }
-var myp5_bubblePopperSketch = new p5(bubblePopper);
 var myp5_brickBreakerSketch = new p5(brickBreakerSketch);
+var myp5_bubblePopperSketch = new p5(bubblePopperSketch);
 var myp5_sonicSketch = new p5(sonicSketch);

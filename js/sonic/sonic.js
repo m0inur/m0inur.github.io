@@ -18,6 +18,10 @@ class Sonic {
       if (this.y == c.height - this.r - 40) {
         this.vy = -25;
       }
+      // console.log(c.keyCode)
+      if (c.keyCode == 38) {
+        this.vy = -25;
+      }
     }
   }
 

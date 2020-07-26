@@ -10,9 +10,8 @@ class Player {
   }
 
   move(c) {
-    if (c.mouseX < c.width - 13 && c.mouseX > 0 + 10) {
+    if (c.mouseX < c.width - 13 && c.mouseX > 0 + 20) {
       this.x = c.mouseX - 25;
-      // this.y = c.mouseY;
     }
 
 
