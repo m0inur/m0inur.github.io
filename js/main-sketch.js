@@ -39,8 +39,6 @@ const brickBreakerSketch = c => {
         cnv.position(firstX.left + 38, firstX.top + 40);
         cnv.style('z-index', 1);
 
-        console.log("Initial Top = " + firstX.top + " Initial left = " + firstX.left)
-        console.log("Initial width = " + firstW + " Initial height = " + firstH)
 
 
         brick.row = 4;
@@ -68,7 +66,6 @@ const brickBreakerSketch = c => {
             }
             if (!pause) {
 
-                var logo = $("#logo").position();
                 ball.bounceEdge(c)
                 if (collidable) {
                     ball.bouncePaddle()
@@ -341,6 +338,7 @@ const bubblePopperSketch = c => {
         y: 0,
         w: 85,
         h: 85,
+        type: "original"
     }
 
     var playerCloneProps = {
@@ -348,6 +346,7 @@ const bubblePopperSketch = c => {
         y: 0,
         w: 85,
         h: 85,
+        type: "clone"
     }
 
     var powerup = {
@@ -424,18 +423,18 @@ const bubblePopperSketch = c => {
         var middleX = middleCard.position();
         // console.log("Initial Top = " + middleX.top + " Initial left = " + middleX.left)
         // console.log("Initial width = " + middleW + " Initial height = " + middleH)
-        cnv = c.createCanvas(middleW, middleH);
-        cnv.parent = $('#middle-card');
-        // c.canvas = cnv
+        canvas = c.createCanvas(middleW, middleH);
+        canvas.parent = $('#middle-card');
+        // c.canvas = canvas
 
-        cnv.position(middleX.left + 38, middleX.top + 41);
-        cnv.style('z-index', 1);
+        canvas.position(middleX.left + 38, middleX.top + 41);
+        canvas.style('z-index', 1);
 
         playerProps.x = c.width / 2 - 30;
         playerProps.y = 600;
 
-        player = new Player(playerProps.x, playerProps.y, playerProps.w, playerProps.h);
-        playerClone = new Player(playerCloneProps.x, playerCloneProps.y, playerCloneProps.w, playerCloneProps.h);
+        player = new Player(playerProps.x, playerProps.y, playerProps.w, playerProps.h, playerProps.type);
+        playerClone = new Player(playerCloneProps.x, playerCloneProps.y, playerCloneProps.w, playerCloneProps.h, playerCloneProps.type);
 
         score.x = c.width / 1 - 100;
         score.y = 25;
@@ -857,6 +856,7 @@ const bubblePopperSketch = c => {
                 playerProps.y = 100;
 
                 playerClone.draw(c);
+                playerClone.move(c);
                 countFrames++
 
                 if (countFrames > 400) {
@@ -939,7 +939,7 @@ const bubblePopperSketch = c => {
             var middleX = middleCard.position();
 
             c.resizeCanvas(middleW, middleH);
-            cnv.position(middleX.left + 38, middleX.top + 41);
+            canvas.position(middleX.left + 38, middleX.top + 41);
         });
     });
 }

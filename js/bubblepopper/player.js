@@ -1,9 +1,10 @@
 class Player {
-  constructor(x, y, width, height) {
+  constructor(x, y, width, height, type) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    this.type = type;
     this.count = 1
     this.angle = 0;
     // this.graphics = NULL;
@@ -84,15 +85,30 @@ class Player {
   }
 
   draw(c) {
-    c.push();
+    if (this.type == "original") {
+      c.push();
 
-    c.translate(this.x, this.y);
-    c.rotate(this.angle);
-    if (c.frameCount % 60 == 0) {
-      c.turnOver = true;
+      c.translate(this.x, this.y);
+      c.rotate(this.angle);
+      if (c.frameCount % 60 == 0) {
+        c.turnOver = true;
+      }
+      c.image(c.player_img, 0, 0, this.width, this.height);
+
+      c.pop();
     }
-    c.image(c.player_img, 0, 0, this.width, this.height);
 
-    c.pop();
+    if (this.type == "clone") {
+      c.push();
+
+      c.translate(this.x, this.y);
+      c.rotate(120);
+      if (c.frameCount % 60 == 0) {
+        c.turnOver = true;
+      }
+      c.image(c.player_img, 0, 0, this.width, this.height);
+
+      c.pop();
+    }
   }
 }

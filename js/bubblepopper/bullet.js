@@ -11,26 +11,25 @@ class Bullet {
   }
 
   move(c, player) {
-    var rotateRight = false;
-    var rotateLeft = false;
+    var rightAngle = 0;
+    var leftAngle = 0;
     if (this.type == "centerBullet") {
 
       this.y -= this.vy;
 
-      if (player.angle > 0) {
-        this.vx = player.angle;
-      }
-      if (this.vx > 0) {
-        this.x -= this.vx * 0.03
-        this.angle = 30;
-      }
-      if (player.angle < 0) {
-        this.vx = -0.30;
-      }
-      if (this.vx < 0) {
-        this.x -= this.vx * 20
-        this.angle = 30;
-      }
+      // if (c.pmouseX > c.mouseX) {
+      //   leftAngle += 2;
+      // }
+
+      // if (c.pmouseX < c.mouseX) {
+      //   rightAngle = 3;
+      // }
+
+      // if (c.pmouseX == c.mouseX) {
+      //   rightAngle = 0;
+      //   leftAngle = 0;
+      // }
+      // this.x += leftAngle
     }
     if (this.type == "leftBullet") {
 
