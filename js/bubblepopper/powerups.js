@@ -35,9 +35,12 @@ class Powerup {
     c.text(c.round(this.hp + 1), this.x, this.y - 12)
 
     if (this.type != "trippleBullets") {
-      c.image(this.icon, this.x - this.r / 2 + 8, this.y - 1, this.height, this.width);
+      c.image(this.icon, this.x - this.r / 2 + 8, this.y - 1, this.width, this.height);
     } else if (this.type == "trippleBullets") {
-      c.image(this.icon, this.x - this.r / 2, this.y - 2, this.height, this.width);
+      this.height = 30;
+      this.width = 30;
+
+      c.image(this.icon, this.x - this.r / 2, this.y - 2, this.width, this.height);
     }
   }
 }

@@ -184,68 +184,64 @@
       loader.className = "hidden"; // class "loader hidden"
     });
 
-    $(document).ready(function () {
 
-      $("#middle-card-fade").click(function () {
 
-        $("#middle-card-fade").toggleClass("middle-card")
+    $("#middle-card-fade").click(function () {
 
-        $("#middle-card-fade").animate({
-          left: "-18",
-          top: "125",
-          opacity: '0'
-        });
-      });
-    });
+      $("#middle-card-fade").toggleClass("middle-card")
 
-    $(document).ready(function () {
-
-      $("#logo").click(function () {
-
-        $("#first-card-fade").toggleClass("first-card")
-        $("#logo").animate({
-          left: "-18",
-          top: "125",
-          height: "25",
-          width: "25",
-        });
-
-        function removeIcon() {
-          $("#logo").toggleClass("hidden")
-        }
-
-        setTimeout(removeIcon, 400)
-
-        $(".full-name").animate({
-          left: "20px",
-          opacity: 0
-        });
-
-        $(".faded-text").animate({
-          left: "20px",
-          opacity: 0
-        });
-
+      $("#middle-card-fade").animate({
+        left: "-18",
+        top: "125",
+        opacity: '0'
       });
     });
 
 
-    $(document).ready(function () {
-      $("#last-play-btn").click(function () {
-        console.log("last play button was clicked")
-        $("#last-card-fade").addClass("last-card")
 
-        $("#contact-info").animate({
-          top: '70px',
-          left: "15px"
-        });
+    $("#logo").click(function () {
 
-        $("#contact-brand").animate({
-          left: "350px",
-          opacity: 0
-        });
-
+      $("#first-card-fade").toggleClass("first-card")
+      $("#logo").animate({
+        left: "-18",
+        top: "125",
+        height: "25",
+        width: "25",
       });
+
+      function removeIcon() {
+        $("#logo").toggleClass("hidden")
+      }
+
+      setTimeout(removeIcon, 400)
+
+      $(".full-name").animate({
+        left: "20px",
+        opacity: 0
+      });
+
+      $(".faded-text").animate({
+        left: "20px",
+        opacity: 0
+      });
+
+    });
+
+
+    $("#last-play-btn").click(function () {
+      console.log("last play button was clicked")
+      $("#last-card-fade").addClass("last-card")
+
+      $("#contact-info").animate({
+        top: '70px',
+        left: "15px"
+      });
+
+      $("#contact-brand").animate({
+        left: "350px",
+        opacity: 0
+      });
+
     });
     $("#last-card").hover(function () {
       $("#last-play-btn").toggleClass("show-btn")

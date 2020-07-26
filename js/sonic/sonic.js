@@ -11,11 +11,10 @@ class Sonic {
 
     // Boolean vars
     this.isGrounded = true;
-    this.isDead = false;
   }
 
   jump(c) {
-    if (!this.isDead) {
+    if (!c.playerIsDead) {
       if (this.y == c.height - this.r - 40) {
         this.vy = -25;
       }
@@ -24,7 +23,7 @@ class Sonic {
 
   move(c, cloudVel, cactusVel, groundVel) {
     // console.log(this.y)
-    if (!this.isDead) {
+    if (!c.playerIsDead) {
 
       if (this.vy < 0) {
         this.isGrounded = false;
@@ -81,14 +80,13 @@ class Sonic {
     var hit = c.collideCircleCircle(x1, y1, this.r, x2, y2, cl.r);
     if (hit) {
       c.playerIsDead = true;
-      this.isDead = true;
     }
     // return collideRectRect(this.x, this.y, this.c.width, this.height, c.x, c.y, c.c.width, c.height);
   }
 
   draw(c) {
-    // console.log(this.isDead)
-    if (!this.isDead) {
+    // console.log(c.playerIsDead)
+    if (!c.playerIsDead) {
 
       if (this.y == c.height - this.r - 40) {
         this.isGrounded = true;
@@ -96,7 +94,7 @@ class Sonic {
 
     }
 
-    if (this.isGrounded == true && !this.isDead) {
+    if (this.isGrounded == true && !c.playerIsDead) {
 
       if ((c.int)(c.frameCount / 3) % 4 == 0) {
         c.graphics = c.sonic_run_1_img;

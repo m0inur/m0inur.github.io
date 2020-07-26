@@ -33,9 +33,12 @@ const brickBreakerSketch = c => {
         var firstH = firstCard.innerHeight();
 
         var firstX = firstCard.position();
+        // console.log(firstW)
         cnv = c.createCanvas(firstW, firstH);
         cnv.parent = $('#first-card');
         // c.canvas = cnv
+        console.log("Initial width = " + firstW + " Initial height = " + firstH)
+        console.log("Initial left = " + firstX.left + " Initial top = " + firstX.top)
         cnv.position(firstX.left + 38, firstX.top + 40);
         cnv.style('z-index', 1);
 
@@ -81,6 +84,7 @@ const brickBreakerSketch = c => {
                         const brick = bricks[i]
 
                         if (brick.isColliding(c, ball)) {
+                            // console.log("collided")
                             // ball.velocity -= 2
                             ball.reverse('y')
                             bricks.splice(i, 1)
@@ -146,6 +150,7 @@ const brickBreakerSketch = c => {
                 //         incBallVel = 1;
 
                 //     if (won == i) {
+                //         console.log("won: " + i)
                 //         brick.row += incRow
                 //         brick.brickPerRow += incBrick
                 //         ballVel = c.createVector(6 + incBallVel, -6 + -incBallVel)
@@ -238,6 +243,8 @@ const brickBreakerSketch = c => {
 
             var firstX = firstCard.position();
 
+            console.log("\n\nResized width = " + firstW + "Resized height = " + firstH)
+            console.log("Resized left = " + firstX.left + "Resized top = " + firstX.top)
 
             c.resizeCanvas(firstW, firstH);
             cnv.position(firstX.left + 38, firstX.top + 40);
@@ -419,6 +426,8 @@ const bubblePopper = c => {
         var middleH = middleCard.innerHeight();
 
         var middleX = middleCard.position();
+        // console.log("Initial width = " + middleW + " Initial height = " + middleH)
+        // console.log("Initial Left = " + middleX.left + " Initial Top = " + middleX.top)
         cnv = c.createCanvas(middleW, middleH);
         cnv.parent = $('#middle-card');
         // c.canvas = cnv
@@ -480,6 +489,7 @@ const bubblePopper = c => {
             // PowerUps properties
             powerup.x = c.floor(c.random(10, (c.width - 50) / 3)) * 3;
             powerup.y = c.floor(c.random(10, (c.height - 150) / 3)) * 3;
+            // console.log((c.height - 150) / 3 * 3);
             // Initialize Objects
             /* ------------------------------ Bullets -------------------------------- */
             if (c.frameCount % bullet.spawnRate == 0) {
@@ -608,6 +618,7 @@ const bubblePopper = c => {
             //         if (!showingPowerup) {
             //             if (lastPowerup != allPowerups[i]) {
 
+            //                 console.log(allPowerups[i]);
             //                 powerup.type = allPowerups[i];
             //                 powerup.icon = allPowerups[i];
             //                 powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.powerup.icon));
@@ -665,6 +676,7 @@ const bubblePopper = c => {
             //             powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.clone));
 
             //             showingPowerup = true;
+            //             console.log(powerup.type);
             //             lastPowerup = powerup.type
             //             powerupShowText = true;
             //         }
@@ -941,15 +953,19 @@ const bubblePopper = c => {
 
             // var middleX = middleCard.position();
 
+            // console.log("\n\nResized width = " + middleW + " Resized height = " + middleH)
+            // console.log("\n\nResized Left = " + middleX.left + " Resized Top = " + middleX.top)
 
             // c.resizeCanvas(middleW, middleH);
             // cnv.position(middleX.left + 38, middleX.top + 41);
 
             //  var middleX = middleCard.position();
+            //  // console.log(middleW)
             //  cnv = c.createCanvas(middleW, middleH);
             //  cnv.parent = $('#middle-card');
             //  // c.canvas = cnv
 
+            //  console.log(middleW + " " + middleH)
             //  cnv.position(middleX.left + 38, middleX.top + 41);
         });
     });
@@ -1024,19 +1040,6 @@ const sonicSketch = c => {
     // Load Images
     c.preload = function () {
         // Sonic
-        // sonic_run_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_1.png', 'sonic');
-        // sonic_run_2_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_2.png', 'sonic');
-        // sonic_run_3_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_3.png', 'sonic');
-        // sonic_run_4_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_4.png', 'sonic');
-        // sonic_jump_1_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_jump_1.png', 'sonic');
-        // sonic_death_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_death.png', 'sonic');
-
-        // // Game property images
-        // game_over_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/game_over.png', 'sonic');
-        // cactus_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/Cactus.png', 'sonic');
-        // cloud_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/colored_cloud.png', 'sonic');
-        // ground_img = createImg('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/ground.png', 'sonic');
-
         c.sonic_run_1_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_1.png');
         c.sonic_run_2_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_2.png');
         c.sonic_run_3_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_3.png');
@@ -1070,12 +1073,13 @@ const sonicSketch = c => {
         var lastH = lastCard.innerHeight();
 
         var lastX = lastCard.position();
+        // console.log(lastW)
 
         cnv = c.createCanvas(lastW, lastH);
         cnv.parent = $('#last-card');
 
         cnv.position(lastX.left + 38, lastX.top + 40);
-        // cnv.style('z-index', -1);
+        cnv.style('z-index', -1);
 
         // Ground Properties
         ground.img = ground_img;
@@ -1086,6 +1090,7 @@ const sonicSketch = c => {
 
         ground = new Ground(c, ground_img);
         var btnTxt = document.getElementById("last-play-btn").textContent;
+        console.log("setup is called")
 
         // if (c.hasReloaded) {
         //     if (!isGameLaunched) {
@@ -1132,6 +1137,7 @@ const sonicSketch = c => {
                     c.isTimerDone = true;
                 }
             }
+            // console.log(c.isTimerDone)
             if (c.isTimerDone) {
                 //         // c.Score increments per second
                 if (c.frameCount % 10 == 0) {
@@ -1158,6 +1164,7 @@ const sonicSketch = c => {
                         speed = 22
                     }
                 }
+                // console.log(c.playerIsDead)
                 if (!c.playerIsDead) {
                     c.textSize(15);
                     c.text('Score: ' + c.score, c.width - 40, 25);
@@ -1229,9 +1236,11 @@ const sonicSketch = c => {
                         cactuses.splice(i, 1);
                     }
                 }
+                // console.log(c.playerIsDead)
 
                 if (c.playerIsDead) {
                     frameCounter++;
+                    // console.log("reload function was called")
                     if (frameCounter % 120 == 0) {
                         c.playerIsDead = false;
                         c.hasReloaded = true;
@@ -1243,10 +1252,10 @@ const sonicSketch = c => {
 
                         cactuses = [];
                         clouds = [];
-                        // $("#last-play-btn").click(function () {
-                        //     c.setup();
-                        //     $("#last-play-btn").toggleClass("hidden");
-                        // });
+                        $("#last-play-btn").click(function () {
+                            c.setup();
+                            $("#last-play-btn").toggleClass("hidden");
+                        });
 
                         $("#last-card-fade").removeClass("last-card");
 
@@ -1282,6 +1291,7 @@ const sonicSketch = c => {
     c.keyPressed = function () {
         if (c.key == ' ') {
             sonic.jump();
+            // console.log('spacebar');
         }
     }
 
@@ -1291,6 +1301,8 @@ const sonicSketch = c => {
         }
     }
 }
+
+
 var myp5_bubblePopperSketch = new p5(bubblePopper);
 var myp5_brickBreakerSketch = new p5(brickBreakerSketch);
 var myp5_sonicSketch = new p5(sonicSketch);
