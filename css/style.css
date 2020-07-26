@@ -6,7 +6,7 @@
 
 canvas {
   display: block;
-  border: black;
+  border: white;
 }
 
 .hidden {
@@ -38,7 +38,7 @@ body {
   font-family: 'Roboto Mono',
     monospace;
   background-image: linear-gradient(0deg, #21D4FD, #B721FF);
-  /* background-color: #333; */
+  background-color: #333;
   height: 100%;
   margin: 0;
   background-repeat: no-repeat;
@@ -70,7 +70,7 @@ body {
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.first-card {
+/* .first-card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -78,19 +78,18 @@ body {
   word-wrap: break-word;
   background-color: transparent;
   /* background-image: url(../img/card-background.png); */
-  background-clip: border-box;
-  border-radius: 0.25rem;
-  opacity: 0.90;
-
-  height: 255px;
-}
+/* background-clip: border-box;
+border-radius: 0.25rem; */
+/* min-height: 250px; */
+/* opacity: 0.90; */
+/* } */
 
 .first-card {
+  /* background-image: url(../img/glamorous.png); */
   z-index: -1;
 }
 
 .middle-card {
-  /* background-image: url(../img/card-background.png); */
   /* background-color: transparent; */
   z-index: -1;
 }
@@ -99,10 +98,26 @@ body {
   z-index: -1;
 }
 
+.first-card-img {
+  background-image: url(../img/glamorous.png);
+  border: white;
+}
+
+.second-card-img {
+  background-image: url(../img/floating-cogs.png);
+  border: white;
+}
+
+.third-card-img {
+  background-image: url(../img/hideout.png);
+  border: white;
+}
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
+  border: white;
+  /* background-color: #333; */
 }
 
 .card:hover {

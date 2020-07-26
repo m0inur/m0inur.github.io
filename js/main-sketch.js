@@ -1,6 +1,5 @@
 // Brick breaker
 const brickBreakerSketch = c => {
-    let playerScore = 0
     let paddle
     let ball
     let bricks
@@ -29,15 +28,15 @@ const brickBreakerSketch = c => {
         c.frameRate(60)
 
         var firstCard = $("#first-card");
-        var firstW = firstCard.innerWidth() - 29;
+        var firstW = firstCard.innerWidth() - 30;
         var firstH = firstCard.innerHeight();
 
         var firstX = firstCard.position();
         cnv = c.createCanvas(firstW, firstH);
         cnv.parent = $('#first-card');
         // c.canvas = cnv
-        cnv.position(firstX.left + 38, firstX.top + 40);
-        cnv.style('z-index', 1);
+        cnv.position(firstX.left + 39, firstX.top + 40);
+        // cnv.style('z-index', 1);
 
 
 
@@ -56,11 +55,12 @@ const brickBreakerSketch = c => {
         bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
     }
     c.draw = function () {
-        c.background(255)
+        c.background("rgba(255, 255, 255, 0.50)")
         if (isPlaying) {
             if (pause) {
                 c.loop();
-                if (c.frameCount % 60 == 0) {
+                c.text("Resizing process.....", c.width / 2 - 50, c.height / 2)
+                if (c.frameCount % 456658468 == 0) {
                     pause = false;
                 }
             }
@@ -92,9 +92,11 @@ const brickBreakerSketch = c => {
                 }
             }
 
+            if (!pause) {
+                paddle.display(c)
+                ball.display(c)
+            }
 
-            paddle.display(c)
-            ball.display(c)
             if (ball.belowBottom(c)) {
                 c.isDead = true;
                 collidable = false;
@@ -168,6 +170,8 @@ const brickBreakerSketch = c => {
                     collidable = true;
                     c.isTimerDone = false;
 
+                    ballVel = c.createVector(4, -4);
+
                     c.score = 0;
 
                     ball = c.NULL;
@@ -176,6 +180,10 @@ const brickBreakerSketch = c => {
                         c.setup();
                     });
                     $("#first-card-fade").removeClass("first-card")
+
+                    $("#first-card-fade").animate({
+                        opacity: 1
+                    });
 
                     $("#logo").removeClass("hidden");
 
@@ -234,13 +242,13 @@ const brickBreakerSketch = c => {
             bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
 
             var firstCard = $("#first-card");
-            var firstW = firstCard.innerWidth() - 29;
+            var firstW = firstCard.innerWidth() - 30;
             var firstH = firstCard.innerHeight();
 
             var firstX = firstCard.position();
 
             c.resizeCanvas(firstW, firstH);
-            cnv.position(firstX.left + 38, firstX.top + 40);
+            cnv.position(firstX.left + 39, firstX.top + 40);
         });
     });
 }
@@ -374,7 +382,7 @@ const bubblePopperSketch = c => {
     var spawnClone = false;
     var spawnDoubleScore = false;
     var powerTextColor = 0;
-    var allPowerups = ["trippleBullets", "doubleBullets", "doubleScore", "clone"]
+    var allPowerups = ["trippleBullets", "doubleBullets", "doubleScore"]
 
     var isPoweredUp = false;
     c.playerMaxAngle = 20;
@@ -417,7 +425,7 @@ const bubblePopperSketch = c => {
 
     c.setup = function () {
         var middleCard = $("#middle-card");
-        var middleW = middleCard.innerWidth() - 29;
+        var middleW = middleCard.innerWidth() - 30;
         var middleH = middleCard.innerHeight();
 
         var middleX = middleCard.position();
@@ -427,8 +435,8 @@ const bubblePopperSketch = c => {
         canvas.parent = $('#middle-card');
         // c.canvas = canvas
 
-        canvas.position(middleX.left + 38, middleX.top + 41);
-        canvas.style('z-index', 1);
+        canvas.position(middleX.left + 39, middleX.top + 41);
+        // canvas.style('z-index', 1);
 
         playerProps.x = c.width / 2 - 30;
         playerProps.y = 600;
@@ -452,23 +460,16 @@ const bubblePopperSketch = c => {
     c.draw = function () {
         // c.background('rgba(0,255,0, 0.25)')
         c.background(255)
-
         if (isPlaying) {
 
             // Score
 
             if (!c.playerIsDead) {
-
                 c.fill(0);
-
                 c.textSize(20);
-
                 c.textFont(c.orbi);
-
                 c.strokeWeight(0)
-
                 c.text('Score: ' + c.round(c.score), score.x, score.y);
-
             }
 
 
@@ -484,7 +485,7 @@ const bubblePopperSketch = c => {
 
             // PowerUps properties
             powerup.x = c.floor(c.random(10, (c.width - 50) / 3)) * 3;
-            powerup.y = c.floor(c.random(10, (c.height - 150) / 3)) * 3;
+            powerup.y = c.floor(c.random(10, (c.height - 300) / 3)) * 3;
             // Initialize Objects
             /* ------------------------------ Bullets -------------------------------- */
             if (c.frameCount % bullet.spawnRate == 0) {
@@ -608,74 +609,31 @@ const bubblePopperSketch = c => {
             }
 
             /* ------------------------------ Power Ups -------------------------------- */
-            // for (var i = 0; i < allPowerups.length; i++) {
-            //     if (0.03 > c.random(1)) {
-            //         if (!showingPowerup) {
-            //             if (lastPowerup != allPowerups[i]) {
+            for (var i = 0; i < allPowerups.length; i++) {
+                if (0.03 > c.random(1)) {
+                    if (!showingPowerup) {
+                        if (lastPowerup != allPowerups[i]) {
+                            powerup.type = allPowerups[i]
 
-            //                 powerup.type = allPowerups[i];
-            //                 powerup.icon = allPowerups[i];
-            //                 powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.powerup.icon));
+                            if (allPowerups[i] == "trippleBullets") {
 
-            //                 showingPowerup = true;
-            //                 lastPowerup = powerup.type
-            //                 powerupShowText = true;
-            //             }
-            //         }
-            //     }
-            // }
-            if (0.03 > c.random(1)) {
-                if (!showingPowerup) {
-                    if (lastPowerup != "trippleBullets") {
-                        powerup.type = "trippleBullets"
-                        powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.trippleBullets));
+                                powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.trippleBullets));
+                            } else if (allPowerups[i] == "doubleBullets") {
 
-                        showingPowerup = true;
-                        lastPowerup = powerup.type
-                        powerupShowText = true;
+                                powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.doubleBullets));
+                            } else if (allPowerups[i] == "doubleScore") {
+
+                                powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.doubleScore));
+                            }
+
+                            showingPowerup = true;
+                            lastPowerup = powerup.type
+                            powerupShowText = true;
+                        }
                     }
                 }
-            } else if (0.03 > c.random(1)) {
-                if (!showingPowerup) {
-                    if (lastPowerup != "doubleBullets") {
-
-                        powerup.type = "doubleBullets"
-                        powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.doubleBullets));
-
-                        showingPowerup = true;
-                        lastPowerup = powerup.type
-                        powerupShowText = true;
-                    }
-                }
-
-            } else if (0.03 > c.random(1)) {
-                if (!showingPowerup) {
-                    if (lastPowerup != "doubleScore") {
-
-                        powerup.type = "doubleScore"
-                        powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.doubleScore));
-
-                        showingPowerup = true;
-                        lastPowerup = powerup.type
-                        powerupShowText = true;
-                    }
-                }
-
             }
-            // else if (0.03 > c.random(1)) {
-            //     if (!showingPowerup) {
-            //         if (lastPowerup != "clone") {
 
-            //             powerup.type = "clone"
-            //             powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.clone));
-
-            //             showingPowerup = true;
-            //             lastPowerup = powerup.type
-            //             powerupShowText = true;
-            //         }
-            //     }
-
-            // }
             // CD - Collision Detection
 
             /* ------------------------------ CD for bubbles -------------------------------- */
@@ -748,36 +706,24 @@ const bubblePopperSketch = c => {
                             if (powerUps[i].hp > 0) {
                                 powerUps[i].hp -= 1;
                             } else if (powerUps[i].hp < 0) {
+                                for (var z = 0; z < allPowerups.length; z++) {
+                                    if (powerUps[i].type == allPowerups[z]) {
 
-                                if (powerUps[i].type == "trippleBullets") {
-                                    spawntrippleBullet = true;
-                                    c.score += powerupHP;
-                                    isPoweredUp = true;
-                                    showingPowerup = true;
+                                        if (allPowerups[z] == "trippleBullets") {
 
-                                }
+                                            spawntrippleBullet = true;
+                                        } else if (powerUps[i].type == "doubleBullets") {
 
-                                if (powerUps[i].type == "doubleBullets") {
-                                    spawnDoubleBullet = true;
-                                    c.score += powerupHP;
-                                    isPoweredUp = true;
-                                    showingPowerup = true;
+                                            spawnDoubleBullet = true;
+                                        } else if (powerUps[i].type == "doubleScore") {
 
-                                }
+                                            spawnDoubleScore = true;
+                                        }
 
-                                if (powerUps[i].type == "doubleScore") {
-                                    spawnDoubleScore = true;
-                                    c.score += powerupHP;
-                                    isPoweredUp = true;
-                                    showingPowerup = true;
-
-                                }
-
-                                if (powerUps[i].type == "clone") {
-                                    spawnClone = true;
-                                    c.score += powerupHP;
-                                    isPoweredUp = true;
-                                    showingPowerup = true;
+                                        c.score += powerupHP;
+                                        isPoweredUp = true;
+                                        showingPowerup = true;
+                                    }
                                 }
                                 powerUps.splice(i, 1);
                             }
@@ -933,13 +879,13 @@ const bubblePopperSketch = c => {
     $(document).ready(function () {
         $(window).resize(function () {
             var middleCard = $("#middle-card");
-            var middleW = middleCard.innerWidth() - 29;
+            var middleW = middleCard.innerWidth() - 30;
             var middleH = middleCard.innerHeight();
 
             var middleX = middleCard.position();
 
             c.resizeCanvas(middleW, middleH);
-            canvas.position(middleX.left + 38, middleX.top + 41);
+            canvas.position(middleX.left + 39, middleX.top + 41);
         });
     });
 }
@@ -1030,21 +976,8 @@ const sonicSketch = c => {
         c.numberFont = c.loadFont('../fonts/Superstar-M54.ttf');
     };
     c.setup = function () {
-
-        // sonic_run_1_img.hide();
-        // sonic_run_2_img.hide();
-        // sonic_run_3_img.hide();
-        // sonic_run_4_img.hide();
-        // sonic_jump_1_img.hide();
-        // sonic_death_img.hide();
-        // game_over_img.hide();
-        // cactus_img.hide();
-        // ground_img.hide();
-        // cloud_img.hide();
-
-
         var lastCard = $("#last-card");
-        var lastW = lastCard.innerWidth() - 29;
+        var lastW = lastCard.innerWidth() - 30;
         var lastH = lastCard.innerHeight();
 
         var lastX = lastCard.position();
@@ -1052,7 +985,7 @@ const sonicSketch = c => {
         cnv = c.createCanvas(lastW, lastH);
         cnv.parent = $('#last-card');
 
-        cnv.position(lastX.left + 38, lastX.top + 40);
+        cnv.position(lastX.left + 39, lastX.top + 40);
         // cnv.style('z-index', -1);
 
         // Ground Properties
@@ -1063,7 +996,6 @@ const sonicSketch = c => {
         ground.h = 20;
 
         ground = new Ground(c, ground_img);
-        var btnTxt = document.getElementById("last-play-btn").textContent;
 
         // if (c.hasReloaded) {
         //     if (!isGameLaunched) {
@@ -1082,6 +1014,7 @@ const sonicSketch = c => {
 
             }
             $("#last-play-btn").toggleClass("hidden");
+            $("#last-play-btn").removeClass("show")
         });
 
         // Sonic 
@@ -1092,9 +1025,9 @@ const sonicSketch = c => {
 
     c.draw = function () {
         c.background(255);
-        $("#last-card").hover(function () {
-            $("#last-play-btn").removeClass("show")
-        });
+        // $("#last-card").hover(function () {
+        //     $("#last-play-btn").removeClass("show")
+        // });
 
         if (isPlaying) {
             if (!c.isTimerDone) {
@@ -1219,8 +1152,8 @@ const sonicSketch = c => {
                         isGameLaunched = false;
                         isPlaying = false;
                         c.isTimerDone = false;
-
                         c.score = 0;
+                        timer = 2;
 
                         cactuses = [];
                         clouds = [];
@@ -1249,13 +1182,13 @@ const sonicSketch = c => {
     $(document).ready(function () {
         $(window).resize(function () {
             var lastCard = $("#last-card");
-            var lastW = lastCard.innerWidth() - 29;
+            var lastW = lastCard.innerWidth() - 30;
             var lastH = lastCard.innerHeight();
 
             var lastX = lastCard.position();
 
             c.resizeCanvas(lastW, lastH);
-            cnv.position(lastX.left + 38, lastX.top + 40);
+            cnv.position(lastX.left + 39, lastX.top + 40);
         });
     });
     // User Inputs
