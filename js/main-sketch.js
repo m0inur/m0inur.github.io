@@ -54,13 +54,15 @@ const brickBreakerSketch = c => {
         bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
     }
     c.draw = function () {
-        c.background(255)
-        // c.background(bg)
+        if (darkMode) {
+            c.background("#383358")
+        } else {
+            c.background("#fff")
+        }
         if (isPlaying) {
             if (pause) {
                 c.loop();
-                c.text("Resizing process.....", c.width / 2 - 50, c.height / 2)
-                if (c.frameCount % 456658468 == 0) {
+                if (c.frameCount % 120 == 0) {
                     pause = false;
                 }
             }
@@ -179,6 +181,8 @@ const brickBreakerSketch = c => {
                     $("#logo").click(function () {
                         c.setup();
                     });
+
+                    $("#first-canvas-background").removeClass("first-card-img")
                     $("#first-card-fade").removeClass("first-card")
 
                     $("#first-card-fade").animate({
@@ -237,7 +241,6 @@ const brickBreakerSketch = c => {
 
     $(document).ready(function () {
         $(window).resize(function () {
-            console.log(c.colors);
             brick.row = 4;
             brick.bricksPerRow = 6
             bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
@@ -460,13 +463,21 @@ const bubblePopperSketch = c => {
     }
     c.draw = function () {
         // c.background('rgba(0,255,0, 0.25)')
-        c.background(255)
+        if (darkMode) {
+            c.background("#383358")
+        } else {
+            c.background("#fff")
+        }
         if (isPlaying) {
 
             // Score
 
             if (!c.playerIsDead) {
-                c.fill(0);
+                if (darkMode) {
+                    c.fill("#e5e5ea");
+                } else {
+                    c.fill("#333")
+                }
                 c.textSize(20);
                 c.textFont(c.orbi);
                 c.strokeWeight(0)
@@ -856,6 +867,7 @@ const bubblePopperSketch = c => {
 
             gameEndingFrames++;
             if (gameEndingFrames % 120 == 0) {
+                $("#middle-canvas-background").removeClass("middle-card-img")
                 $("#middle-card-fade").removeClass("middle-card")
 
                 $("#middle-card-fade").animate({
@@ -1025,21 +1037,32 @@ const sonicSketch = c => {
     };
 
     c.draw = function () {
-        c.background(255);
-        // $("#last-card").hover(function () {
-        //     $("#last-play-btn").removeClass("show")
-        // });
+        if (darkMode) {
+            c.background("#383358")
+        } else {
+            c.background("#fff")
+        }
 
         if (isPlaying) {
             if (!c.isTimerDone) {
                 c.textSize(40)
                 if (timer > 0) {
                     c.textFont(c.numberFont)
+                    if (darkMode) {
+                        c.fill("#e5e5ea");
+                    } else {
+                        c.fill("#333")
+                    }
                     c.text("" + timer, c.width / 2, c.height / 2);
                 }
                 if (c.frameCount % 60 == 0 && timer > 0) { // if the c.frameCount is divisible by 60, then a second has passed. it will stop at 0
                     timer -= 1;
                     c.textFont(c.numberFont)
+                    if (darkMode) {
+                        c.fill("#e5e5ea");
+                    } else {
+                        c.fill("#333")
+                    }
                     c.text("" + timer, c.width / 2, c.height / 2);
                 }
                 if (timer == 0) {
@@ -1163,7 +1186,12 @@ const sonicSketch = c => {
                         //     $("#last-play-btn").toggleClass("hidden");
                         // });
 
+                        $("#third-card-fade").removeClass("third-card")
                         $("#last-card-fade").removeClass("last-card");
+
+                        $("#last-card-fade").animate({
+                            opacity: 1
+                        });
 
                         $("#contact-brand").animate({
                             left: "10px",

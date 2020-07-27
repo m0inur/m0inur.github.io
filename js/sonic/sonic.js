@@ -51,6 +51,11 @@ class Sonic {
       groundVel = 0;
 
       c.image(c.game_over_img, c.width / 2 - 125, c.height / 2 - 140, 250, 250)
+      if (darkMode) {
+        c.fill("#e5e5ea");
+      } else {
+        c.fill("#333")
+      }
       c.text('Score: ' + c.score, c.width / 2, c.height / 2 + 25);
       // }
     }

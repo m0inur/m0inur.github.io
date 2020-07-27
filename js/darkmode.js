@@ -2,7 +2,6 @@
 
     $("input").click(function () {
         darkMode = !darkMode
-        console.log('toggle button was clicked')
     });
 
     function animate() {
