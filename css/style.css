@@ -72,20 +72,6 @@ body {
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* .first-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: transparent;
-  /* background-image: url(../img/card-background.png); */
-/* background-clip: border-box;
-border-radius: 0.25rem; */
-/* min-height: 250px; */
-/* opacity: 0.90; */
-/* } */
-
 .first-card {
   z-index: -1;
 }
@@ -149,27 +135,22 @@ canvas {
 .card-text {
   font-weight: 450;
   font-size: 20px;
-
-
 }
 
 .card-text-faded {
   font-size: 16px;
-  color: grey;
-}
-
-.dark-text-faded {
-  font-size: 16px;
-  color: #fff;
+  font-weight: 540;
+  color: rgb(71, 71, 71);
 }
 
 .card-text-gold {
-  font-weight: 100;
   font-size: 21px;
+  font-weight: 500;
 }
 
 .card-text-paragraph {
-  font-size: 17px;
+  font-size: 19px;
+  font-weight: 300;
 }
 
 .card-text-date {
@@ -184,10 +165,16 @@ canvas {
   margin-bottom: 0;
 }
 
-.card-text-link {
+/* .card-text-link {
   color: #A73F15;
   text-decoration: none;
   font-size: 15px;
+} */
+
+.card-text-link {
+  color: #01C2FF;
+  text-decoration: none;
+  font-size: 16px;
 }
 
 .card-text-link:hover {
@@ -220,34 +207,6 @@ canvas {
   font-size: large;
   font-weight: large;
 }
-
-.contact-info {
-  -webkit-user-select: none;
-  /* Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE10+/Edge */
-  user-select: none;
-  /* Standard */
-}
-
-.contact-brand {
-  -webkit-user-select: none;
-  /* Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE10+/Edge */
-  user-select: none;
-  /* Standard */
-}
-
-/* #particles-js {
-  position: absolute;
-  width: 100%;
-  height: 160%;
-} */
 
 #particles-js {
   width: 100%;
@@ -305,13 +264,11 @@ canvas {
 
 @keyframes bg-change-to-dark {
   from {
-    background-color: #B721FF;
-    /* opacity: 1; */
+    background-color: #448AFF;
   }
 
   to {
     background-color: #25233a;
-    /* opacity: 0; */
   }
 }
 
@@ -321,7 +278,7 @@ canvas {
   }
 
   to {
-    background-color: #B721FF;
+    background-color: #448AFF;
   }
 }
 

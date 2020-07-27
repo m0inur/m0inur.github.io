@@ -4,10 +4,6 @@ var counter = 0;
 $("input").click(function () {
     counter = 0
     darkMode = !darkMode
-
-    // $("body").css("animation", "change-to-light");
-    // $("body").css("animation", "3s");
-    // $("body").css("-webkit-animation-play-state", "running");
 });
 
 function animate() {
@@ -35,15 +31,14 @@ function animate() {
         $(".card").css("background-color", "#383358")
         $(".card-text-gold").css("color", "#1EA51D")
 
-
-        // $(".card").removeClass("card")
+        $(".card-text-faded").css("color", "#CECECE")
     } else {
         counter++;
         $("body").addClass("bg-lightMode");
         $("body").removeClass("bg-darkMode");
 
         if (counter % 120 == 0) {
-            $('body').css("background", "#B721FF")
+            $('body').css("background", "#448AFF")
             // $('body').css({
             //     background: "-webkit-gradient(linear, left top, left bottom, from(#B721FF), to(#21D4FD))"
             // });
@@ -52,12 +47,10 @@ function animate() {
 
         $(".card").addClass("card-lightMode");
         $(".card").removeClass("card-darkMode");
-        // $('body').css({
-        //     background: "-webkit-gradient(linear, left top, left bottom, from(#B721FF), to(#21D4FD))"
-        // });
         $('body').css("color", "#333");
 
-        $(".card-text-gold").css("color", "#AAA500")
+        $(".card-text-faded").css("color", "#727272")
+        $(".card-text-gold").css("color", "#00838F")
         $(".card").css("background-color", "#fff")
         // $("body").css("background-image", "linear-gradient(0deg, #21D4FD, #B721FF);");
         /* background-image: linear-gradient(0deg, #21D4FD, #B721FF); */
