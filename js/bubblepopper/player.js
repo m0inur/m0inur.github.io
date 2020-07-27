@@ -93,6 +93,7 @@ class Player {
       if (c.frameCount % 60 == 0) {
         c.turnOver = true;
       }
+      console.log("player is drawn")
       c.image(c.player_img, 0, 0, this.width, this.height);
 
       c.pop();
@@ -106,6 +107,7 @@ class Player {
       if (c.frameCount % 60 == 0) {
         c.turnOver = true;
       }
+
       c.image(c.player_img, 0, 0, this.width, this.height);
 
       c.pop();

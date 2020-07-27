@@ -15,6 +15,7 @@
 
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dark-mode.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/gh/bmoren/p5.collide2D/p5.collide2d.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,20 +30,40 @@
   <!-- particles.js container -->
   <div id="particles-js"></div>
 
+  <div class="switch" style="margin-right: 40px;">
+    <input type="checkbox" name="toggle">
+    <label for="toggle">
+      <i class="bulb">
+        <span class="bulb-center"></span>
+        <span class="filament-1"></span>
+        <span class="filament-2"></span>
+        <span class="reflections">
+          <span></span>
+        </span>
+        <span class="sparks">
+          <i class="spark1"></i>
+          <i class="spark2"></i>
+          <i class="spark3"></i>
+          <i class="spark4"></i>
+        </span>
+      </i>
+    </label>
+  </div>
+
   <div class="body-particles">
-    <div class="container">
-      <div class="row justify-content-center" style="padding-top: 100px;">
+    <div class="container" id="first_card">
+      <div class="row justify-content-center" style="padding-top: 50px;">
         <div class="ml-4 col-xl-7 col-lg-8 col-sm-12 col-12" id="first-card">
           <div class="card first-card-img" id="first-card-fade">
 
             <div class="card-body" style="text-align:center;">
-
               <img id="logo" src="img/icon.png" class="icon" style="position: relative;">
               <br>
               <p class="card-text full-name" style="position: relative;">Moinur Rahman Najib</p>
               <p class="card-text-faded faded-text" style="position: relative;">
                 <i class="fa fa-angle-left"></i> Programming Hobbyist <i class="fa fa-angle-right"></i>
               </p>
+
             </div>
           </div>
         </div>
@@ -145,7 +166,7 @@
                 <i unselectable="on" class="fa fa-bullseye"></i>
                 Contact</p>
               <div class="container">
-                <div id="contact-info" class="row justify-content-center" style="margin-top: 75px;
+                <div id="contact-info" class="row justify-content-center" style="margin-top: 65px;
   margin-bottom: 0px; position: relative;">
                   <a unselectable="on" id="email" class="card-text-link d-inline mr-4"
                     href="mailto:moinurnajib@gmail.com" target="_blank"><i class="fa fa-envelope"></i>
@@ -177,6 +198,7 @@
   <script src="js/particles.js"></script>
   <script src="js/app.js"></script>
   <script src="js/jquery.min.js"></script>
+  <script src="js/darkmode.js"></script>
 
   <script>
     window.addEventListener("load", function () {
@@ -184,17 +206,26 @@
       loader.className = "hidden"; // class "loader hidden"
     });
 
-    $("#logo").click(function () {
+    $("#middle-card-fade").click(function () {
 
-      $("#first-card-fade").addClass("first-card")
+      $("#middle-card-fade").toggleClass("middle-card")
 
-      $("#first-card-fade").animate({
+      $("#middle-card-fade").animate({
         opacity: '0'
       });
+    });
 
+
+    $("#logo").click(function () {
+
+      $("#first-card-fade").toggleClass("first-card")
       $("#logo").animate({
-        left: "-15",
-        top: "165",
+        left: "-18",
+        top: "125",
+      });
+
+      $("#first-card-fade").animate({
+        opacity: 0
       });
 
       function removeIcon() {
@@ -212,18 +243,10 @@
         left: "20px",
         opacity: 0
       });
+
     });
 
-    $("#middle-card-fade").click(function () {
 
-      $("#middle-card-fade").toggleClass("middle-card")
-
-      $("#middle-card-fade").animate({
-        opacity: '0'
-      });
-    });
-
-    var last_play_btn_clicked = false;
 
     $("#last-play-btn").click(function () {
       console.log("last play button was clicked")
@@ -239,20 +262,11 @@
         opacity: 0
       });
 
-      last_play_btn_clicked = true;
-      console.log(last_play_btn_clicked);
-      $("#last-play-btn").addClass("hidden")
     });
-    if (!last_play_btn_clicked) {
-      showLastBtn();
-    }
+    $("#last-card").hover(function () {
+      $("#last-play-btn").toggleClass("show-btn")
+    });
 
-    function showLastBtn() {
-      $("#last-card").hover(function () {
-        console.log(last_play_btn_clicked);
-        $("#last-play-btn").toggleClass("show-btn")
-      });
-    }
 
     // let renderer = createCanvas(sketchWidth, sketchHeight);
     // renderer.parent("first_card");

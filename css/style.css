@@ -37,8 +37,7 @@ canvas {
 body {
   font-family: 'Roboto Mono',
     monospace;
-  background-image: linear-gradient(0deg, #21D4FD, #B721FF);
-  background-color: #333;
+  /* background-image: linear-gradient(0deg, #21D4FD, #B721FF); */
   height: 100%;
   margin: 0;
   background-repeat: no-repeat;
@@ -85,12 +84,10 @@ border-radius: 0.25rem; */
 /* } */
 
 .first-card {
-  /* background-image: url(../img/glamorous.png); */
   z-index: -1;
 }
 
 .middle-card {
-  /* background-color: transparent; */
   z-index: -1;
 }
 
@@ -114,6 +111,15 @@ border-radius: 0.25rem; */
 }
 
 .card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: white;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border: white;
@@ -147,6 +153,11 @@ canvas {
 .card-text-faded {
   font-size: 16px;
   color: grey;
+}
+
+.dark-text-faded {
+  font-size: 16px;
+  color: #fff;
 }
 
 .card-text-gold {

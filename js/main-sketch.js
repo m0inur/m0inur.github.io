@@ -21,6 +21,7 @@ const brickBreakerSketch = c => {
     }
     c.preload = function () {
         c.ball_img = c.loadImage("../img/icon2.png")
+        bg = c.loadImage("../img/glamorous.png")
     }
 
     c.setup = function () {
@@ -35,10 +36,8 @@ const brickBreakerSketch = c => {
         cnv = c.createCanvas(firstW, firstH);
         cnv.parent = $('#first-card');
         // c.canvas = cnv
-        cnv.position(firstX.left + 39, firstX.top + 40);
-        // cnv.style('z-index', 1);
-
-
+        cnv.position(firstX.left + 39, firstX.top + 68);
+        cnv.style('z-index', 1);
 
         brick.row = 4;
         brick.bricksPerRow = 6;
@@ -55,7 +54,8 @@ const brickBreakerSketch = c => {
         bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
     }
     c.draw = function () {
-        c.background("rgba(255, 255, 255, 0.50)")
+        c.background(255)
+        // c.background(bg)
         if (isPlaying) {
             if (pause) {
                 c.loop();
@@ -237,6 +237,7 @@ const brickBreakerSketch = c => {
 
     $(document).ready(function () {
         $(window).resize(function () {
+            console.log(c.colors);
             brick.row = 4;
             brick.bricksPerRow = 6
             bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
@@ -248,7 +249,7 @@ const brickBreakerSketch = c => {
             var firstX = firstCard.position();
 
             c.resizeCanvas(firstW, firstH);
-            cnv.position(firstX.left + 39, firstX.top + 40);
+            cnv.position(firstX.left + 39, firstX.top + 68);
         });
     });
 }
@@ -435,7 +436,7 @@ const bubblePopperSketch = c => {
         canvas.parent = $('#middle-card');
         // c.canvas = canvas
 
-        canvas.position(middleX.left + 39, middleX.top + 41);
+        canvas.position(middleX.left + 39, middleX.top + 68);
         // canvas.style('z-index', 1);
 
         playerProps.x = c.width / 2 - 30;
@@ -885,7 +886,7 @@ const bubblePopperSketch = c => {
             var middleX = middleCard.position();
 
             c.resizeCanvas(middleW, middleH);
-            canvas.position(middleX.left + 39, middleX.top + 41);
+            canvas.position(middleX.left + 39, middleX.top + 68);
         });
     });
 }
@@ -985,7 +986,7 @@ const sonicSketch = c => {
         cnv = c.createCanvas(lastW, lastH);
         cnv.parent = $('#last-card');
 
-        cnv.position(lastX.left + 39, lastX.top + 40);
+        cnv.position(lastX.left + 39, lastX.top + 68);
         // cnv.style('z-index', -1);
 
         // Ground Properties
@@ -1188,7 +1189,7 @@ const sonicSketch = c => {
             var lastX = lastCard.position();
 
             c.resizeCanvas(lastW, lastH);
-            cnv.position(lastX.left + 39, lastX.top + 40);
+            cnv.position(lastX.left + 39, lastX.top + 68);
         });
     });
     // User Inputs
