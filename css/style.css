@@ -144,6 +144,7 @@ canvas {
 }
 
 .card-text-gold {
+  color: #44abff;
   font-size: 21px;
   font-weight: 500;
 }
