@@ -43,6 +43,8 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 
+
+
   -webkit-user-select: none;
   /* Safari */
   -moz-user-select: none;
@@ -53,16 +55,6 @@ body {
   /* Standard */
 }
 
-/* body .lightMode {
-  background-color: #fff;
-  animation: change-to-light 3s;
-  animation-play-state: running;
-}
-
-body .darkMode {
-  animation: change-to-dark 3s;
-  animation-play-state: running;
-} */
 
 .last-card {
   position: relative;
@@ -278,6 +270,28 @@ canvas {
   border-top: 1px solid grey;
 }
 
+.bg-lightMode {
+  animation: bg-change-to-light 2s;
+  animation-play-state: running;
+}
+
+.bg-darkMode {
+  /* background-color: #25233a; */
+  animation: bg-change-to-dark 2s;
+  animation-play-state: running;
+}
+
+.card-lightMode {
+  animation: card-change-to-light 2s;
+  animation-play-state: running;
+}
+
+.card-darkMode {
+  animation: card-change-to-dark 2s;
+  animation-play-state: running;
+}
+
+
 @media(max-width: 767px) {
   .card-text-date {
     float: right;
@@ -289,23 +303,44 @@ canvas {
   }
 }
 
-@keyframes change-to-dark {
+@keyframes bg-change-to-dark {
   from {
-
     background-color: #B721FF;
+    /* opacity: 1; */
   }
 
   to {
     background-color: #25233a;
+    /* opacity: 0; */
   }
 }
 
-@keyframes change-to-light {
+@keyframes bg-change-to-light {
   from {
     background-color: #25233a;
   }
 
   to {
     background-color: #B721FF;
+  }
+}
+
+@keyframes card-change-to-dark {
+  from {
+    background-color: #fff;
+  }
+
+  to {
+    background-color: #383358;
+  }
+}
+
+@keyframes card-change-to-light {
+  from {
+    background-color: #383358;
+  }
+
+  to {
+    background-color: #fff;
   }
 }

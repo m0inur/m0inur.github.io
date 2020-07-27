@@ -243,7 +243,6 @@ const brickBreakerSketch = c => {
         $(window).resize(function () {
             brick.row = 4;
             brick.bricksPerRow = 6
-            console.log(c.colors)
             bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
 
             var firstCard = $("#first-card");
@@ -809,6 +808,7 @@ const bubblePopperSketch = c => {
                     c.textFrames = 0;
                 }
             }
+
 
             if (spawnPlateSweep) {
                 showText(c, "Plate Sweep!");

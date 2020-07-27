@@ -10,26 +10,9 @@ class Bullet {
     this.colors = colors[Math.floor(Math.random() * colors.length)];
   }
 
-  move(c, player) {
-    var rightAngle = 0;
-    var leftAngle = 0;
+  move() {
     if (this.type == "centerBullet") {
-
       this.y -= this.vy;
-
-      // if (c.pmouseX > c.mouseX) {
-      //   leftAngle += 2;
-      // }
-
-      // if (c.pmouseX < c.mouseX) {
-      //   rightAngle = 3;
-      // }
-
-      // if (c.pmouseX == c.mouseX) {
-      //   rightAngle = 0;
-      //   leftAngle = 0;
-      // }
-      // this.x += leftAngle
     }
     if (this.type == "leftBullet") {
 
@@ -52,7 +35,7 @@ class Bullet {
     }
   }
 
-  draw(c, player) {
+  draw(c) {
 
 
     if (this.type == "rightBullet") {
