@@ -53,6 +53,17 @@ body {
   /* Standard */
 }
 
+/* body .lightMode {
+  background-color: #fff;
+  animation: change-to-light 3s;
+  animation-play-state: running;
+}
+
+body .darkMode {
+  animation: change-to-dark 3s;
+  animation-play-state: running;
+} */
+
 .last-card {
   position: relative;
   display: flex;
@@ -163,8 +174,6 @@ canvas {
 .card-text-gold {
   font-weight: 100;
   font-size: 21px;
-  color: #AAA500;
-
 }
 
 .card-text-paragraph {
@@ -277,5 +286,26 @@ canvas {
 
   .card-text-education {
     float: none;
+  }
+}
+
+@keyframes change-to-dark {
+  from {
+
+    background-color: #B721FF;
+  }
+
+  to {
+    background-color: #25233a;
+  }
+}
+
+@keyframes change-to-light {
+  from {
+    background-color: #25233a;
+  }
+
+  to {
+    background-color: #B721FF;
   }
 }

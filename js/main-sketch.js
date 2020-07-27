@@ -243,6 +243,7 @@ const brickBreakerSketch = c => {
         $(window).resize(function () {
             brick.row = 4;
             brick.bricksPerRow = 6
+            console.log(c.colors)
             bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
 
             var firstCard = $("#first-card");
@@ -378,17 +379,11 @@ const bubblePopperSketch = c => {
         r: 13
     }
     // Boolean
-    var initComplete = false;
-    var firstFrame = true;
-
     var spawntrippleBullet = false;
     var spawnDoubleBullet = false;
-    var spawnClone = false;
     var spawnDoubleScore = false;
-    var powerTextColor = 0;
-    var allPowerups = ["trippleBullets", "doubleBullets", "doubleScore"]
-
-    var isPoweredUp = false;
+    var spawnPlateSweep = false;
+    var pushPlateSweep = false;
     c.playerMaxAngle = 20;
     // Normal vars
     c.score = 0;
@@ -403,15 +398,17 @@ const bubblePopperSketch = c => {
     c.textFrames = 0;
     c.increaseOpacity = -1;
 
-    var powerupShowText = false;
     var lastPowerup;
     var showingPowerup = false;
     var showMaxBubbles = 8;
-
+    var allPowerups = [
+        "trippleBullets",
+        "doubleBullets",
+        "doubleScore"
+    ]
 
     // Gamestates
     var isPlaying = false;
-    var isPause = true;
     c.playerIsDead = false;
     // Images
     c.preload = function () {
@@ -433,8 +430,6 @@ const bubblePopperSketch = c => {
         var middleH = middleCard.innerHeight();
 
         var middleX = middleCard.position();
-        // console.log("Initial Top = " + middleX.top + " Initial left = " + middleX.left)
-        // console.log("Initial width = " + middleW + " Initial height = " + middleH)
         canvas = c.createCanvas(middleW, middleH);
         canvas.parent = $('#middle-card');
         // c.canvas = canvas
@@ -572,8 +567,8 @@ const bubblePopperSketch = c => {
             if (c.score < 100) {
                 showMaxBubbles = 5
 
-                powerupHP = powerup.hp = c.random(2, 3)
-                bubbleHP = bubbleHittable = c.random(2, 3)
+                powerupHP = powerup.hp = c.random(1, 3)
+                bubbleHP = bubbleHittable = c.random(1, 3)
                 if (bubbles.length < showMaxBubbles) {
                     //         if (bubbles.length != 0) {
                     //           for (i = 0; i < bubbles.length; i++) {
@@ -594,11 +589,13 @@ const bubblePopperSketch = c => {
                 }
             }
             if (c.score > 100) {
-                showMaxBubbles = 9
-
-                powerupHP = powerup.hp = c.random(3, 5)
-                bubbleHP = bubbleHittable = c.random(3, 5)
-
+                showMaxBubbles = 8
+                if (!pushPlateSweep) {
+                    allPowerups.push("plateSweep")
+                }
+                pushPlateSweep = true;
+                powerupHP = powerup.hp = c.random(3, 4)
+                bubbleHP = bubbleHittable = c.random(3, 4)
                 if (bubbles.length < showMaxBubbles) {
                     if (0.03 > c.random(1)) {
                         bubbles.push(new Bubble(bubble.x, bubble.y, bubble.vy, bubbleHittable, bubble.radius, c.bubbleColors));
@@ -608,10 +605,10 @@ const bubblePopperSketch = c => {
             }
 
             if (c.score > 200) {
-                showMaxBubbles = 9
+                showMaxBubbles = 8
 
-                powerupHP = powerup.hp = c.random(5, 8)
-                bubbleHP = bubbleHittable = c.random(5, 8)
+                powerupHP = powerup.hp = c.random(4, 6)
+                bubbleHP = bubbleHittable = c.random(4, 6)
 
                 if (bubbles.length < showMaxBubbles) {
                     if (0.03 > c.random(1)) {
@@ -634,6 +631,9 @@ const bubblePopperSketch = c => {
 
                                 powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.doubleBullets));
                             } else if (allPowerups[i] == "doubleScore") {
+
+                                powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.doubleScore));
+                            } else if (allPowerups[i] == "plateSweep") {
 
                                 powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.doubleScore));
                             }
@@ -682,9 +682,8 @@ const bubblePopperSketch = c => {
                             if (!spawnDoubleScore) {
                                 c.score += c.round(bubbleHP);
                             } else if (spawnDoubleScore) {
-                                showText(c, "Double Score");
 
-                                c.score += c.round(bubble.hp) * 2;
+                                c.score += c.round(bubbleHP) * 2;
                             }
                             bubbles.splice(i, 1);
                             for (i = 0; i < 15; i++) {
@@ -730,6 +729,9 @@ const bubblePopperSketch = c => {
                                         } else if (powerUps[i].type == "doubleScore") {
 
                                             spawnDoubleScore = true;
+                                        } else if (powerUps[i].type == "plateSweep") {
+
+                                            spawnPlateSweep = true;
                                         }
 
                                         c.score += powerupHP;
@@ -808,18 +810,30 @@ const bubblePopperSketch = c => {
                 }
             }
 
-            if (spawnClone) {
-                // showText(c, "Clone");
-                playerProps.x = player.x;
-                playerProps.y = 100;
+            if (spawnPlateSweep) {
+                showText(c, "Plate Sweep!");
+                for (var i = 0; i < bubbles.length; i++) {
+                    bParticle.x = c.random(bubbles[i].x, bubbles[i].x);
+                    bParticle.y = c.random(bubbles[i].y, bubbles[i].y);
+                    bParticles.colors = bubbles[i].colors;
 
-                playerClone.draw(c);
-                playerClone.move(c);
+                    bubbles.splice(i, 1);
+                }
+                if (bubbles.length > 0) {
+                    c.score += c.round(bubbleHP);
+
+                    for (i = 0; i < 15; i++) {
+                        bParticle.radius = c.random(2, 10);
+                        bParticle.vx = c.random(-3, 3);
+                        bParticle.vy = c.random(-3, 3);
+                        bParticles.push(new Particle(bParticle.x, bParticle.y, bParticle.vx, bParticle.vy, bParticle.radius, bParticles.colors));
+                    }
+                }
                 countFrames++
 
-                if (countFrames > 400) {
+                if (countFrames > 100 && bubbles.length <= 0) {
                     showingPowerup = false;
-                    spawnDoubleScore = false;
+                    spawnPlateSweep = false;
                     isPoweredUp = false;
                     countFrames = 0;
                     c.textFrames = 0;
@@ -831,7 +845,7 @@ const bubblePopperSketch = c => {
             if (c.textFrames == 0) {
                 c.powerTextY = c.height / 2 - 50;
                 c.textColor = 0;
-                textFillColor = c.bubbleColors[Math.floor(Math.random() * c.bubbleColors.length)]
+                textFillColor = colors[Math.floor(Math.random() * colors.length)]
                 // textFillColor = c.color(0);
                 opacity = 255;
             }

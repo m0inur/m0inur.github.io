@@ -30,11 +30,15 @@ class Powerup {
 
     c.fill(0);
     // c.textStyle(c.NORMAL);
+    c.textSize(20)
     c.strokeWeight(0)
     c.textFont(c.numberFont);
     c.text(c.round(this.hp + 1), this.x, this.y - 12)
 
-    if (this.type != "trippleBullets") {
+    if (this.type == "plateSweep") {
+      c.fill(0);
+      c.ellipse(this.x - this.r / 2 + 15, this.y + 8, this.width, this.height);
+    } else if (this.type != "trippleBullets") {
       c.image(this.icon, this.x - this.r / 2 + 8, this.y - 1, this.width, this.height);
     } else if (this.type == "trippleBullets") {
       this.height = 30;
