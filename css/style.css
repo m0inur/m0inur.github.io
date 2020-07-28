@@ -43,8 +43,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 
-
-
   -webkit-user-select: none;
   /* Safari */
   -moz-user-select: none;
@@ -209,6 +207,20 @@ canvas {
   font-weight: large;
 }
 
+.hide-fourth-card {
+  height: 0px;
+  max-height: 0px;
+  min-height: 0px;
+}
+
+.show-fourth-card {
+  height: 150px;
+}
+
+.hide-fourth-card {
+  height: 0px;
+}
+
 #particles-js {
   width: 100%;
   height: 100%;
@@ -217,6 +229,7 @@ canvas {
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+  z-index: -1;
 }
 
 .body-particles {
@@ -260,6 +273,16 @@ canvas {
 
   .card-text-education {
     float: none;
+  }
+}
+
+@keyframes show-card {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 

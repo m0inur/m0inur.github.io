@@ -17,7 +17,7 @@ function animate() {
         $("body").addClass("bg-darkMode");
         $("body").removeClass("bg-lightMode");
 
-        if (counter % 120 == 0) {
+        if (counter % 100 == 0) {
             $('body').css("background", "#25233a");
         }
 

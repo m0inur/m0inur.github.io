@@ -36,7 +36,7 @@ const brickBreakerSketch = c => {
         cnv = c.createCanvas(firstW, firstH);
         cnv.parent = $('#first-card');
         // c.canvas = cnv
-        cnv.position(firstX.left + 39, firstX.top + 68);
+        cnv.position(firstX.left + 39, firstX.top + 27);
         cnv.style('z-index', 1);
 
         brick.row = 4;
@@ -433,7 +433,7 @@ const bubblePopperSketch = c => {
         canvas.parent = $('#middle-card');
         // c.canvas = canvas
 
-        canvas.position(middleX.left + 39, middleX.top + 68);
+        canvas.position(middleX.left + 39, middleX.top + 30);
         // canvas.style('z-index', 1);
 
         playerProps.x = c.width / 2 - 30;
@@ -912,7 +912,7 @@ const bubblePopperSketch = c => {
             var middleX = middleCard.position();
 
             c.resizeCanvas(middleW, middleH);
-            canvas.position(middleX.left + 39, middleX.top + 68);
+            canvas.position(middleX.left + 39, middleX.top + 30);
         });
     });
 }
@@ -1012,7 +1012,7 @@ const sonicSketch = c => {
         cnv = c.createCanvas(lastW, lastH);
         cnv.parent = $('#last-card');
 
-        cnv.position(lastX.left + 39, lastX.top + 68);
+        cnv.position(lastX.left + 39, lastX.top + 30);
         // cnv.style('z-index', -1);
 
         // Ground Properties
@@ -1231,7 +1231,7 @@ const sonicSketch = c => {
             var lastX = lastCard.position();
 
             c.resizeCanvas(lastW, lastH);
-            cnv.position(lastX.left + 39, lastX.top + 68);
+            cnv.position(lastX.left + 39, lastX.top + 30);
         });
     });
     // User Inputs
@@ -1248,6 +1248,168 @@ const sonicSketch = c => {
         }
     }
 }
+
+const snakeSketch = c => {
+    var snake, food;
+    var speed = 1;
+    var score = 0;
+    c.isPlaying = false;
+    c.playerHasDied = false;
+    c.deadCounter = 0;
+
+    c.preload = function () {
+        c.heart = c.loadImage('../img/heart.png')
+
+        c.orbi = c.loadFont('../fonts/Orbitron-Bold.ttf');
+        c.numberFont = c.loadFont('../fonts/Superstar-M54.ttf');
+    }
+    c.setup = function () {
+        var fourthCard = $("#fourth-card");
+        var fourthW = fourthCard.innerWidth() - 30;
+        var fourthH = fourthCard.innerHeight();
+
+        var fourthX = fourthCard.position();
+        c.cnvs = c.createCanvas(fourthW, fourthH);
+        c.cnvs.parent = $('#fourth-card');
+
+        c.cnvs.position(fourthX.left + 39, fourthX.top);
+
+        isPlaying = true;
+
+        // $("#heart").click(function () {
+        //     var fourthCard = $("#fourth-card");
+        //     var fourthW = fourthCard.innerWidth() - 30;
+        //     var fourthH = fourthCard.innerHeight();
+
+        //     var fourthX = fourthCard.position();
+        //     c.resizeCanvas(fourthW, fourthH);
+        //     c.cnvs.parent = $('#fourth-card');
+
+        //     c.cnvs.position(fourthX.left + 39, fourthX.top);
+
+        //     c.isPlaying = true;
+        // });
+
+        snake = new Snake(c, 12, 12, 255);
+        snake.x = 2;
+        snake.y = 2;
+        food = new Food(c, 15, 15, [255, 0, 100], true);
+        c.frameRate(13);
+    }
+    c.keyPressed = function () {
+        if (c.isPlaying == false) {
+            if (keys.w || keys.s || keys.a || keys.d) {
+                c.setCanvas = true;
+            }
+        }
+
+        switch (c.keyCode) {
+            case keys.w: {
+                snake.dir(0, -speed);
+                break;
+            }
+            case keys.s: {
+                snake.dir(0, speed);
+                break;
+            }
+            case keys.a: {
+                snake.dir(-speed, 0);
+                break;
+            }
+            case keys.d: {
+                snake.dir(speed, 0);
+                break;
+            }
+            default: {
+                return false;
+                break;
+            }
+        }
+    }
+    c.draw = function () {
+
+        if (c.setCanvas) {
+            var fourthCard = $("#fourth-card");
+            var fourthW = fourthCard.innerWidth() - 30;
+            var fourthH = fourthCard.innerHeight();
+
+            var fourthX = fourthCard.position();
+
+            c.resizeCanvas(fourthW, fourthH);
+            c.cnvs.position(fourthX.left + 39, fourthX.top);
+
+            c.isPlaying = true;
+        }
+
+        if (c.frameCount % 1 == 0) {
+            c.clear();
+        }
+
+        if (c.isPlaying) {
+            if (snake.eat(food)) {
+                score++;
+                snake.rise++;
+                food.rewind(c);
+            }
+            c.text("Score: " + score, c.width / 3, 0 - 20)
+            for (var i = 0; i < snake.tail.length; i++) {
+                var xTail = snake.tail[i].x;
+                var yTail = snake.tail[i].y;
+                var diff = c.dist(xTail, yTail, food.x, food.y);
+
+                if (diff < 7) {
+                    food.rewind();
+                }
+
+                if (snake.crash(c, xTail, yTail)) {
+                    // score.reset();
+                    // score.show();
+                    snake.death();
+                    break;
+                } else {
+                    c.noStroke();
+                    c.fill("red");
+                    c.rect(xTail, yTail, snake.w, snake.h);
+                }
+            }
+
+
+
+            snake.show(c);
+            if (!c.playerHasDied) {
+                snake.update(c);
+            }
+            food.show(c);
+        }
+
+    }
+
+    $(document).ready(function () {
+        $(window).resize(function () {
+            var fourthCard = $("#fourth-card");
+            var fourthW = fourthCard.innerWidth() - 30;
+            var fourthH = fourthCard.innerHeight();
+
+            var fourthX = fourthCard.position();
+
+            c.resizeCanvas(fourthW, fourthH);
+            c.cnvs.position(fourthX.left + 39, fourthX.top);
+        });
+    });
+
+    // window.onload = function () {
+    //     var $wrap = document.querySelector('#canvas-wrap');
+    //     var $bar = document.querySelector('.bar');
+
+    //     // score.wrap = $bar;
+    //     // score.show();
+    //     // score.reset();
+
+    //     $wrap.appendChild(canvas);
+    // };
+
+}
 var myp5_brickBreakerSketch = new p5(brickBreakerSketch);
 var myp5_bubblePopperSketch = new p5(bubblePopperSketch);
 var myp5_sonicSketch = new p5(sonicSketch);
+var myp5_snakeSketch = new p5(snakeSketch);
