@@ -1249,6 +1249,7 @@ const sonicSketch = c => {
     }
 }
 
+// Snake
 const snakeSketch = c => {
     var snake, food;
     var speed = 1;
@@ -1298,25 +1299,33 @@ const snakeSketch = c => {
     }
     c.keyPressed = function () {
         if (c.isPlaying == false) {
-            if (keys.w || keys.s || keys.a || keys.d) {
+            if (keys.w || keys.s || keys.a || keys.d || c.UP_ARROW || c.DOWN_ARROW || c.LEFT_ARROW || c.RIGHT_ARROW) {
                 c.setCanvas = true;
             }
         }
 
+        // if (keys.w || keys.s || keys.a || keys.d || c.UP_ARROW || c.DOWN_ARROW || c.LEFT_ARROW || c.RIGHT_ARROW) {
+        //     c.keyCode.preventDefault();
+        // }
+
         switch (c.keyCode) {
-            case keys.w: {
+            case keys.w:
+            case c.UP_ARROW: {
                 snake.dir(0, -speed);
                 break;
             }
-            case keys.s: {
+            case keys.s:
+            case c.DOWN_ARROW: {
                 snake.dir(0, speed);
                 break;
             }
-            case keys.a: {
+            case keys.a:
+            case c.LEFT_ARROW: {
                 snake.dir(-speed, 0);
                 break;
             }
-            case keys.d: {
+            case keys.d:
+            case c.RIGHT_ARROW: {
                 snake.dir(speed, 0);
                 break;
             }
@@ -1358,7 +1367,7 @@ const snakeSketch = c => {
                 var diff = c.dist(xTail, yTail, food.x, food.y);
 
                 if (diff < 7) {
-                    food.rewind();
+                    food.rewind(c);
                 }
 
                 if (snake.crash(c, xTail, yTail)) {
@@ -1396,18 +1405,6 @@ const snakeSketch = c => {
             c.cnvs.position(fourthX.left + 39, fourthX.top);
         });
     });
-
-    // window.onload = function () {
-    //     var $wrap = document.querySelector('#canvas-wrap');
-    //     var $bar = document.querySelector('.bar');
-
-    //     // score.wrap = $bar;
-    //     // score.show();
-    //     // score.reset();
-
-    //     $wrap.appendChild(canvas);
-    // };
-
 }
 var myp5_brickBreakerSketch = new p5(brickBreakerSketch);
 var myp5_bubblePopperSketch = new p5(bubblePopperSketch);

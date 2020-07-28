@@ -22,7 +22,7 @@
 
 </head>
 
-<body data-spy="scroll" data-target="#navbarResponsive" class="bg-darkMode">
+<body data-spy="scroll" data-target="#navbarResponsive">
   <!-- <div class="loader">
     <p>Loading...</p>
   </div> -->
@@ -294,8 +294,18 @@
       });
 
     });
-    $(document).keypress(function (event) {
-      var keycode = (event.keyCode ? event.keyCode : event.which);
+
+    $("#last-card").hover(function () {
+      $("#last-play-btn").toggleClass("show-btn")
+    });
+
+    $(document).keypress(function (e) {
+      var keycode = (e.keyCode ? e.keyCode : e.which);
+
+      if (keycode == "38" || keycode == "40") {
+        e.view.event.preventDefault();
+      }
+
       if ($("#fourth-card-show").hasClass("hide-fourth-card")) {
         if (keycode == '119' || keycode == '97' || keycode == '100' || keycode == '115') {
           $("#fourth-card-show").removeClass("hide-fourth-card")
@@ -304,10 +314,6 @@
           $("#heart").css("opacity", "0");
         }
       }
-
-      $("#last-card").hover(function () {
-        $("#last-play-btn").toggleClass("show-btn")
-      });
     });
     // let renderer = createCanvas(sketchWidth, sketchHeight);
     // renderer.parent("first_card");

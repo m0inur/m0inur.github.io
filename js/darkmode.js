@@ -1,5 +1,4 @@
 var darkMode = true;
-var darkModeToggled = false;
 var counter = 0;
 $("input").click(function () {
     counter = 0
@@ -9,22 +8,27 @@ $("input").click(function () {
 function animate() {
     requestAnimationFrame(animate)
 
-
     if (darkMode) {
         counter++
 
+        if (!$("body").hasClass("bg-lightMode")) {
+            $("body").removeClass("bg-darkMode");
 
-        $("body").addClass("bg-darkMode");
-        $("body").removeClass("bg-lightMode");
+            $('body').css("background", "#25233a")
+            $(".card").css("background-color", "#383358")
+        }
+
+        if ($("body").hasClass("bg-lightMode")) {
+            $("body").addClass("bg-darkMode");
+            $("body").removeClass("bg-lightMode");
+
+            $(".card").addClass("card-darkMode");
+            $(".card").removeClass("card-lightMode");
+        }
 
         if (counter % 100 == 0) {
             $('body').css("background", "#25233a");
         }
-
-
-        $(".card").addClass("card-darkMode");
-        $(".card").removeClass("card-lightMode");
-
 
         $('body').css("color", "#e5e5ea");
 

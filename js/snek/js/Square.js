@@ -19,7 +19,6 @@ function Square(c, w, h, rgb, randCoord, type) {
             c.fill("red")
             c.rect(this.x, this.y, this.w, this.h);
         } else if (type == "food") {
-            c.fill("red")
             c.image(c.heart, this.x, this.y, this.w, this.h);
         }
     };
