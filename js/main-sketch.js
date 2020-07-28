@@ -36,7 +36,7 @@ const brickBreakerSketch = c => {
         cnv = c.createCanvas(firstW, firstH);
         cnv.parent = $('#first-card');
         // c.canvas = cnv
-        cnv.position(firstX.left + 39, firstX.top + 27);
+        cnv.position(firstX.left + 39, firstX.top + 28);
         cnv.style('z-index', 1);
 
         brick.row = 4;
@@ -252,7 +252,7 @@ const brickBreakerSketch = c => {
             var firstX = firstCard.position();
 
             c.resizeCanvas(firstW, firstH);
-            cnv.position(firstX.left + 39, firstX.top + 68);
+            cnv.position(firstX.left + 39, firstX.top + 28);
         });
     });
 }
@@ -1009,11 +1009,11 @@ const sonicSketch = c => {
 
         var lastX = lastCard.position();
 
-        cnv = c.createCanvas(lastW, lastH);
-        cnv.parent = $('#last-card');
+        c.canvas3 = c.createCanvas(lastW, lastH);
+        c.canvas3.parent = $('#last-card');
 
-        cnv.position(lastX.left + 39, lastX.top + 30);
-        // cnv.style('z-index', -1);
+        c.canvas3.position(lastX.left + 39, lastX.top + 30);
+        // c.canvas3.style('z-index', -1);
 
         // Ground Properties
         ground.img = ground_img;
@@ -1231,7 +1231,7 @@ const sonicSketch = c => {
             var lastX = lastCard.position();
 
             c.resizeCanvas(lastW, lastH);
-            cnv.position(lastX.left + 39, lastX.top + 30);
+            c.canvas3.position(lastX.left + 39, lastX.top + 30);
         });
     });
     // User Inputs

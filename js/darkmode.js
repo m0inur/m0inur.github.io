@@ -12,7 +12,7 @@ function animate() {
         counter++
 
         if (!$("body").hasClass("bg-lightMode")) {
-            $("body").removeClass("bg-darkMode");
+            // $("body").removeClass("bg-darkMode");
 
             $('body').css("background", "#25233a")
             $(".card").css("background-color", "#383358")
