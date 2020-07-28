@@ -33,7 +33,7 @@ class Powerup {
     c.textSize(20)
     c.strokeWeight(0)
     c.textFont(c.numberFont);
-    c.text(c.round(this.hp + 1), this.x, this.y - 12)
+    c.text(c.round(this.hp + 2), this.x, this.y - 12)
 
     if (this.type == "plateSweep") {
       c.fill(0);

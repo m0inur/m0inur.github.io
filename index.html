@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>Moinur Rahman</title>
   <link rel="icon" href="img/icon2.png" type="image/x-icon">
-  <meta name="description" content="I am a high school student learning different things.">
+  <!-- <meta name="description" content="I am a high school student learning different things."> -->
   <meta name="author" content="Moinur Rahman" />
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -54,7 +54,7 @@
       <div class="row justify-content-center" style="padding-top: 30px;">
         <div class="ml-4 col-xl-7 col-lg-8 col-sm-12 col-12" id="first-card">
           <div id="first-canvas-background">
-            <div class="card first-card-img" id="first-card-fade">
+            <div class="card first-card-img" id="first-card-fade" style="opacity: 1;">
 
               <div class="card-body" style="text-align:center;">
                 <img id="logo" src="img/icon.png" class="icon" style="position: relative;">
@@ -70,7 +70,6 @@
         </div>
       </div>
     </div>
-
     <div class="container" style="margin-top: 20px;">
       <div class="row justify-content-center">
         <div class="ml-4 col-xl-7 col-lg-8 col-sm-12 col-12" id="middle-card">
@@ -88,12 +87,13 @@
                   <p class="card-text-faded card-text-date">2020 -
                     2021</p>
                   <div style="clear: both;">
-                    <p class="card-text-paragraph mb-0"> Govt. Model School Khulna <br>
-                      Khulna, Bangladesh</p>
-                    <p class="card-text-faded mt-0">Roll : 9</p>
+                    <p class="card-text-paragraph mb-0"> Govt. Model School
+                      <br> Khulna, Bangladesh</p>
                   </div>
                 </div>
-                <p class="card-text-gold d-block"><i class="fa fa-cog"></i> Projects</p>
+                <br>
+
+                <p class="card-text-gold d-block" id="second-card-btn"><i class="fa fa-cog"></i> Projects</p>
                 <div style="margin-left: 30px; margin-right: 30px;">
                   <a class="card-text-link" href="https://github.com/moinur-najib/laravel-mina-ecommerce"
                     target="_blank">
@@ -101,13 +101,6 @@
                   </a>
                   <p class="mb-0 card-text-faded">Laravel e-commerce site with Login, Registration, Admin
                     controls, Cart & Invoice System</p>
-
-                  <hr class="mb-1 mt-1">
-
-                  <a class="card-text-link" href="https://github.com/moinur-najib/js-canvas-gravity" target="_blank">
-                    Gravity System
-                  </a>
-                  <p class="card-text-faded">Using vanilla JS and HTML, CSS</p>
 
                   <hr class="mb-1 mt-1">
 
@@ -171,14 +164,16 @@
                   <i unselectable="on" class="fa fa-bullseye"></i>
                   Contact</p>
                 <div class="container">
+
+
                   <div id="contact-info" class="row justify-content-center" style="margin-top: 65px;
   margin-bottom: 0px; position: relative;">
-                    <a unselectable="on" id="email" class="card-text-link d-inline mr-4"
-                      href="mailto:moinurnajib@gmail.com" target="_blank"><i class="fa fa-envelope"></i>
+                    <a unselectable="on" class="card-text-link d-inline email" href="mailto:moinurnajib@gmail.com"
+                      target="_blank"><i class="fa fa-envelope"></i>
                       E-Mail</a>
 
-                    <a unselectable="on" class="card-text-link d-inline mr-4" href="https://github.com/moinur-najib"
-                      target="_blank"><i class="fa fa-github"></i> Github </a>
+                    <a unselectable="on" id="github" class="card-text-link d-inline"
+                      href="https://github.com/moinur-najib" target="_blank"><i class="fa fa-github"></i> Github </a>
 
                     <a unselectable="on" class="card-text-link d-inline"
                       href="https://www.youtube.com/c/Nixonokk/videos" target="_blank"><i
@@ -211,9 +206,8 @@
   </div>
 
   <p class="heart mt-5" id="heart" style="text-align: center;"><span
-      style="color: red;text-align: center; display: inline-block; z-index: 2;" class="fa fa-heart"
-      aria-hidden="true"></span></p>
-  <canvas></canvas>
+      style="color: red;text-align: center; display: inline-block; position: absolute; margin-bottom: 100px;"
+      class="fa fa-heart heart-icon" aria-hidden="true"></span></p>
 
   <!-- scripts -->
   <script src="js/particles.js"></script>
@@ -227,16 +221,41 @@
     //   loader.className = "hidden"; // class "loader hidden"
     // });
 
-    $("#middle-card-fade").click(function () {
+    var keys = {};
+    window.addEventListener("keydown",
+      function (e) {
+        keys[e.keyCode] = true;
+        switch (e.keyCode) {
+          case 37:
+          case 39:
+          case 38:
+          case 40: // Arrow keys
+          case 32:
+            e.preventDefault();
+            break; // Space
+          default:
+            break; // do not block other keys
+        }
+      },
+      false);
+    window.addEventListener('keyup',
+      function (e) {
+        keys[e.keyCode] = false;
+      },
+      false);
 
-      $("#middle-card-fade").toggleClass("middle-card")
-      $("#last-canvas-background").addClass("last-card-img")
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      $("#second-card-btn").click(function () {
 
-      $("#last-canvas-background").css("box-shadow", "10px 10px 40px #FFC900");
-      $("#middle-card-fade").animate({
-        opacity: '0'
+        $("#middle-card-fade").toggleClass("middle-card")
+        $("#last-canvas-background").addClass("last-card-img")
+
+        $("#last-canvas-background").css("box-shadow", "10px 10px 40px #FFC900");
+        $("#middle-card-fade").animate({
+          opacity: '0'
+        });
       });
-    });
+    }
 
     // $("#fourth-card-show").css("opacity", "0");
 
@@ -273,48 +292,58 @@
     });
 
 
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 
-    $("#last-play-btn").click(function () {
-      console.log("last play button was clicked")
-      $("#last-card-fade").addClass("last-card")
+      $("#last-play-btn").click(function () {
+        $("#last-card-fade").addClass("last-card")
 
-      $("#second-canvas-background").addClass("second-card-img")
-      $("#last-card-fade").animate({
-        opacity: 0
+        $("#second-canvas-background").addClass("second-card-img")
+        $("#last-card-fade").animate({
+          opacity: 0
+        });
+
+        $("#contact-info").animate({
+          top: '70px',
+          left: "15px"
+        });
+
+        $("#contact-brand").animate({
+          left: "35px",
+          opacity: 0
+        });
+
       });
 
-      $("#contact-info").animate({
-        top: '70px',
-        left: "15px"
+      $("#last-card").hover(function () {
+        $("#last-play-btn").toggleClass("show-btn")
       });
+    }
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 
-      $("#contact-brand").animate({
-        left: "350px",
-        opacity: 0
-      });
+      $(document).keypress(function (e) {
+        var keycode = (e.keyCode ? e.keyCode : e.which);
 
-    });
-
-    $("#last-card").hover(function () {
-      $("#last-play-btn").toggleClass("show-btn")
-    });
-
-    $(document).keypress(function (e) {
-      var keycode = (e.keyCode ? e.keyCode : e.which);
-
-      if (keycode == "38" || keycode == "40") {
-        e.view.event.preventDefault();
-      }
-
-      if ($("#fourth-card-show").hasClass("hide-fourth-card")) {
-        if (keycode == '119' || keycode == '97' || keycode == '100' || keycode == '115') {
-          $("#fourth-card-show").removeClass("hide-fourth-card")
-          $("#fourth-card-show").toggleClass("show-fourth-card")
-
-          $("#heart").css("opacity", "0");
+        if (keycode == "38" || keycode == "40") {
+          e.view.event.preventDefault();
         }
-      }
-    });
+
+        if ($("#fourth-card-show").hasClass("hide-fourth-card")) {
+          if (keycode == '119' || keycode == '97' || keycode == '100' || keycode == '115') {
+            $("#fourth-card-show").removeClass("hide-fourth-card")
+            $("#fourth-card-show").toggleClass("show-fourth-card")
+
+            setTimeout(removeHeart, 500)
+
+            function removeHeart() {
+              $("#heart").css("opacity", "0");
+              $("#heart").css("margin-top", "0px");
+              $("#heart").css("position", "absolute");
+              $(".heart-icon").css("margin-bottom", "0px");
+            }
+          }
+        }
+      });
+    }
     // let renderer = createCanvas(sketchWidth, sketchHeight);
     // renderer.parent("first_card");
   </script>

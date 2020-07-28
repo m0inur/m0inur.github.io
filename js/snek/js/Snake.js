@@ -75,15 +75,31 @@ function Snake(c, w, h, rgb, randCoord) {
     this.death = function () {
         c.playerHasDied = true;
         c.deadCounter++;
+
+        c.fill(255)
+
+        c.textSize(20);
+        c.textFont(c.orbi);
+        c.text("Game Over\n", c.width / 2 - 60, c.height / 2)
+        c.text(c.score, c.width / 2, c.height / 2 + 30)
+
         if (c.deadCounter % 20 == 0) {
             c.playerHasDied = false;
             c.isPlaying = false;
+
+            c.initObjects = false;
+            c.setCanvas = false
             c.deadCounter = 0;
+            c.score = 0;
 
             this.rise = 0;
             this.tail = [];
 
-            console.log("resetting")
+            $("#heart").css("opacity", "1");
+            $("#heart").css("margin-top", "0px");
+            $("#heart").css("position", "relative");
+            $(".heart-icon").css("margin-bottom", "100px");
+
             $("#fourth-card-show").removeClass("show-fourth-card")
             $("#fourth-card-show").addClass("hide-fourth-card")
 

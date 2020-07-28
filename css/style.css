@@ -137,6 +137,8 @@ canvas {
 }
 
 .card-text-faded {
+  /* font-family: 'Amiko', */
+  /* sans-serif; */
   font-size: 16px;
   font-weight: 540;
   color: rgb(71, 71, 71);
@@ -240,6 +242,11 @@ canvas {
   z-index: 100;
 }
 
+#github {
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
 .faded-text-game {
   border-top: 1px solid grey;
 }
@@ -265,17 +272,110 @@ canvas {
   animation-play-state: running;
 }
 
+@media(max-width: 992px) {
+  .card-text {
+    font-weight: 400;
+    font-size: 18px;
+  }
 
-@media(max-width: 767px) {
-  .card-text-date {
-    float: right;
-    display: block;
+  .card-text-gold {
+    color: #44abff;
+    font-size: 20px;
+    font-weight: 300;
+  }
+
+  .card-text-paragraph {
+    font-size: 17px;
+    font-weight: 300;
   }
 
   .card-text-education {
-    float: none;
+    font-size: 17px;
+    float: left;
+    margin-bottom: 0;
+  }
+
+  .card-text-link {
+    color: #01C2FF;
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+}
+
+@media(max-width: 767px) {
+  .card-text {
+    font-weight: 400;
+    font-size: 19px;
+  }
+
+  .card-text-gold {
+    font-size: 19px;
+    font-size: 330;
+  }
+
+  .card-text-link {
+    font-size: 15px;
+  }
+
+  .card-text-paragraph {
+    font-size: 17px;
+    font-weight: 200;
+  }
+
+  .card-text-faded {
+    font-size: 14px;
+    font-weight: 500;
   }
 }
+
+@media(max-width: 576px) {
+  .card-text {
+    font-weight: 270;
+    font-size: 19px;
+  }
+
+  .card-text-gold {
+    font-size: 18px;
+    font-size: 300;
+  }
+
+  .card-text-link {
+    font-size: 16px;
+  }
+
+  .card-text-paragraph {
+    font-size: 16px;
+    font-weight: 185;
+  }
+
+  #contact-info {
+    margin-left: 8px;
+  }
+
+  #github {
+    margin-left: 10px;
+    margin-right: 8px;
+  }
+
+  .email {
+    margin-left: -25px;
+  }
+
+  .card-text-faded {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .card-text-date {
+    margin-top: 3px;
+  }
+
+  .third-card-img .card .container {
+    width: 100%;
+  }
+}
+
 
 @keyframes show-card {
   from {
