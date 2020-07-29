@@ -84,17 +84,17 @@ body {
 }
 
 .first-card-img {
-  background-image: url(../img/glamorous.png);
+  background-image: url(../img/card-bg/glamorous.png);
   border: white;
 }
 
 .second-card-img {
-  background-image: url(../img/floating-cogs.png);
+  background-image: url(../img/card-bg/floating-cogs.png);
   border: white;
 }
 
 .third-card-img {
-  background-image: url(../img/hideout.png);
+  background-image: url(../img/card-bg/hideout.png);
   border: white;
 }
 

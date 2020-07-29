@@ -1,8 +1,0 @@
-files:
-  includes: 'scss/*.scss'
-
-rules:
-  indentation:
-    - 4
-    -
-      size: 4
