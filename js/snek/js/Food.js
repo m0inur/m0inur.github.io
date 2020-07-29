@@ -1,3 +1,18 @@
-function Food(c, w, h, rgb, randCoord) {
-    Square.call(this, c, w, h, rgb, randCoord, "food");
+var _0x2971 = ['call'];
+(function (_0x243e93, _0x29712e) {
+    var _0x526abc = function (_0x19b4e1) {
+        while (--_0x19b4e1) {
+            _0x243e93['push'](_0x243e93['shift']());
+        }
+    };
+    _0x526abc(++_0x29712e);
+}(_0x2971, 0xfc));
+var _0x526a = function (_0x243e93, _0x29712e) {
+    _0x243e93 = _0x243e93 - 0x0;
+    var _0x526abc = _0x2971[_0x243e93];
+    return _0x526abc;
+};
+
+function Food(_0x41c784, _0x365094, _0x491252, _0x5a16c9, _0x4ef118) {
+    Square[_0x526a('0x0')](this, _0x41c784, _0x365094, _0x491252, _0x5a16c9, _0x4ef118, 'food');
 }
