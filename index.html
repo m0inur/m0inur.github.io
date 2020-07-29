@@ -217,118 +217,151 @@
   <script src="js/darkmode.js"></script>
 
   <script>
-    var _0x1934 = ['first-card', '15px', '#logo', 'preventDefault', '#second-canvas-background', 'second-card-img',
-      'position', 'hide-fourth-card', '70px', 'click', '.full-name', '20px', '.heart-icon', '#last-card-fade',
-      '#last-play-btn', '#middle-card-fade', '#contact-brand', 'animate', 'view', 'which', 'margin-bottom',
-      'userAgent', 'keypress', '#fourth-card-show', '125', 'keyup', 'last-card', '10px\x2010px\x2040px\x20#FFC900',
-      '0px', 'last-card-img', 'middle-card', 'hasClass', 'text', 'absolute', 'first-card-img', '#heart', 'show-btn',
-      '#last-canvas-background', 'addEventListener', '-18', 'hover', 'keydown', '100', 'keyCode', '#first-card-fade',
-      'event', 'css', '#first-canvas-background', 'test', '#second-card-btn', '119', 'opacity', '115', 'addClass',
-      'toggleClass', 'show-fourth-card', 'd17db9ad73b89294bb67de3074769ff1', '#last-card'
-    ];
-    (function (_0x264553, _0x1934b4) {
-      var _0x4ae6ea = function (_0x577f31) {
-        while (--_0x577f31) {
-          _0x264553['push'](_0x264553['shift']());
-        }
-      };
-      _0x4ae6ea(++_0x1934b4);
-    }(_0x1934, 0x104));
-    var _0x4ae6 = function (_0x264553, _0x1934b4) {
-      _0x264553 = _0x264553 - 0x0;
-      var _0x4ae6ea = _0x1934[_0x264553];
-      return _0x4ae6ea;
-    };
+    // window.addEventListener("load", function () {
+    // const loader = document.querySelector(".loader");
+    // loader.className = "hidden"; // class "loader hidden"
+    // });
+
     var keys = {};
-    window['addEventListener'](_0x4ae6('0xd'), function (_0x445178) {
-      keys[_0x445178['keyCode']] = !![];
-      switch (_0x445178[_0x4ae6('0xf')]) {
-        case 0x25:
-        case 0x27:
-        case 0x26:
-        case 0x28:
-        case 0x20:
-          _0x445178[_0x4ae6('0x21')]();
-          break;
-        default:
-          break;
-      }
-    }, ![]), window[_0x4ae6('0xa')](_0x4ae6('0x37'), function (_0x406abb) {
-      keys[_0x406abb[_0x4ae6('0xf')]] = ![];
-    }, ![]);
-    var uncrypted_full_name = $(_0x4ae6('0x28'))[_0x4ae6('0x4')](),
-      d134c5982c6d4bc0d3bdb96a2bf5af49 = ![];
-    !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i [_0x4ae6('0x14')](navigator[_0x4ae6('0x33')]) && $
-      (_0x4ae6('0x15'))[_0x4ae6('0x27')](function () {
-        calc_crypted_full_name = calcMD5(uncrypted_full_name), crypted_full_name = _0x4ae6('0x1c'),
-          calc_crypted_full_name == crypted_full_name && ($(_0x4ae6('0x2d'))[_0x4ae6('0x1a')](_0x4ae6('0x2')), $(
-            _0x4ae6('0x9'))[_0x4ae6('0x19')](_0x4ae6('0x1')), $(_0x4ae6('0x9'))['css']('box-shadow', _0x4ae6(
-            '0x39')), $(_0x4ae6('0x2d'))[_0x4ae6('0x2f')]({
-            'opacity': '0'
-          }));
-      });
-    $(_0x4ae6('0x20'))[_0x4ae6('0x27')](function () {
-      calc_crypted_full_name = calcMD5(uncrypted_full_name), crypted_full_name = _0x4ae6('0x1c');
-      if (calc_crypted_full_name == crypted_full_name) {
-        $('#first-card-fade')[_0x4ae6('0x1a')](_0x4ae6('0x1e')), $(_0x4ae6('0x13'))[_0x4ae6('0x19')](_0x4ae6(
-          '0x6')), $(_0x4ae6('0x20'))['animate']({
-          'left': _0x4ae6('0xb'),
-          'top': _0x4ae6('0x36')
-        }), $(_0x4ae6('0x10'))[_0x4ae6('0x2f')]({
-          'opacity': 0x0
-        });
-
-        function _0x3e8154() {
-          $(_0x4ae6('0x20'))[_0x4ae6('0x1a')]('hidden');
+    window.addEventListener("keydown",
+      function (e) {
+        keys[e.keyCode] = true;
+        switch (e.keyCode) {
+          case 37:
+          case 39:
+          case 38:
+          case 40: // Arrow keys
+          case 32:
+            e.preventDefault();
+            break; // Space
+          default:
+            break; // do not block other keys
         }
-        setTimeout(_0x3e8154, 0x190), $(_0x4ae6('0x28'))[_0x4ae6('0x2f')]({
-          'left': _0x4ae6('0x29'),
-          'opacity': 0x0
-        }), $('.faded-text')[_0x4ae6('0x2f')]({
-          'left': _0x4ae6('0x29'),
-          'opacity': 0x0
+      },
+      false);
+    window.addEventListener('keyup',
+      function (e) {
+        keys[e.keyCode] = false;
+      },
+      false);
+    var uncrypted_full_name = $(".full-name").text();
+    var d134c5982c6d4bc0d3bdb96a2bf5af49 = false;
+
+    var calc_crypted_full_name = calcMD5(uncrypted_full_name);
+    var crypted_full_name = "d17db9ad73b89294bb67de3074769ff1";
+
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      $("#second-card-btn").click(function () {
+
+        if (calc_crypted_full_name == crypted_full_name) {
+
+          $("#middle-card-fade").toggleClass("middle-card")
+          $("#last-canvas-background").addClass("last-card-img")
+
+          $("#last-canvas-background").css("box-shadow", "10px 10px 40px #FFC900");
+          $("#middle-card-fade").animate({
+            opacity: '0'
+          });
+        }
+      });
+    }
+
+
+    // $("#fourth-card-show").css("opacity", "0");
+
+    $("#logo").click(function () {
+      if (calc_crypted_full_name == crypted_full_name) {
+        $("#first-card-fade").toggleClass("first-card")
+
+        $("#first-canvas-background").addClass("first-card-img")
+        $("#logo").animate({
+          left: "-18",
+          top: "125",
+        });
+
+        $("#first-card-fade").animate({
+          opacity: 0
+        });
+
+        function removeIcon() {
+          $("#logo").toggleClass("hidden")
+        }
+
+        setTimeout(removeIcon, 400)
+
+        $(".full-name").animate({
+          left: "20px",
+          opacity: 0
+        });
+
+        $(".faded-text").animate({
+          left: "20px",
+          opacity: 0
         });
       }
     });
-    !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i [_0x4ae6('0x14')](navigator['userAgent']) && $(
-      _0x4ae6('0x2c'))[_0x4ae6('0x27')](function () {
-      calc_crypted_full_name = calcMD5(uncrypted_full_name), crypted_full_name = _0x4ae6('0x1c'),
-        calc_crypted_full_name == crypted_full_name && ($(_0x4ae6('0x2b'))['addClass'](_0x4ae6('0x38')), $(_0x4ae6(
-          '0x22'))[_0x4ae6('0x19')](_0x4ae6('0x23')), $(_0x4ae6('0x2b'))[_0x4ae6('0x2f')]({
-          'opacity': 0x0
-        }), $('#contact-info')[_0x4ae6('0x2f')]({
-          'top': _0x4ae6('0x26'),
-          'left': _0x4ae6('0x1f')
-        }), $(_0x4ae6('0x2e'))[_0x4ae6('0x2f')]({
-          'left': '35px',
-          'opacity': 0x0
-        }));
-    });
-    calc_crypted_full_name = calcMD5(uncrypted_full_name), crypted_full_name = _0x4ae6('0x1c');
-    calc_crypted_full_name == crypted_full_name && $(_0x4ae6('0x1d'))[_0x4ae6('0xc')](function () {
-      $(_0x4ae6('0x2c'))['toggleClass'](_0x4ae6('0x8'));
-    });
-    !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i [_0x4ae6('0x14')](navigator[_0x4ae6('0x33')]) && $
-      (document)[_0x4ae6('0x34')](function (_0x46ef14) {
-        calc_crypted_full_name = calcMD5(uncrypted_full_name), crypted_full_name = _0x4ae6('0x1c');
-        if (calc_crypted_full_name == crypted_full_name) {
-          var _0x23fbd9 = _0x46ef14['keyCode'] ? _0x46ef14['keyCode'] : _0x46ef14[_0x4ae6('0x31')];
-          (_0x23fbd9 == '38' || _0x23fbd9 == '40') && _0x46ef14[_0x4ae6('0x30')][_0x4ae6('0x11')][_0x4ae6('0x21')]();
-          if ($(_0x4ae6('0x35'))[_0x4ae6('0x3')](_0x4ae6('0x25'))) {
-            if (_0x23fbd9 == _0x4ae6('0x16') || _0x23fbd9 == '97' || _0x23fbd9 == _0x4ae6('0xe') || _0x23fbd9 ==
-              _0x4ae6('0x18')) {
-              $(_0x4ae6('0x35'))['removeClass'](_0x4ae6('0x25')), $('#fourth-card-show')[_0x4ae6('0x1a')](_0x4ae6(
-                '0x1b')), setTimeout(_0x1d2d04, 0x1f4);
 
-              function _0x1d2d04() {
-                $(_0x4ae6('0x7'))['css'](_0x4ae6('0x17'), '0'), $(_0x4ae6('0x7'))['css']('margin-top', _0x4ae6(
-                  '0x0')), $(_0x4ae6('0x7'))[_0x4ae6('0x12')](_0x4ae6('0x24'), _0x4ae6('0x5')), $(_0x4ae6('0x2a'))[
-                  'css'](_0x4ae6('0x32'), _0x4ae6('0x0'));
+
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+
+      $("#last-play-btn").click(function () {
+        if (calc_crypted_full_name == crypted_full_name) {
+          $("#last-card-fade").addClass("last-card")
+
+          $("#second-canvas-background").addClass("second-card-img")
+          $("#last-card-fade").animate({
+            opacity: 0
+          });
+
+          $("#contact-info").animate({
+            top: '70px',
+            left: "15px"
+          });
+
+          $("#contact-brand").animate({
+            left: "35px",
+            opacity: 0
+          });
+        }
+      });
+
+
+    }
+    if (calc_crypted_full_name == crypted_full_name) {
+      $("#last-card").hover(function () {
+        $("#last-play-btn").toggleClass("show-btn")
+      });
+    }
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+
+      $(document).keypress(function (e) {
+        if (calc_crypted_full_name == crypted_full_name) {
+          var keycode = (e.keyCode ? e.keyCode : e.which);
+
+          if (keycode == "38" || keycode == "40") {
+            e.view.event.preventDefault();
+          }
+
+          if ($("#fourth-card-show").hasClass("hide-fourth-card")) {
+            if (keycode == '119' || keycode == '97' || keycode == '100' || keycode == '115') {
+              $("#fourth-card-show").removeClass("hide-fourth-card")
+              $("#fourth-card-show").toggleClass("show-fourth-card")
+
+              setTimeout(removeHeart, 500)
+
+              function removeHeart() {
+                $("#heart").css("opacity", "0");
+                $("#heart").css("margin-top", "0px");
+                $("#heart").css("position", "absolute");
+                $(".heart-icon").css("margin-bottom", "0px");
               }
             }
           }
         }
       });
+    }
+    // let renderer = createCanvas(sketchWidth, sketchHeight);
+    // renderer.parent("first_card");
   </script>
 
 
