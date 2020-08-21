@@ -26,6 +26,7 @@ function Square(c, w, h, rgb, randCoord, type) {
             // console.log(this.x + " " + this.y)
             c.rect(this.x, this.y, this.w, this.h);
         } else if (type == "food") {
+
             if (!c.initObjects) {
                 this.x = c.width / 2 + 4;
                 this.y = 150 / 2 - 26;

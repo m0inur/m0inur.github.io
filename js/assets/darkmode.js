@@ -12,7 +12,6 @@ function animate() {
         counter++
 
         if (!$("body").hasClass("bg-lightMode")) {
-            // $("body").removeClass("bg-darkMode");
 
             $('body').css("background", "#25233a")
             $(".card").css("background-color", "#383358")
@@ -33,7 +32,6 @@ function animate() {
         $('body').css("color", "#e5e5ea");
 
         $(".card").css("background-color", "#383358")
-        // $(".card-text-gold").css("color", "#1EA51D")
 
         $(".card-text-faded").css("color", "#CECECE")
     } else {
@@ -43,9 +41,6 @@ function animate() {
 
         if (counter % 120 == 0) {
             $('body').css("background", "#448AFF")
-            // $('body').css({
-            //     background: "-webkit-gradient(linear, left top, left bottom, from(#B721FF), to(#21D4FD))"
-            // });
         }
 
 
@@ -56,8 +51,8 @@ function animate() {
         $(".card-text-faded").css("color", "#727272")
         $(".card-text-gold").css("color", "#44abff")
         $(".card").css("background-color", "#fff")
-        // $("body").css("background-image", "linear-gradient(0deg, #21D4FD, #B721FF);");
-        /* background-image: linear-gradient(0deg, #21D4FD, #B721FF); */
+
+        $(".heart-img-text").css("color", "#B7B7B7")
     }
 
 }

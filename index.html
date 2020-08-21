@@ -177,15 +177,19 @@
                     <a unselectable="on" id="github" class="card-text-link d-inline" href="https://github.com/m0inur"
                       target="_blank"><i class="fa fa-github"></i> Github </a>
 
-                    <a unselectable="on" class="card-text-link d-inline"
-                      href="https://www.youtube.com/c/Nixonokk/videos" target="_blank"><i
-                        class=" fa fa-youtube-play"></i>
-                      YouTube</a>
+                    <a unselectable="on" class="card-text-link d-inline hackerrank"
+                      href="https://www.hackerrank.com/moinurnajib" target="_blank">
+                      <img class="hover-hackerrank-img hackerrank-img hide-hackerrank-img" src="img/hackerrank_2.webp"
+                        alt="hackerrank-img">
+
+                      <img class="main-hackerrank-img hackerrank-img" src="img/hackerrank.webp" alt="hackerrank-img">
+                      Hackerrank</a>
 
 
                   </div>
                 </div>
               </div>
+              <i class="fa fa-hackerrank"></i>
               <p class="card-game-btn d-inline hidden"><i id="last-play-btn" class="fa fa-gamepad"></i></p>
             </div>
           </div>
@@ -207,8 +211,11 @@
     </div>
   </div>
 
-  <p class="heart mt-5" id="heart" style="text-align: center;"><span
-      style="color: red;text-align: center; display: inline-block; position: absolute; margin-bottom: 100px;"
+  <p class="text-center mt-5 mb-0 heart-img-text hidden"
+    style="margin-left: 16px; color: grey; font-size: 10px; font-weight: 500;">W
+    A S D</p>
+  <p class="heart" id="heart" style="text-align: center;">
+    <span style="color: red;text-align: center; display: inline-block; position: absolute; margin-bottom: 100px;"
       class="fa fa-heart heart-icon" aria-hidden="true"></span></p>
 
   <!-- scripts -->
@@ -217,6 +224,14 @@
   <script src="js/assets/darkmode.js"></script>
 
   <script>
+    $(".hackerrank").hover(function () {
+      $(".hackerrank .main-hackerrank-img").toggleClass("hide-hackerrank-img")
+      $(".hackerrank .hover-hackerrank-img").toggleClass("show-hackerrank-img");
+    })
+
+    $(".heart").hover(function () {
+      $(".heart-img-text").toggleClass("show")
+    })
     // window.addEventListener("load", function () {
     // const loader = document.querySelector(".loader");
     // loader.className = "hidden"; // class "loader hidden"

@@ -181,6 +181,7 @@ canvas {
 
 .card-text-link:hover {
   text-decoration: none;
+  color: rgb(221, 192, 30);
 }
 
 .icons {
@@ -232,7 +233,6 @@ canvas {
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  z-index: -1;
 }
 
 .body-particles {
@@ -271,6 +271,29 @@ canvas {
   animation: card-change-to-dark 2s;
   animation-play-state: running;
 }
+
+.email {
+  margin-left: 0px;
+}
+
+.hackerrank-img {
+  visibility: visible;
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+
+.hide-hackerrank-img {
+  opacity: 0;
+  position: absolute;
+}
+
+.show-hackerrank-img {
+  opacity: 1 !important;
+  position: relative;
+}
+
+/* email */
 
 @media(max-width: 992px) {
   .card-text {
