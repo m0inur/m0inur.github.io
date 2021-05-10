@@ -4,6 +4,7 @@ class Sonic {
     this.x = this.r;
     this.y = c.height - this.r - 45;
     this.gravity = 2;
+    // this.groundDistance = 40;
     this.vy = 0;
     this.jumpDistance = -18;
     this.jumpHeight = 19;
@@ -17,6 +18,7 @@ class Sonic {
       if (this.y == c.height - this.r - 40) {
         this.vy = -25;
       }
+      // console.log(c.keyCode)
       if (c.keyCode == 38) {
         this.vy = -25;
       }
@@ -24,10 +26,12 @@ class Sonic {
   }
 
   move(c, cloudVel, cactusVel, groundVel) {
+    // console.log(this.y)
     if (!c.playerIsDead) {
 
       if (this.vy < 0) {
         this.isGrounded = false;
+        // console.log("it's not grounded");
       }
 
       if (!this.isGrounded) {
@@ -37,6 +41,7 @@ class Sonic {
       }
 
     } else {
+      // if (!c.hasReloaded) {
       c.graphics = c.sonic_death_img;
       c.playerIsDead = true;
       cloudVel = 2;
@@ -57,6 +62,8 @@ class Sonic {
 
     // Make player jump
     if (!c.playerIsDead) {
+      // console.log(this.vy);
+      // console.log("make player jump");
       this.y += this.vy;
       this.vy += this.gravity;
       this.y = c.constrain(this.y, 0, c.height - this.r - 40);
@@ -64,6 +71,16 @@ class Sonic {
   }
 
   hits(cl, c) {
+    /* 
+     * Properties of recltangle
+     *
+     * x1 & x1 = Player Properties
+     *
+     * x2 & x2 = Obstaclles Properties
+     *
+     * cl = clacltus
+     */
+
     var x1 = this.x + this.r * 0.5;
     var y1 = this.y + this.r * 0.5;
     var x2 = cl.x + cl.r * 0.5;
@@ -73,9 +90,11 @@ class Sonic {
     if (hit) {
       c.playerIsDead = true;
     }
+    // return collideRectRect(this.x, this.y, this.c.width, this.height, c.x, c.y, c.c.width, c.height);
   }
 
   draw(c) {
+    // console.log(c.playerIsDead)
     if (!c.playerIsDead) {
 
       if (this.y == c.height - this.r - 40) {
@@ -96,6 +115,9 @@ class Sonic {
         c.graphics = c.sonic_run_4_img;
       }
     }
+    // console.log(c.c.graphics + " " + this.x + " " + this.y + " " + this.r
+    // c.graphics = sonic_run_1_img;
+    // c.image(c.graphics, this.x, c.height - 45);
     c.image(c.graphics, this.x, this.y + 15, this.r, this.r);
   }
 }

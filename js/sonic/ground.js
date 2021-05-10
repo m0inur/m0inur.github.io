@@ -1,4 +1,6 @@
 function Ground(c) {
+    // var ground_img = c.loadImage('js/sonic/assets/ground.png');
+    // var graphics = c.ground_img;
     this.x = 0;
 
     this.move = function (vx) {
