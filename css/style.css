@@ -21,6 +21,13 @@ canvas {
   visibility: visible !important;
 }
 
+.paragraph-separator {
+  border: none;
+  height: 1px;
+  background-color: rgb(157, 157, 157);
+  margin: 0.75rem 0; /* top & bottom */
+}
+
 /* Tooltip */
 
 .custom_tooltip {
@@ -141,11 +148,37 @@ body {
 }
 
 .card:hover {
-  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2),
+  box-shadow: 0 12 24 0 rgba(0, 0, 0, 0.2),
     0 8px 22px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* Card */
+
+/* Projects */
+
+.project-title {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.project-meta {
+  color: #49adff;
+  font-weight: 500;
+}
+
+.subtitle-text {
+  color: #44abff;
+  font-weight: 500;
+}
+
+.project-desc {
+  opacity: 0.8;      /* this is the key */
+  line-height: 1.55;
+  margin-top: 6px;
+}
+
+/* Projects */
 
 canvas {
   border-radius: 3px;
@@ -171,7 +204,7 @@ canvas {
 }
 
 .card-text-gold {
-  color: #44abff;
+  color: #5db6ff;
   font-size: 21px;
   font-weight: 500;
 }
@@ -196,7 +229,6 @@ canvas {
 .card-text-link {
   color: #01C2FF;
   text-decoration: none;
-  font-size: 16px;
 }
 
 .card-text-link:hover {
@@ -324,6 +356,14 @@ canvas {
   z-index: 999;
 }
 
+#contact-info {
+  display: flex;
+  gap: 24px;          /* space between links */
+  flex-wrap: wrap;    /* allows wrapping on small screens */
+  align-items: center;
+  justify-content: center;
+}
+
 /* email */
 
 @media(max-width: 992px) {
@@ -352,7 +392,6 @@ canvas {
   .card-text-link {
     color: #01C2FF;
     text-decoration: none;
-    font-size: 16px;
   }
 
   .wasd-img {
@@ -369,10 +408,6 @@ canvas {
   .card-text-gold {
     font-size: 19px;
     font-size: 330;
-  }
-
-  .card-text-link {
-    font-size: 15px;
   }
 
   .card-text-paragraph {
@@ -395,10 +430,6 @@ canvas {
   .card-text-gold {
     font-size: 18px;
     font-size: 300;
-  }
-
-  .card-text-link {
-    font-size: 16px;
   }
 
   .card-text-paragraph {
