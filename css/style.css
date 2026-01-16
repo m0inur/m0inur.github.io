@@ -1,3 +1,29 @@
+:root {
+  --subtitle-dark: #9FB7D9;
+  --subtitle-light: #6B86B3;
+  --section-dark: #6EC1FF;
+  --section-light: #0B5ED7;
+  --link-dark: #4DA3FF;
+  --link-light: #1A73E8;
+  --link-hover-gold: #D9B441;
+  
+  --subtitle-color: var(--subtitle-dark);
+  --section-color: var(--section-dark);
+  --link-color: var(--link-dark);
+}
+
+.bg-lightMode {
+  --subtitle-color: var(--subtitle-light);
+  --section-color: var(--section-light);
+  --link-color: var(--link-light);
+}
+
+.bg-darkMode {
+  --subtitle-color: var(--subtitle-dark);
+  --section-color: var(--section-dark);
+  --link-color: var(--link-dark);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -168,7 +194,7 @@ body {
 }
 
 .subtitle-text {
-  color: #44abff;
+  color: var(--subtitle-color);
   font-weight: 500;
 }
 
@@ -203,10 +229,10 @@ canvas {
   color: rgb(71, 71, 71);
 }
 
-.card-text-gold {
-  color: #5db6ff;
+.section-text {
   font-size: 21px;
   font-weight: 500;
+  color: var(--section-color);
 }
 
 .card-text-paragraph {
@@ -227,13 +253,18 @@ canvas {
 }
 
 .card-text-link {
-  color: #01C2FF;
+  color: var(--link-color);
   text-decoration: none;
+  /* border-bottom: 0.5px solid; */
 }
 
 .card-text-link:hover {
   text-decoration: none;
-  color: rgb(221, 192, 30);
+  color: var(--link-hover-gold);
+}
+
+.card-text-link:hover .link-image {
+  color: var(--link-hover-gold);
 }
 
 .icons {
@@ -327,21 +358,31 @@ canvas {
   margin-left: 0px;
 }
 
-.hackerrank-img {
+.link-image {
+  display: inline-block;
   visibility: visible;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   position: relative;
+  color: var(--link-color);
+  background-color: currentColor;
+  vertical-align: middle;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
 }
 
-.hide-hackerrank-img {
-  opacity: 0;
-  position: absolute;
+.hackerrank-image {
+  -webkit-mask-image: url("../img/hackerrank.svg");
+  mask-image: url("../img/hackerrank.svg");
 }
 
-.show-hackerrank-img {
-  opacity: 1 !important;
-  position: relative;
+.leetcode-image {
+  -webkit-mask-image: url("../img/leetcode.svg");
+  mask-image: url("../img/leetcode.svg");
 }
 
 .wasd-img {
@@ -372,8 +413,7 @@ canvas {
     font-size: 18px;
   }
 
-  .card-text-gold {
-    color: #44abff;
+  .section-text {
     font-size: 20px;
     font-weight: 300;
   }
@@ -389,11 +429,6 @@ canvas {
     margin-bottom: 0;
   }
 
-  .card-text-link {
-    color: #01C2FF;
-    text-decoration: none;
-  }
-
   .wasd-img {
     margin-right: 20%;
   }
@@ -405,7 +440,7 @@ canvas {
     font-size: 19px;
   }
 
-  .card-text-gold {
+  .section-text {
     font-size: 19px;
     font-size: 330;
   }
@@ -427,7 +462,7 @@ canvas {
     font-size: 19px;
   }
 
-  .card-text-gold {
+  .section-text {
     font-size: 18px;
     font-size: 300;
   }
@@ -493,7 +528,7 @@ canvas {
 
 @keyframes bg-change-to-dark {
   from {
-    background-color: #448AFF;
+    background-color: #6B86B3;
   }
 
   to {
@@ -507,7 +542,7 @@ canvas {
   }
 
   to {
-    background-color: #448AFF;
+    background-color: #6B86B3;
   }
 }
 
