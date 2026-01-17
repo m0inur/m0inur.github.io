@@ -159,6 +159,11 @@ body {
   border: white;
 }
 
+.experience-card-img {
+  background-image: url(../img/card-bg/floating-cogs.png);
+  border: white;
+}
+
 .project-card-img {
   background-image: url(../img/card-bg/floating-cogs.png);
   border: white;
