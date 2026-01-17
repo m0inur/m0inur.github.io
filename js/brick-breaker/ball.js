@@ -20,6 +20,7 @@ class Ball {
     }
   }
 
+  // Bounce off screen edge
   bounceEdge(c) {
     if (this.location.x + this.radius >= c.width) { // Check right edge
       this.reverse('x')
@@ -30,10 +31,6 @@ class Ball {
     }
   }
   display(c) {
-    // c.fill(this.color)
-    // c.ellipse(this.location.x - 5, this.location.y, this.size, this.size)
-    // this.location.x = c.mouseX - 20;
-    // this.location.y = c.mouseY;
     c.image(c.ball_img, this.location.x, this.location.y, this.radius, this.radius)
   }
 

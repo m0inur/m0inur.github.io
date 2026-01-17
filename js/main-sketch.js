@@ -34,17 +34,17 @@ const brickBreakerSketch = c => {
         // c.createCanvas(617, 250)
         c.frameRate(60)
 
-        var firstCard = $("#first-card");
-        var firstW = firstCard.innerWidth() - 30;
-        var firstH = firstCard.innerHeight();
+        var heroCard = $("#hero-card");
+        var heroW = heroCard.innerWidth() - 30;
+        var heroH = heroCard.innerHeight();
         if (calc_crypted_full_name != crypted_full_name) {
             d134c5982c6d4bc0d3bdb96a2bf5af49 = true;
         }
-        var firstX = firstCard.position();
-        cnv = c.createCanvas(firstW, firstH);
-        cnv.parent = $('#first-card');
+        var heroX = heroCard.position();
+        cnv = c.createCanvas(heroW, heroH);
+        cnv.parent = $('#hero-card');
         // c.canvas = cnv
-        cnv.position(firstX.left + 39, firstX.top + cards_top);
+        cnv.position(heroX.left + 39, heroX.top + cards_top);
         cnv.style('z-index', 1);
 
         brick.row = 4;
@@ -69,12 +69,8 @@ const brickBreakerSketch = c => {
         }
         if (isPlaying) {
             if (!d134c5982c6d4bc0d3bdb96a2bf5af49) {
-                console.log("Is paused ? = " + pause)
-                console.log("Is playing ? = " + isPlaying)
                 if (pause) {
                     c.loop();
-                    console.log("c.frameCount = " + (c.frameCount))
-                    console.log("c.frameCount % 120 = " + (c.frameCount % 120))
                     if (c.frameCount % 120 == 0) {
                         pause = false;
                     }
@@ -91,15 +87,19 @@ const brickBreakerSketch = c => {
                     if (!c.isDead) {
                         paddle.move(c)
                     }
-
+                    
+                    didAlreadyCollide = false
                     for (let i = bricks.length - 1; i >= 0; i--) {
                         if (collidable) {
                             const brick = bricks[i]
 
-                            if (brick.isColliding(c, ball)) {
-                                // ball.velocity -= 2
+                            if (!didAlreadyCollide && brick.isColliding(c, ball)) {
+                                if (brick.isCollidingSideways(c, ball)) {
+                                    ball.reverse('x')
+                                }
                                 ball.reverse('y')
                                 bricks.splice(i, 1)
+                                didAlreadyCollide = true;
                             } else {
                                 brick.display(c)
                             }
@@ -195,10 +195,10 @@ const brickBreakerSketch = c => {
                             c.setup();
                         });
 
-                        $("#first-canvas-background").removeClass("first-card-img")
-                        $("#first-card-fade").removeClass("first-card")
+                        $("#hero-canvas-background").removeClass("hero-card-img")
+                        $("#hero-card-fade").removeClass("hero-card")
 
-                        $("#first-card-fade").animate({
+                        $("#hero-card-fade").animate({
                             opacity: 1
                         });
 
@@ -259,14 +259,14 @@ const brickBreakerSketch = c => {
             brick.bricksPerRow = 6
             bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
 
-            var firstCard = $("#first-card");
-            var firstW = firstCard.innerWidth() - 30;
-            var firstH = firstCard.innerHeight();
+            var heroCard = $("#hero-card");
+            var heroW = heroCard.innerWidth() - 30;
+            var heroH = heroCard.innerHeight();
 
-            var firstX = firstCard.position();
+            var heroX = heroCard.position();
 
-            c.resizeCanvas(firstW, firstH);
-            cnv.position(firstX.left + 39, firstX.top + cards_top);
+            c.resizeCanvas(heroW, heroH);
+            cnv.position(heroX.left + 39, heroX.top + cards_top);
         });
     });
 }

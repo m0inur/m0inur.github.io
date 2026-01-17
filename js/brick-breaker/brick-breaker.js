@@ -7,17 +7,17 @@ let gameState
 function setup() {
   createCanvas(617, 250)
 
-  var firstCard = $("#first-card");
-  var firstW = firstCard.innerWidth() - 29;
-  var firstH = firstCard.innerHeight();
+  var heroCard = $("#hero-card");
+  var heroW = heroCard.innerWidth() - 29;
+  var heroH = heroCard.innerHeight();
 
-  var firstX = firstCard.position();
-  // console.log(firstW)
+  var heroX = heroCard.position();
+  // console.log(heroW)
 
-  cnv = createCanvas(firstW, firstH);
-  cnv.parent = $('#first-card');
+  cnv = createCanvas(heroW, heroH);
+  cnv.parent = $('#hero-card');
 
-  cnv.position(firstX.left + 38, firstX.top);
+  cnv.position(heroX.left + 38, heroX.top);
   cnv.style('z-index', -1);
 
   let colors = createColors()
@@ -44,7 +44,6 @@ function createBricks(colors) {
   const brickWidth = width / bricksPerRow
   for (let row = 0; row < rows; row++) {
     for (let i = 0; i < bricksPerRow; i++) {
-      console.log(colors[floor(random(0, colors.length))]);
       brick = new Brick(createVector(brickWidth * i, 15 * row), brickWidth, 15, colors[floor(random(0, colors.length))])
       bricks.push(brick)
     }
@@ -66,9 +65,12 @@ function draw() {
     } else if (keyIsDown(RIGHT_ARROW)) {
       paddle.move('right')
     }
-
+    
+    console.log("Draw")
     for (let i = bricks.length - 1; i >= 0; i--) {
       const brick = bricks[i]
+
+      // If brick is colliding with ball
       if (brick.isColliding(ball)) {
         ball.reverse('y')
         bricks.splice(i, 1)
@@ -101,13 +103,13 @@ function draw() {
 
 $(document).ready(function () {
   $(window).resize(function () {
-    var firstCard = $("#first-card");
-    var firstW = firstCard.innerWidth() - 29;
-    var firstH = firstCard.innerHeight();
+    var heroCard = $("#hero-card");
+    var heroW = heroCard.innerWidth() - 29;
+    var heroH = heroCard.innerHeight();
 
-    var firstX = firstCard.position();
+    var heroX = heroCard.position();
 
-    resizeCanvas(firstW, firstH);
-    cnv.position(firstX.left + 38, firstX.top);
+    resizeCanvas(heroW, heroH);
+    cnv.position(heroX.left + 38, heroX.top);
   });
 });
