@@ -1,572 +1,1421 @@
-var _0x2903 = ['#336FFF', 'innerHeight', 'radius', 'middle-card', 'noStroke', 'createCanvas', 'loadImage', 'sonic_run_4_img', 'https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_1.png', 'loadFont', 'jump', 'loop', 'length', 'increaseOpacity', 'textAlign', 'rotateSpeed', 'bounceEdge', '#e5e5ea', 'playerHasDied', 'initObjects', 'style', 'isColliding', '#second-card-btn', 'UP_ARROW', 'CENTER', 'textColor', '#middle-card-fade', '#2185C5', '#middle-card', 'display', 'ready', 'animate', 'belowBottom', 'mouseX', 'fill', 'spawnRate', 'sonic_jump_1_img', '#first-canvas-background', 'setAlpha', 'type', 'floor', '#FFFF00', 'orbi', '#last-card-fade', 'resizeCanvas', 'clone', 'createVector', 'playing', 'mouseY', 'https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/game_over.png', 'sonic_run_1_img', 'powerTextY', 'color', 'https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/ground.png', 'background', 'score', 'mousePressed', 'https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_2.png', 'RIGHT_ARROW', 'colors', 'heart', 'cloud_img', '0px', 'height', '#middle-canvas-background', '#third-card-fade', 'removeClass', 'brickPerRow', 'frameRate', '../img/heart.png', 'textFont', 'https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/Cactus.png', 'bullet_img', 'Plate\x20Sweep!', 'https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_4.png', 'splice', 'opacity', 'click', 'textFrames', 'crash', '.full-name', 'third-card', 'isTimerDone', 'textSize', 'round', '#00FF00', '#fourth-card', 'width', '#FF7F00', 'draw', 'hidden', 'setCanvas', 'bouncePaddle', 'deadCounter', '../img/bubblepopper/bullet.png', 'move', 'isPlaying', 'preload', 'key', 'sonic_death_img', 'distance', 'angleMode', '#FF336F', 'https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_death.png', 'bubbleColors', '#44abff', 'canvas3', '../img/icon2.png', 'd17db9ad73b89294bb67de3074769ff1', 'spaceBetween', 'push', 'setup', '#383358', 'bricksPerRow', 'parent', 'left', 'playerMaxAngle', 'DEGREES', 'last-card', 'z-index', 'sonic_run_2_img', 'sonic_run_3_img', 'dist', 'trippleBullets', 'plateSweep', 'rewind', 'DOWN_ARROW', 'bubbleHittable', 'colorMinRange', 'stroke', '.faded-text', 'graphics', '#last-play-btn', 'clear', '#fff', 'colorMaxRange', 'top', 'rise', '#first-card-fade', 'particlesFps', 'frameCount', 'playerIsDead', '#logo', 'strokeWeight', 'https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_3.png', 'update', 'toggleClass', 'numberFont', 'first-card', '#01C2FF', '#5D33FF', 'death', 'leftBullet', 'resize', '../fonts/Orbitron-Bold.ttf', 'LEFT_ARROW', 'cnvs', 'Tripple\x20Bullets', 'tail', 'centerBullet', 'doubleBullets', '#33FF9F', '#first-card', 'show', 'playerFps', 'reverse', 'hit', 'img', 'row', 'text', 'isDead', '../img/bubblepopper/double_score.png', 'innerWidth', '../img/bubblepopper/spaceship.png', 'keyPressed', '../img/bubblepopper/clone.png', 'random', 'keyCode', 'ball_img', '100', 'Double\x20Score', 'dir', '#contact-brand', '../fonts/Superstar-M54.ttf', '#333', '#last-card', 'hasReloaded', '../img/bubblepopper/tripple_bullet.png', 'position', 'doubleScore'];
-(function (_0x3dc05c, _0x2903fb) {
-    var _0x120451 = function (_0x572db0) {
-        while (--_0x572db0) {
-            _0x3dc05c['push'](_0x3dc05c['shift']());
+var cards_top = 43;
+// Brick breaker
+var uncrypted_full_name = $(".full-name").text();
+var d134c5982c6d4bc0d3bdb96a2bf5af49 = false;
+
+var calc_crypted_full_name = calcMD5(uncrypted_full_name);
+var crypted_full_name = "d17db9ad73b89294bb67de3074769ff1";
+
+const brickBreakerSketch = c => {
+    let paddle
+    let ball
+    let bricks
+
+    // Game States
+    let gameState
+    var won = 0;
+    var pause = true;
+    var isPlaying = false;
+    c.isDead = false;
+    c.hasReloaded = false;
+    var hasWon = false;
+
+    var collidable = true;
+    var ballVel = c.createVector(4, -4);
+    var brick = {
+        row: 4,
+        bricksPerRow: 6
+    }
+    c.preload = function () {
+        c.ball_img = c.loadImage("../img/icon2.png")
+    }
+
+    c.setup = function () {
+        // c.createCanvas(617, 250)
+        c.frameRate(60)
+
+        var firstCard = $("#first-card");
+        var firstW = firstCard.innerWidth() - 30;
+        var firstH = firstCard.innerHeight();
+        if (calc_crypted_full_name != crypted_full_name) {
+            d134c5982c6d4bc0d3bdb96a2bf5af49 = true;
         }
-    };
-    _0x120451(++_0x2903fb);
-}(_0x2903, 0x167));
-var _0x1204 = function (_0x3dc05c, _0x2903fb) {
-    _0x3dc05c = _0x3dc05c - 0x0;
-    var _0x120451 = _0x2903[_0x3dc05c];
-    return _0x120451;
-};
-var cards_top = 0x2b,
-    uncrypted_full_name = $(_0x1204('0x65'))['text'](),
-    d134c5982c6d4bc0d3bdb96a2bf5af49 = ![],
-    calc_crypted_full_name = calcMD5(uncrypted_full_name),
-    crypted_full_name = _0x1204('0x81');
-const brickBreakerSketch = _0x396c09 => {
-        let _0x4e89db, _0x1a7027, _0x31c365, _0x4c8f88;
-        var _0x1a66ea = 0x0,
-            _0x1ad784 = !![],
-            _0x5c6ba9 = ![];
-        _0x396c09[_0x1204('0x1')] = ![], _0x396c09['hasReloaded'] = ![];
-        var _0x54b03f = ![],
-            _0x381460 = !![],
-            _0x2e8f97 = _0x396c09[_0x1204('0x43')](0x4, -0x4),
-            _0x190323 = {
-                'row': 0x4,
-                'bricksPerRow': 0x6
-            };
-        _0x396c09[_0x1204('0x76')] = function () {
-            _0x396c09[_0x1204('0x9')] = _0x396c09['loadImage'](_0x1204('0x80'));
-        }, _0x396c09[_0x1204('0x84')] = function () {
-            _0x396c09[_0x1204('0x59')](0x3c);
-            var _0x5ee6e9 = $(_0x1204('0xb7')),
-                _0x1a64b2 = _0x5ee6e9['innerWidth']() - 0x1e,
-                _0x347f9a = _0x5ee6e9[_0x1204('0x16')]();
-            calc_crypted_full_name != crypted_full_name && (d134c5982c6d4bc0d3bdb96a2bf5af49 = !![]);
-            var _0x5adfdf = _0x5ee6e9[_0x1204('0x13')]();
-            cnv = _0x396c09[_0x1204('0x1a')](_0x1a64b2, _0x347f9a), cnv['parent'] = $(_0x1204('0xb7')), cnv['position'](_0x5adfdf[_0x1204('0x88')] + 0x27, _0x5adfdf[_0x1204('0x9d')] + cards_top), cnv[_0x1204('0x29')](_0x1204('0x8c'), 0x1), _0x190323['row'] = 0x4, _0x190323['bricksPerRow'] = 0x6, _0x396c09[_0x1204('0x50')] = _0x187a31(), _0x4e89db = new Paddle(_0x396c09), _0x1a7027 = new Ball(_0x2e8f97, _0x396c09, _0x4e89db), $(_0x1204('0xa3'))[_0x1204('0x62')](function () {
-                _0x4c8f88 = _0x1204('0x44'), _0x5c6ba9 = !![];
-            }), _0x31c365 = _0x1d2fc5(_0x190323['row'], _0x190323[_0x1204('0x86')], _0x396c09[_0x1204('0x50')]);
-        }, _0x396c09[_0x1204('0x6e')] = function () {
-            darkMode ? _0x396c09[_0x1204('0x4b')](_0x1204('0x85')) : _0x396c09[_0x1204('0x4b')](_0x1204('0x9b'));
-            if (_0x5c6ba9) {
-                if (!d134c5982c6d4bc0d3bdb96a2bf5af49) {
-                    _0x1ad784 && (_0x396c09[_0x1204('0x20')](), _0x396c09[_0x1204('0xa1')] % 0x78 == 0x0 && (_0x1ad784 = ![]));
-                    if (!_0x1ad784) {
-                        _0x1a7027[_0x1204('0x25')](_0x396c09);
-                        _0x381460 && _0x1a7027[_0x1204('0x71')]();
-                        _0x1a7027[_0x1204('0xa6')]();
-                        !_0x396c09[_0x1204('0x1')] && _0x4e89db[_0x1204('0x74')](_0x396c09);
-                        for (let _0x336d37 = _0x31c365[_0x1204('0x21')] - 0x1; _0x336d37 >= 0x0; _0x336d37--) {
-                            if (_0x381460) {
-                                const _0x1895c0 = _0x31c365[_0x336d37];
-                                _0x1895c0[_0x1204('0x2a')](_0x396c09, _0x1a7027) ? (_0x1a7027[_0x1204('0xba')]('y'), _0x31c365[_0x1204('0x60')](_0x336d37, 0x1)) : _0x1895c0[_0x1204('0x32')](_0x396c09);
+        var firstX = firstCard.position();
+        cnv = c.createCanvas(firstW, firstH);
+        cnv.parent = $('#first-card');
+        // c.canvas = cnv
+        cnv.position(firstX.left + 39, firstX.top + cards_top);
+        cnv.style('z-index', 1);
+
+        brick.row = 4;
+        brick.bricksPerRow = 6;
+
+        c.colors = createColors()
+        paddle = new Paddle(c)
+        ball = new Ball(ballVel, c, paddle)
+
+        $("#logo").click(function () {
+            gameState = "playing";
+            isPlaying = true;
+        });
+        bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
+    }
+    c.draw = function () {
+
+        if (darkMode) {
+            c.background("#383358")
+        } else {
+            c.background("#fff")
+        }
+        if (isPlaying) {
+            if (!d134c5982c6d4bc0d3bdb96a2bf5af49) {
+                console.log("Is paused ? = " + pause)
+                console.log("Is playing ? = " + isPlaying)
+                if (pause) {
+                    c.loop();
+                    console.log("c.frameCount = " + (c.frameCount))
+                    console.log("c.frameCount % 120 = " + (c.frameCount % 120))
+                    if (c.frameCount % 120 == 0) {
+                        pause = false;
+                    }
+                }
+                if (!pause) {
+
+                    ball.bounceEdge(c)
+                    if (collidable) {
+                        ball.bouncePaddle()
+                    }
+
+                    ball.update()
+
+                    if (!c.isDead) {
+                        paddle.move(c)
+                    }
+
+                    for (let i = bricks.length - 1; i >= 0; i--) {
+                        if (collidable) {
+                            const brick = bricks[i]
+
+                            if (brick.isColliding(c, ball)) {
+                                // ball.velocity -= 2
+                                ball.reverse('y')
+                                bricks.splice(i, 1)
+                            } else {
+                                brick.display(c)
                             }
                         }
-                    }!_0x1ad784 && (_0x4e89db[_0x1204('0x32')](_0x396c09), _0x1a7027[_0x1204('0x32')](_0x396c09));
-                    _0x1a7027[_0x1204('0x35')](_0x396c09) && (_0x396c09[_0x1204('0x1')] = !![], _0x381460 = ![]);
-                    if (_0x31c365[_0x1204('0x21')] === 0x0) {
-                        _0x54b03f = !![];
-                        let _0x28629c = _0x187a31();
-                        _0x1a66ea += 0x1, _0x1a66ea == 0x1 && (_0x190323[_0x1204('0xbd')] = 0x4, _0x190323[_0x1204('0x58')] = 0x7, _0x2e8f97 = _0x396c09[_0x1204('0x43')](0x6, -0x6), _0x31c365 = _0x1d2fc5(_0x190323[_0x1204('0xbd')], _0x190323['brickPerRow'], _0x28629c), _0x1a7027 = new Ball(_0x2e8f97, _0x396c09, _0x4e89db)), _0x1a66ea == 0x2 && (_0x190323[_0x1204('0xbd')] = 0x5, _0x190323[_0x1204('0x58')] = 0x7, _0x2e8f97 = _0x396c09[_0x1204('0x43')](0x7, -0x7), _0x31c365 = _0x1d2fc5(_0x190323[_0x1204('0xbd')], _0x190323['brickPerRow'], _0x28629c), _0x1a7027 = new Ball(_0x2e8f97, _0x396c09, _0x4e89db)), _0x1a66ea == 0x3 && (_0x190323['row'] = 0x6, _0x190323[_0x1204('0x58')] = 0x8, _0x2e8f97 = _0x396c09[_0x1204('0x43')](0x8, -0x8), _0x31c365 = _0x1d2fc5(_0x190323[_0x1204('0xbd')], _0x190323[_0x1204('0x58')], _0x28629c), _0x1a7027 = new Ball(_0x2e8f97, _0x396c09, _0x4e89db)), _0x1a66ea == 0x4 && (_0x190323['row'] = 0x8, _0x190323[_0x1204('0x58')] = 0x8, _0x2e8f97 = _0x396c09['createVector'](0x9, -0x9), _0x31c365 = _0x1d2fc5(_0x190323[_0x1204('0xbd')], _0x190323[_0x1204('0x58')], _0x28629c), _0x1a7027 = new Ball(_0x2e8f97, _0x396c09, _0x4e89db));
                     }
-                    _0x396c09[_0x1204('0x1')] && (_0x396c09[_0x1204('0xa1')] % 0x78 == 0x0 && (_0x396c09['isDead'] = ![], _0x396c09[_0x1204('0x11')] = !![], isGameLaunched = ![], _0x5c6ba9 = ![], _0x381460 = !![], _0x396c09[_0x1204('0x67')] = ![], _0x2e8f97 = _0x396c09[_0x1204('0x43')](0x4, -0x4), _0x396c09[_0x1204('0x4c')] = 0x0, _0x1a7027 = _0x396c09['NULL'], $(_0x1204('0xa3'))[_0x1204('0x62')](function () {
-                        _0x396c09[_0x1204('0x84')]();
-                    }), $(_0x1204('0x3a'))[_0x1204('0x57')]('first-card-img'), $(_0x1204('0x9f'))[_0x1204('0x57')](_0x1204('0xa9')), $(_0x1204('0x9f'))[_0x1204('0x34')]({
-                        'opacity': 0x1
-                    }), $(_0x1204('0xa3'))[_0x1204('0x57')](_0x1204('0x6f')), $(_0x1204('0xa3'))[_0x1204('0x34')]({
-                        'left': _0x1204('0x53'),
-                        'top': _0x1204('0x53'),
-                        'height': _0x1204('0xa'),
-                        'width': _0x1204('0xa')
-                    }), $(_0x1204('0x65'))[_0x1204('0x34')]({
-                        'left': _0x1204('0x53'),
-                        'opacity': 0x1
-                    }), $(_0x1204('0x97'))[_0x1204('0x34')]({
-                        'left': _0x1204('0x53'),
-                        'opacity': 0x1
-                    })));
+                }
+
+                if (!pause) {
+                    paddle.display(c)
+                    ball.display(c)
+                }
+
+                if (ball.belowBottom(c)) {
+                    c.isDead = true;
+                    collidable = false;
+                }
+
+                if (bricks.length === 0) {
+                    hasWon = true;
+
+                    // if (!c.hasReloaded) {
+                    let colors = createColors()
+                    won += 1;
+                    if (won == 1) {
+                        brick.row = 4;
+                        brick.brickPerRow = 7;
+                        ballVel = c.createVector(6, -6);
+
+                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                        ball = new Ball(ballVel, c, paddle)
+                    }
+
+                    if (won == 2) {
+                        brick.row = 5;
+                        brick.brickPerRow = 7;
+                        ballVel = c.createVector(7, -7);
+
+                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                        ball = new Ball(ballVel, c, paddle)
+                    }
+
+                    if (won == 3) {
+                        brick.row = 6;
+                        brick.brickPerRow = 8;
+                        ballVel = c.createVector(8, -8);
+
+                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                        ball = new Ball(ballVel, c, paddle)
+                    }
+
+                    if (won == 4) {
+                        brick.row = 8;
+                        brick.brickPerRow = 8;
+                        ballVel = c.createVector(9, -9);
+
+                        bricks = createBricks(brick.row, brick.brickPerRow, colors);
+                        ball = new Ball(ballVel, c, paddle)
+                    }
+                    // for (var i = 1; i < 10; i++) {
+                    //     var incRow = 1,
+                    //         incBrick = 2,
+                    //         incBallVel = 1;
+
+                    //     if (won == i) {
+                    //         brick.row += incRow
+                    //         brick.brickPerRow += incBrick
+                    //         ballVel = c.createVector(6 + incBallVel, -6 + -incBallVel)
+
+                    //         bricks = createBricks(brick.row, brick.brickPerRow, colors);
+
+                    //         ball = new Ball(ballVel, c, paddle)
+                    //     }
+                    // }
+                    // }
+                }
+
+                if (c.isDead) {
+                    if (c.frameCount % 120 == 0) {
+                        c.isDead = false;
+                        c.hasReloaded = true;
+                        isGameLaunched = false;
+                        isPlaying = false;
+                        collidable = true;
+                        c.isTimerDone = false;
+
+                        ballVel = c.createVector(4, -4);
+
+                        c.score = 0;
+
+                        ball = c.NULL;
+
+                        $("#logo").click(function () {
+                            c.setup();
+                        });
+
+                        $("#first-canvas-background").removeClass("first-card-img")
+                        $("#first-card-fade").removeClass("first-card")
+
+                        $("#first-card-fade").animate({
+                            opacity: 1
+                        });
+
+                        $("#logo").removeClass("hidden");
+
+                        $("#logo").animate({
+                            left: "0px",
+                            top: "0px",
+                            height: "100",
+                            width: "100",
+                        });
+
+                        $(".full-name").animate({
+                            left: "0px",
+                            opacity: 1
+                        });
+
+                        $(".faded-text").animate({
+                            left: "0px",
+                            opacity: 1
+                        });
+                    }
+
                 }
             }
+        }
+    }
+
+
+    function createColors() {
+        const colors = []
+
+        for (let i = 0; i < 10; i++) {
+            colors.push(materialColor());
+        }
+        return colors
+    }
+
+    function createBricks(row, brickPerRow, colors) {
+        var bricks = []
+        // const rows = 4
+        // const bricksPerRow = 6
+        const rows = row
+        const bricksPerRow = brickPerRow
+        const brickWidth = c.width / bricksPerRow
+        for (let row = 0; row < rows; row++) {
+            for (let i = 0; i < bricksPerRow; i++) {
+                brick = new Brick(c.createVector(brickWidth * i, 15 * row), brickWidth, 15, colors[c.floor(c.random(0, colors.length))])
+                bricks.push(brick)
+            }
+        }
+        return bricks
+    }
+
+    $(document).ready(function () {
+        $(window).resize(function () {
+            brick.row = 4;
+            brick.bricksPerRow = 6
+            bricks = createBricks(brick.row, brick.bricksPerRow, c.colors)
+
+            var firstCard = $("#first-card");
+            var firstW = firstCard.innerWidth() - 30;
+            var firstH = firstCard.innerHeight();
+
+            var firstX = firstCard.position();
+
+            c.resizeCanvas(firstW, firstH);
+            cnv.position(firstX.left + 39, firstX.top + cards_top);
+        });
+    });
+}
+
+// Bubble Popper
+const bubblePopperSketch = c => {
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        //Objects
+        var player;
+
+        var bubbles = [];
+        var shipBubs = [];
+        var bullets = [];
+        var bulletCenter = "centerBullet";
+        var bulletLeft = "leftBullet";
+        var bulletRight = "rightBullet";
+
+        var bParticles = [];
+        var powerUps = [];
+
+        // Frame rates
+        var frameCounter = 0;
+        var keyFrames = 0;
+        var countScoreFrames = 0;
+        var countFrames = 0;
+        c.playerFps = 0;
+        var gameEndingFrames = 0;
+
+        // Object Colors
+        var colors = [
+            "#2185C5",
+            "#FF0000",
+            "#00FF00",
+            "#00FF00",
+            "#FFFF00",
+            "#FF7F00",
+        ];
+
+        c.bubbleColors = [
+            "#5D33FF",
+            "#FF336F",
+            "#FF5D33",
+            "#336FFF",
+            "#33FF9F",
+            "#FF336F",
+        ];
+        // Objects properties
+
+        // bpp
+        var score = {
+            x: 0,
+            y: 0,
+        }
+        var bParticle = {
+            x: 0,
+            y: 0,
+            vy: 0.90,
+            side: 0,
+            bubbleHittable: 0,
+            radius: 5,
+            colors: null
+        }
+        // Bubbles
+        var bubble = {
+            x: 0,
+            y: 0,
+            radius: 30,
+            vy: 3,
+            hp: 0
+        }
+
+        var bubbleHittable;
+
+        // Bullets
+        var bullet = {
+            radius: 20,
+            spawnRate: 4,
+            vy: 12,
+            vx: 3,
+        }
+        // Player
+        var playerProps = {
+            x: 0,
+            y: 0,
+            w: 85,
+            h: 85,
+            type: "original"
+        }
+
+        var playerCloneProps = {
+            x: 0,
+            y: 0,
+            w: 85,
+            h: 85,
+            type: "clone"
+        }
+
+        var powerup = {
+            x: 0,
+            y: 0,
+            vy: 2,
+            r: 30,
+            width: 15,
+            height: 15,
+            hp: 0,
+            type: null,
+            icon: null
+        }
+
+
+        var shipBub = {
+            r: 13
+        }
+        // Boolean
+        var spawntrippleBullet = false;
+        var spawnDoubleBullet = false;
+        var spawnDoubleScore = false;
+        var spawnPlateSweep = false;
+        var pushPlateSweep = false;
+        c.playerMaxAngle = 20;
+        // Normal vars
+        c.score = 0;
+        c.particlesFps = 0;
+        c.powerTextY = 0;
+        c.rotateSpeed = 0;
+        c.colorMinRange = 150;
+        c.colorMaxRange = 255;
+        c.opacity = 255;
+        c.changeBubblesOpacity = false;
+
+        c.textFrames = 0;
+        c.increaseOpacity = -1;
+
+        var lastPowerup;
+        var showingPowerup = false;
+        var showMaxBubbles = 8;
+        var allPowerups = [
+            "trippleBullets",
+            "doubleBullets",
+            "doubleScore"
+        ]
+
+        // Gamestates
+        var isPlaying = false;
+        c.playerIsDead = false;
+        // Images
+        c.preload = function () {
+
+            c.player_img = c.loadImage('../img/bubblepopper/spaceship.png');
+            c.bullet_img = c.loadImage('../img/bubblepopper/bullet.png');
+            c.trippleBullets = c.loadImage('../img/bubblepopper/tripple_bullet.png');
+            c.doubleBullets = c.loadImage('../img/bubblepopper/double_bullet.png');
+            c.doubleScore = c.loadImage('../img/bubblepopper/double_score.png');
+            c.clone = c.loadImage('../img/bubblepopper/clone.png');
+
+            c.orbi = c.loadFont('../fonts/Orbitron-Bold.ttf');
+            c.numberFont = c.loadFont('../fonts/Superstar-M54.ttf');
+        }
+
+        c.setup = function () {
+            var middleCard = $("#middle-card");
+            var middleW = middleCard.innerWidth() - 30;
+            var middleH = middleCard.innerHeight();
+
+            var middleX = middleCard.position();
+            canvas = c.createCanvas(middleW, middleH);
+            canvas.parent = $('#middle-card');
+            // c.canvas = canvas
+
+            canvas.position(middleX.left + 39, middleX.top + cards_top);
+            // canvas.style('z-index', 1);
+
+            playerProps.x = c.width / 2 - 30;
+            playerProps.y = $("#middle-card").innerHeight() / 1.3;
+
+            player = new Player(playerProps.x, playerProps.y, playerProps.w, playerProps.h, playerProps.type);
+            playerClone = new Player(playerCloneProps.x, playerCloneProps.y, playerCloneProps.w, playerCloneProps.h, playerCloneProps.type);
+
+            score.x = c.width / 1 - 100;
+            score.y = 25;
+
+            // c.text styles
+            c.textSize(20);
+            c.textFont(c.orbi);
+            c.textAlign(c.CENTER, c.CENTER);
+
+            $("#second-card-btn").click(function () {
+                isPlaying = true;
+            });
+            c.angleMode(c.DEGREES);
+        }
+        c.draw = function () {
+            // c.background('rgba(0,255,0, 0.25)')
+            if (darkMode) {
+                c.background("#383358")
+            } else {
+                c.background("#fff")
+            }
+
+            if (isPlaying) {
+                if (!d134c5982c6d4bc0d3bdb96a2bf5af49) {
+                    // Score
+
+                    if (!c.playerIsDead) {
+                        if (darkMode) {
+                            c.fill("#e5e5ea");
+                        } else {
+                            c.fill("#333")
+                        }
+                        c.textSize(20);
+                        c.textFont(c.orbi);
+                        c.strokeWeight(0)
+                        c.text('Score: ' + c.round(c.score), score.x, score.y);
+                    }
+
+
+
+                    // Change Object Properties
+
+
+
+                    // Bubble properties
+
+                    bubble.x = c.floor(c.random(10, (c.width - 50) / 3)) * 3;
+                    // bubble.y = c.floor(c.random(10, (c.height - 50) / 3)) * 3;
+
+                    // PowerUps properties
+                    powerup.x = c.floor(c.random(10, (c.width - 50) / 3)) * 3;
+                    powerup.y = c.floor(c.random(10, (c.height - 300) / 3)) * 3;
+                    // Initialize Objects
+                    /* ------------------------------ Bullets -------------------------------- */
+                    if (c.frameCount % bullet.spawnRate == 0) {
+                        bullets.push(new Bullet(player.x + 24, player.y + 60, bullet.vy, bullet.vx, bulletCenter, bullet.radius, colors));
+                    }
+
+                    /* ------------------------------ Plane Bublles -------------------------------- */
+                    if (c.frameCount % 5 == 0) {
+                        shipBubs.push(new ShipBubs(player.x + 43, player.y + 80, shipBub.r));
+                    }
+
+
+
+
+                    /* ------------------------------ Use? Objects -------------------------------- */
+
+                    /* ------------------------------ Player -------------------------------- */
+                    player.draw(c);
+                    if (!c.playerIsDead) {
+                        player.move(c);
+                    }
+                    /* ------------------------------ Bubbles -------------------------------- */
+                    if (bubbles.length > 0) {
+                        for (i = 0; i < bubbles.length; i++) {
+
+                            bubbles[i].draw(c, player);
+                            if (!c.playerIsDead) {
+                                bubbles[i].move(c);
+                            }
+                            bubbles[i].hasEnded(c);
+                            bubbles[i].hitPlayer(c, bubbles[i], player);
+                        }
+                    }
+
+                    /* ------------------------------ Bullets -------------------------------- */
+
+                    for (i = 0; i < bullets.length; i++) {
+                        bullets[i].draw(c, player);
+                        if (!c.playerIsDead) {
+                            bullets[i].move(c, player);
+                        }
+                    }
+
+                    /* ------------------------------ BP Particles -------------------------------- */
+
+                    for (var i = 0; i < bParticles.length; i++) {
+                        bParticles[i].draw(c);
+                        bParticles[i].move(c);
+                        c.particlesFps++
+                        if (c.particlesFps > 500) {
+                            bParticles.splice(i, bParticles.length);
+
+                            c.particlesFps = 0;
+                        }
+                    }
+
+                    /* ------------------------------ Plane Bubbles -------------------------------- */
+
+                    for (var i = 0; i < shipBubs.length; i++) {
+                        shipBubs[i].draw(c);
+
+                        if (shipBubs[i].r > 0) {
+                            shipBubs[i].y += 3;
+                            shipBubs[i].r -= 0.50;
+                        } else {
+                            shipBubs.splice(i, 1);
+                        }
+                    }
+
+                    /* ------------------------------ Score system -------------------------------- */
+                    if (c.score < 100) {
+                        showMaxBubbles = 5
+
+                        powerupHP = powerup.hp = c.random(1, 3)
+                        bubbleHP = bubbleHittable = c.random(1, 3)
+                        if (bubbles.length < showMaxBubbles) {
+                            if (0.02 > c.random(1)) {
+                                bubbles.push(new Bubble(bubble.x, bubble.y, bubble.vy, bubbleHittable, bubble.radius, c.bubbleColors));
+                            }
+                        }
+                    }
+                    if (c.score > 100) {
+                        showMaxBubbles = 8
+                        if (!pushPlateSweep) {
+                            allPowerups.push("plateSweep")
+                        }
+                        pushPlateSweep = true;
+                        powerupHP = powerup.hp = c.random(3, 4)
+                        bubbleHP = bubbleHittable = c.random(3, 4)
+                        if (bubbles.length < showMaxBubbles) {
+                            if (0.03 > c.random(1)) {
+                                bubbles.push(new Bubble(bubble.x, bubble.y, bubble.vy, bubbleHittable, bubble.radius, c.bubbleColors));
+
+                            }
+                        }
+                    }
+
+                    if (c.score > 200) {
+                        showMaxBubbles = 8
+
+                        powerupHP = powerup.hp = c.random(4, 6)
+                        bubbleHP = bubbleHittable = c.random(4, 6)
+
+                        if (bubbles.length < showMaxBubbles) {
+                            if (0.03 > c.random(1)) {
+                                bubbles.push(new Bubble(bubble.x, bubble.y, bubble.vy, bubbleHittable, bubble.radius, c.bubbleColors));
+                            }
+                        }
+                    }
+
+                    /* ------------------------------ Power Ups -------------------------------- */
+                    for (var i = 0; i < allPowerups.length; i++) {
+                        if (0.03 > c.random(1)) {
+                            if (!showingPowerup) {
+                                if (lastPowerup != allPowerups[i]) {
+                                    powerup.type = allPowerups[i]
+
+                                    if (allPowerups[i] == "trippleBullets") {
+
+                                        powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.trippleBullets));
+                                    } else if (allPowerups[i] == "doubleBullets") {
+
+                                        powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.doubleBullets));
+                                    } else if (allPowerups[i] == "doubleScore") {
+
+                                        powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.doubleScore));
+                                    } else if (allPowerups[i] == "plateSweep") {
+
+                                        powerUps.push(new Powerup(powerup.x, powerup.y, powerup.vy, powerup.r, powerup.width, powerup.height, powerup.hp, powerup.type, c.doubleScore));
+                                    }
+
+                                    showingPowerup = true;
+                                    lastPowerup = powerup.type
+                                    powerupShowText = true;
+                                }
+                            }
+                        }
+                    }
+
+                    // CD - Collision Detection
+
+                    /* ------------------------------ CD for bubbles -------------------------------- */
+                    for (i = 0; i < powerUps.length; i++) {
+                        powerUps[i].draw(c);
+
+                        frameCounter++;
+                    }
+                    // If bullet Collides with bubbles
+
+                    for (var i = 0; i < bubbles.length; i++) {
+                        for (var j = 0; j < bullets.length; j++) {
+
+                            var hit = bubbles[i].hit(c, bullets[j]);
+
+                            if (hit) {
+                                // bullets[j].x = player.x + 24;
+                                // bullets[j].y = player.y;
+
+                                bubbles[i].bubbleHittable -= 1;
+
+                                bullets.splice(j, 1);
+
+                                if (bubbles[i].bubbleHittable > 0) {
+
+                                    break;
+
+                                } else if (bubbles[i].bubbleHittable < 0) {
+                                    c.particlesFps = 0
+                                    bParticle.x = c.random(bubbles[i].x, bubbles[i].x);
+                                    bParticle.y = c.random(bubbles[i].y, bubbles[i].y);
+                                    bParticles.colors = bubbles[i].colors;
+
+                                    if (!spawnDoubleScore) {
+                                        c.score += c.round(bubbleHP);
+                                    } else if (spawnDoubleScore) {
+
+                                        c.score += c.round(bubbleHP) * 2;
+                                    }
+                                    bubbles.splice(i, 1);
+                                    for (i = 0; i < 15; i++) {
+                                        bParticle.radius = c.random(2, 10);
+                                        bParticle.vx = c.random(-3, 3);
+                                        bParticle.vy = c.random(-3, 3);
+                                        bParticles.push(new Particle(bParticle.x, bParticle.y, bParticle.vx, bParticle.vy, bParticle.radius, bParticles.colors));
+                                    }
+                                }
+
+                                break;
+                            } else {
+                                if (bullets[j].y < 0) {
+                                    bullets.splice(j, 1);
+                                }
+                            }
+                        }
+                    }
+
+                    /* ------------------------------ CD for Powerups -------------------------------- */
+
+                    for (i = 0; i < powerUps.length; i++) {
+                        for (var j = 0; j < bullets.length; j++) {
+                            var hit;
+                            if (powerUps.length > 0) {
+
+                                hitten = powerUps[i].hit(c, bullets[j]);
+
+                                if (hitten) {
+                                    bullets.splice(j, 1);
+                                    if (powerUps[i].hp > 0) {
+                                        powerUps[i].hp -= 1;
+                                    } else if (powerUps[i].hp < 0) {
+                                        for (var z = 0; z < allPowerups.length; z++) {
+                                            if (powerUps[i].type == allPowerups[z]) {
+
+                                                if (allPowerups[z] == "trippleBullets") {
+
+                                                    spawntrippleBullet = true;
+                                                } else if (powerUps[i].type == "doubleBullets") {
+
+                                                    spawnDoubleBullet = true;
+                                                } else if (powerUps[i].type == "doubleScore") {
+
+                                                    spawnDoubleScore = true;
+                                                } else if (powerUps[i].type == "plateSweep") {
+
+                                                    spawnPlateSweep = true;
+                                                }
+
+                                                c.score += powerupHP;
+                                                isPoweredUp = true;
+                                                showingPowerup = true;
+                                            }
+                                        }
+                                        powerUps.splice(i, 1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    /* ------------------------------ Power Ups -------------------------------- */
+
+                    if (spawntrippleBullet == true) {
+
+                        showText(c, "Tripple Bullets");
+
+                        if (c.frameCount % 5 == 0) {
+                            bullets.push(new Bullet(player.x + 24, player.y, bullet.vy, bullet.vx, bulletLeft, bullet.radius, colors));
+                        }
+
+                        if (c.frameCount % 5 == 0) {
+                            bullets.push(new Bullet(player.x + 24, player.y, bullet.vy, bullet.vx, bulletRight, bullet.radius, colors));
+                        }
+                        // after specified ¦¦¦ frames either stop or loop the tripple bullet
+                        countFrames++
+
+                        if (countFrames > 400) {
+                            spawntrippleBullet = false;
+                            showingPowerup = false;
+                            isPoweredUp = false;
+
+                            c.textFrames = 0;
+                            countFrames = 0;
+                            bullets = [];
+                        }
+                    }
+
+                    // Double Bullets
+                    if (spawnDoubleBullet) {
+
+                        showText(c, "Double Bullets");
+
+                        bullet.spawnRate = 2
+                        bullet.vy = 20;
+
+                        countFrames += 1
+
+                        if (countFrames > 400) {
+                            spawnDoubleBullet = false;
+                            isPoweredUp = false;
+                            showingPowerup = false;
+
+                            bullet.spawnRate = 5;
+                            bullet.vy = 10;
+
+                            c.textFrames = 0;
+                            countFrames = 0;
+                            bullets = [];
+                        }
+                    }
+
+                    if (spawnDoubleScore) {
+                        showText(c, "Double Score");
+
+                        countFrames++
+
+                        if (countFrames > 400) {
+                            showingPowerup = false;
+                            spawnDoubleScore = false;
+                            isPoweredUp = false;
+                            countFrames = 0;
+                            c.textFrames = 0;
+                        }
+                    }
+
+
+                    if (spawnPlateSweep) {
+                        showText(c, "Plate Sweep!");
+                        for (var i = 0; i < bubbles.length; i++) {
+                            bParticle.x = c.random(bubbles[i].x, bubbles[i].x);
+                            bParticle.y = c.random(bubbles[i].y, bubbles[i].y);
+                            bParticles.colors = bubbles[i].colors;
+
+                            bubbles.splice(i, 1);
+                        }
+                        if (bubbles.length > 0) {
+                            c.score += c.round(bubbleHP);
+                            for (i = 0; i < 15; i++) {
+                                bParticle.radius = c.random(2, 10);
+                                bParticle.vx = c.random(-3, 3);
+                                bParticle.vy = c.random(-3, 3);
+                                bParticles.push(new Particle(bParticle.x, bParticle.y, bParticle.vx, bParticle.vy, bParticle.radius, bParticles.colors));
+                            }
+                        }
+                        countFrames++
+
+                        if (countFrames > 100 && bubbles.length <= 0) {
+                            showingPowerup = false;
+                            spawnPlateSweep = false;
+                            isPoweredUp = false;
+                            countFrames = 0;
+                            c.textFrames = 0;
+                        }
+                    }
+                }
+            }
+
+            function showText(c, s) {
+                if (c.textFrames == 0) {
+                    c.powerTextY = c.height / 2 - 50;
+                    c.textColor = 0;
+                    textFillColor = colors[Math.floor(Math.random() * colors.length)]
+                    // textFillColor = c.color(0);
+                    opacity = 255;
+                }
+
+                c.textFrames++;
+
+                if (c.textColor < 255) {
+                    opacity -= 3;
+                }
+                if (opacity < 0) {
+                    opacity = 0;
+                }
+                var squareColor = c.color(textFillColor);
+                if (darkMode) {
+                    c.stroke("#383358");
+                } else {
+                    c.stroke("#fff");
+                }
+
+                squareColor.setAlpha(opacity);
+
+                c.textSize(50);
+                c.fill(squareColor);
+
+                var powerTextWidth = c.textWidth(s);
+                var powerTextX = c.width / 2 + powerTextWidth / 20;
+
+                c.text(s, powerTextX, c.powerTextY)
+
+                if (c.textFrames % 90 == 0) {
+                    c.powerTextY = -100
+                }
+            }
+            if (c.playerIsDead) {
+
+                gameEndingFrames++;
+                if (gameEndingFrames % 120 == 0) {
+                    $("#middle-canvas-background").removeClass("middle-card-img")
+                    $("#middle-card-fade").removeClass("middle-card")
+
+                    $("#middle-card-fade").animate({
+                        left: "0",
+                        top: "0",
+                        opacity: '1'
+                    });
+                    showingPowerup = false;
+
+                    spawnPlateSweep = false;
+                    spawntrippleBullet = false;
+                    spawnDoubleBullet = false;
+                    spawnDoubleScore = false;
+
+                    isPoweredUp = false;
+
+                    c.playerIsDead = false;
+                    c.score = 0;
+                    isPlaying = false;
+
+                    bubbles = [];
+                    shipBubs = [];
+                    bullets = [];
+                    bParticles = [];
+                    powerUps = [];
+                }
+            }
+        }
+
+        $(document).ready(function () {
+            $(window).resize(function () {
+                var middleCard = $("#middle-card");
+                var middleW = middleCard.innerWidth() - 30;
+                var middleH = middleCard.innerHeight();
+
+                var middleX = middleCard.position();
+
+                c.resizeCanvas(middleW, middleH);
+                canvas.position(middleX.left + 39, middleX.top + cards_top);
+            });
+        });
+    }
+}
+// Sonic 
+const sonicSketch = c => {
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        // Objects
+        var sonic;
+        var ground;
+        var ground = [];
+        var cactuses = [];
+        var clouds = [];
+
+        var cactusWaitime = 2;
+        var minCactusWaitTime = 2;
+
+        // Boolean vars
+        var isCactusTime = true;
+        var isPlaying = false;
+        c.playerIsDead = false;
+        c.hasReloaded = false;
+        c.isTimerDone = false;
+        var isGameLaunched = false;
+
+        var ground_img;
+
+        // Other variables
+        c.graphics;
+        var frameCounter = 0;
+        // Collsion
+        c.score = 0;
+        var cnv;
+        var timer = 2;
+
+        // Object Properies
+        var sonic = {
+            r: 50,
+            x: 0,
+            y: 0,
+            vx: 4,
+        }
+
+        var ground = {
+            img: null,
+            x: 0,
+            y: 0,
+            vx: 10,
+            w: 20,
+            h: 0
+        }
+
+        var groundVel = 10
+        var cloud = {
+            img: null,
+            x: 0,
+            y: 0,
+            vx: 2,
+            distance: 1,
+            w: 60,
+            h: 40
+        }
+
+        var cactus = {
+            r: 30,
+            x: 0,
+            y: 0,
+            vx: 10,
+        }
+
+
+        // Load Images
+        c.preload = function () {
+            // Sonic
+            c.sonic_run_1_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_1.png');
+            c.sonic_run_2_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_2.png');
+            c.sonic_run_3_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_3.png');
+            c.sonic_run_4_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_run_4.png');
+            c.sonic_jump_1_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_jump_1.png');
+            c.sonic_death_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_death.png');
+
+            // Game property images
+            c.game_over_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/game_over.png');
+            c.cactus_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/Cactus.png');
+            c.cloud_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/colored_cloud.png');
+            c.ground_img = c.loadImage('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/ground.png');
+
+            c.orbi = c.loadFont('../fonts/Orbitron-Bold.ttf');
+            c.numberFont = c.loadFont('../fonts/Superstar-M54.ttf');
+        };
+        c.setup = function () {
+            var lastCard = $("#last-card");
+            var lastW = lastCard.innerWidth() - 30;
+            var lastH = lastCard.innerHeight();
+
+            var lastX = lastCard.position();
+
+            c.canvas3 = c.createCanvas(lastW, lastH);
+            c.canvas3.parent = $('#last-card');
+
+            c.canvas3.position(lastX.left + 39, lastX.top + cards_top);
+            // c.canvas3.style('z-index', -1);
+
+            // Ground Properties
+            ground.img = ground_img;
+            ground.x = 20;
+            ground.y = c.height - 30;
+            ground.w = c.width;
+            ground.h = 20;
+
+            ground = new Ground(c, ground_img);
+
+            // if (c.hasReloaded) {
+            //     if (!isGameLaunched) {
+            //         isGameLaunched = true;
+            //         isPlaying = true;
+
+            //         $("#last-play-btn").toggleClass("hidden");
+            //     }
+            // }
+
+            $("#last-play-btn").click(function () {
+
+                if (!isGameLaunched) {
+                    isGameLaunched = true;
+                    isPlaying = true;
+
+                }
+                $("#last-play-btn").toggleClass("hidden");
+                $("#last-play-btn").removeClass("show")
+            });
+
+            // Sonic 
+            sonic = new Sonic(c);
+
+            c.textAlign(c.CENTER, c.CENTER);
         };
 
-        function _0x187a31() {
-            const _0x4de6a3 = [];
-            for (let _0x30014b = 0x0; _0x30014b < 0xa; _0x30014b++) {
-                _0x4de6a3[_0x1204('0x83')](materialColor());
-            }
-            return _0x4de6a3;
-        }
+        c.draw = function () {
 
-        function _0x1d2fc5(_0x3f0c98, _0xbfde87, _0x307fe4) {
-            var _0x321413 = [];
-            const _0x22f14a = _0x3f0c98,
-                _0x44f273 = _0xbfde87,
-                _0x45087f = _0x396c09[_0x1204('0x6c')] / _0x44f273;
-            for (let _0x579328 = 0x0; _0x579328 < _0x22f14a; _0x579328++) {
-                for (let _0x2cb61a = 0x0; _0x2cb61a < _0x44f273; _0x2cb61a++) {
-                    _0x190323 = new Brick(_0x396c09[_0x1204('0x43')](_0x45087f * _0x2cb61a, 0xf * _0x579328), _0x45087f, 0xf, _0x307fe4[_0x396c09['floor'](_0x396c09[_0x1204('0x7')](0x0, _0x307fe4[_0x1204('0x21')]))]), _0x321413[_0x1204('0x83')](_0x190323);
-                }
-            }
-            return _0x321413;
-        }
-        $(document)[_0x1204('0x33')](function () {
-            $(window)[_0x1204('0xae')](function () {
-                _0x190323[_0x1204('0xbd')] = 0x4, _0x190323[_0x1204('0x86')] = 0x6, _0x31c365 = _0x1d2fc5(_0x190323['row'], _0x190323[_0x1204('0x86')], _0x396c09['colors']);
-                var _0x4eb1ba = $(_0x1204('0xb7')),
-                    _0x57af29 = _0x4eb1ba[_0x1204('0x3')]() - 0x1e,
-                    _0x1f0979 = _0x4eb1ba[_0x1204('0x16')](),
-                    _0x19dac8 = _0x4eb1ba[_0x1204('0x13')]();
-                _0x396c09[_0x1204('0x41')](_0x57af29, _0x1f0979), cnv['position'](_0x19dac8[_0x1204('0x88')] + 0x27, _0x19dac8[_0x1204('0x9d')] + cards_top);
-            });
-        });
-    },
-    bubblePopperSketch = _0x4a966d => {
-        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i ['test'](navigator['userAgent'])) {
-            var _0x1ddbdd, _0x101244 = [],
-                _0x57cb18 = [],
-                _0x4457b2 = [],
-                _0x51b226 = _0x1204('0xb4'),
-                _0x44e19f = _0x1204('0xad'),
-                _0x1de2e4 = 'rightBullet',
-                _0x38944d = [],
-                _0x26cd6f = [],
-                _0xdb262a = 0x0,
-                _0x1241ff = 0x0,
-                _0x39e0ce = 0x0,
-                _0x148a18 = 0x0;
-            _0x4a966d[_0x1204('0xb9')] = 0x0;
-            var _0x206701 = 0x0,
-                _0x399b6f = [_0x1204('0x30'), '#FF0000', _0x1204('0x6a'), '#00FF00', _0x1204('0x3e'), _0x1204('0x6d')];
-            _0x4a966d[_0x1204('0x7d')] = [_0x1204('0xab'), _0x1204('0x7b'), '#FF5D33', _0x1204('0x15'), _0x1204('0xb6'), _0x1204('0x7b')];
-            var _0x41dfbc = {
-                    'x': 0x0,
-                    'y': 0x0
-                },
-                _0x1fe5c1 = {
-                    'x': 0x0,
-                    'y': 0x0,
-                    'vy': 0.9,
-                    'side': 0x0,
-                    'bubbleHittable': 0x0,
-                    'radius': 0x5,
-                    'colors': null
-                },
-                _0x2c2c27 = {
-                    'x': 0x0,
-                    'y': 0x0,
-                    'radius': 0x1e,
-                    'vy': 0x3,
-                    'hp': 0x0
-                },
-                _0x48f705, _0x2dd015 = {
-                    'radius': 0x14,
-                    'spawnRate': 0x4,
-                    'vy': 0xc,
-                    'vx': 0x3
-                },
-                _0x3f8f94 = {
-                    'x': 0x0,
-                    'y': 0x0,
-                    'w': 0x55,
-                    'h': 0x55,
-                    'type': 'original'
-                },
-                _0x451654 = {
-                    'x': 0x0,
-                    'y': 0x0,
-                    'w': 0x55,
-                    'h': 0x55,
-                    'type': _0x1204('0x42')
-                },
-                _0x30ad80 = {
-                    'x': 0x0,
-                    'y': 0x0,
-                    'vy': 0x2,
-                    'r': 0x1e,
-                    'width': 0xf,
-                    'height': 0xf,
-                    'hp': 0x0,
-                    'type': null,
-                    'icon': null
-                },
-                _0x5cc78a = {
-                    'r': 0xd
-                },
-                _0x1e0d8f = ![],
-                _0x35dddf = ![],
-                _0x60fed4 = ![],
-                _0x15343e = ![],
-                _0x54b171 = ![];
-            _0x4a966d[_0x1204('0x89')] = 0x14, _0x4a966d[_0x1204('0x4c')] = 0x0, _0x4a966d[_0x1204('0xa0')] = 0x0, _0x4a966d[_0x1204('0x48')] = 0x0, _0x4a966d[_0x1204('0x24')] = 0x0, _0x4a966d[_0x1204('0x95')] = 0x96, _0x4a966d[_0x1204('0x9c')] = 0xff, _0x4a966d[_0x1204('0x61')] = 0xff, _0x4a966d['changeBubblesOpacity'] = ![], _0x4a966d[_0x1204('0x63')] = 0x0, _0x4a966d[_0x1204('0x22')] = -0x1;
-            var _0x2d8504, _0x482a6c = ![],
-                _0x28806c = 0x8,
-                _0x22a4d6 = [_0x1204('0x90'), _0x1204('0xb5'), _0x1204('0x14')],
-                _0x46fb08 = ![];
-            _0x4a966d[_0x1204('0xa2')] = ![], _0x4a966d[_0x1204('0x76')] = function () {
-                _0x4a966d['player_img'] = _0x4a966d[_0x1204('0x1b')](_0x1204('0x4')), _0x4a966d[_0x1204('0x5d')] = _0x4a966d[_0x1204('0x1b')](_0x1204('0x73')), _0x4a966d[_0x1204('0x90')] = _0x4a966d[_0x1204('0x1b')](_0x1204('0x12')), _0x4a966d[_0x1204('0xb5')] = _0x4a966d['loadImage']('../img/bubblepopper/double_bullet.png'), _0x4a966d['doubleScore'] = _0x4a966d[_0x1204('0x1b')](_0x1204('0x2')), _0x4a966d[_0x1204('0x42')] = _0x4a966d[_0x1204('0x1b')](_0x1204('0x6')), _0x4a966d[_0x1204('0x3f')] = _0x4a966d[_0x1204('0x1e')]('../fonts/Orbitron-Bold.ttf'), _0x4a966d['numberFont'] = _0x4a966d[_0x1204('0x1e')]('../fonts/Superstar-M54.ttf');
-            }, _0x4a966d['setup'] = function () {
-                var _0x584730 = $(_0x1204('0x31')),
-                    _0x3a42e2 = _0x584730[_0x1204('0x3')]() - 0x1e,
-                    _0x17f4c8 = _0x584730['innerHeight'](),
-                    _0x5ef04a = _0x584730[_0x1204('0x13')]();
-                canvas = _0x4a966d['createCanvas'](_0x3a42e2, _0x17f4c8), canvas[_0x1204('0x87')] = $(_0x1204('0x31')), canvas[_0x1204('0x13')](_0x5ef04a[_0x1204('0x88')] + 0x27, _0x5ef04a[_0x1204('0x9d')] + cards_top), _0x3f8f94['x'] = _0x4a966d['width'] / 0x2 - 0x1e, _0x3f8f94['y'] = $('#middle-card')[_0x1204('0x16')]() / 1.3, _0x1ddbdd = new Player(_0x3f8f94['x'], _0x3f8f94['y'], _0x3f8f94['w'], _0x3f8f94['h'], _0x3f8f94[_0x1204('0x3c')]), playerClone = new Player(_0x451654['x'], _0x451654['y'], _0x451654['w'], _0x451654['h'], _0x451654[_0x1204('0x3c')]), _0x41dfbc['x'] = _0x4a966d[_0x1204('0x6c')] / 0x1 - 0x64, _0x41dfbc['y'] = 0x19, _0x4a966d[_0x1204('0x68')](0x14), _0x4a966d[_0x1204('0x5b')](_0x4a966d[_0x1204('0x3f')]), _0x4a966d[_0x1204('0x23')](_0x4a966d[_0x1204('0x2d')], _0x4a966d[_0x1204('0x2d')]), $(_0x1204('0x2b'))[_0x1204('0x62')](function () {
-                    _0x46fb08 = !![];
-                }), _0x4a966d[_0x1204('0x7a')](_0x4a966d[_0x1204('0x8a')]);
-            }, _0x4a966d[_0x1204('0x6e')] = function () {
-                darkMode ? _0x4a966d[_0x1204('0x4b')](_0x1204('0x85')) : _0x4a966d[_0x1204('0x4b')](_0x1204('0x9b'));
-                if (_0x46fb08) {
-                    if (!d134c5982c6d4bc0d3bdb96a2bf5af49) {
-                        !_0x4a966d['playerIsDead'] && (darkMode ? _0x4a966d[_0x1204('0x37')](_0x1204('0x26')) : _0x4a966d[_0x1204('0x37')]('#333'), _0x4a966d[_0x1204('0x68')](0x14), _0x4a966d[_0x1204('0x5b')](_0x4a966d[_0x1204('0x3f')]), _0x4a966d[_0x1204('0xa4')](0x0), _0x4a966d[_0x1204('0x0')]('Score:\x20' + _0x4a966d[_0x1204('0x69')](_0x4a966d[_0x1204('0x4c')]), _0x41dfbc['x'], _0x41dfbc['y']));
-                        _0x2c2c27['x'] = _0x4a966d[_0x1204('0x3d')](_0x4a966d[_0x1204('0x7')](0xa, (_0x4a966d[_0x1204('0x6c')] - 0x32) / 0x3)) * 0x3, _0x30ad80['x'] = _0x4a966d[_0x1204('0x3d')](_0x4a966d[_0x1204('0x7')](0xa, (_0x4a966d[_0x1204('0x6c')] - 0x32) / 0x3)) * 0x3, _0x30ad80['y'] = _0x4a966d[_0x1204('0x3d')](_0x4a966d[_0x1204('0x7')](0xa, (_0x4a966d[_0x1204('0x54')] - 0x12c) / 0x3)) * 0x3;
-                        _0x4a966d[_0x1204('0xa1')] % _0x2dd015[_0x1204('0x38')] == 0x0 && _0x4457b2[_0x1204('0x83')](new Bullet(_0x1ddbdd['x'] + 0x18, _0x1ddbdd['y'] + 0x3c, _0x2dd015['vy'], _0x2dd015['vx'], _0x51b226, _0x2dd015[_0x1204('0x17')], _0x399b6f));
-                        _0x4a966d[_0x1204('0xa1')] % 0x5 == 0x0 && _0x57cb18[_0x1204('0x83')](new ShipBubs(_0x1ddbdd['x'] + 0x2b, _0x1ddbdd['y'] + 0x50, _0x5cc78a['r']));
-                        _0x1ddbdd['draw'](_0x4a966d);
-                        !_0x4a966d['playerIsDead'] && _0x1ddbdd[_0x1204('0x74')](_0x4a966d);
-                        if (_0x101244['length'] > 0x0)
-                            for (_0x31bf77 = 0x0; _0x31bf77 < _0x101244[_0x1204('0x21')]; _0x31bf77++) {
-                                _0x101244[_0x31bf77][_0x1204('0x6e')](_0x4a966d, _0x1ddbdd), !_0x4a966d['playerIsDead'] && _0x101244[_0x31bf77][_0x1204('0x74')](_0x4a966d), _0x101244[_0x31bf77]['hasEnded'](_0x4a966d), _0x101244[_0x31bf77]['hitPlayer'](_0x4a966d, _0x101244[_0x31bf77], _0x1ddbdd);
-                            }
-                        for (_0x31bf77 = 0x0; _0x31bf77 < _0x4457b2['length']; _0x31bf77++) {
-                            _0x4457b2[_0x31bf77]['draw'](_0x4a966d, _0x1ddbdd), !_0x4a966d['playerIsDead'] && _0x4457b2[_0x31bf77]['move'](_0x4a966d, _0x1ddbdd);
-                        }
-                        for (var _0x31bf77 = 0x0; _0x31bf77 < _0x38944d[_0x1204('0x21')]; _0x31bf77++) {
-                            _0x38944d[_0x31bf77][_0x1204('0x6e')](_0x4a966d), _0x38944d[_0x31bf77][_0x1204('0x74')](_0x4a966d), _0x4a966d['particlesFps']++, _0x4a966d[_0x1204('0xa0')] > 0x1f4 && (_0x38944d[_0x1204('0x60')](_0x31bf77, _0x38944d['length']), _0x4a966d[_0x1204('0xa0')] = 0x0);
-                        }
-                        for (var _0x31bf77 = 0x0; _0x31bf77 < _0x57cb18[_0x1204('0x21')]; _0x31bf77++) {
-                            _0x57cb18[_0x31bf77][_0x1204('0x6e')](_0x4a966d), _0x57cb18[_0x31bf77]['r'] > 0x0 ? (_0x57cb18[_0x31bf77]['y'] += 0x3, _0x57cb18[_0x31bf77]['r'] -= 0.5) : _0x57cb18['splice'](_0x31bf77, 0x1);
-                        }
-                        _0x4a966d['score'] < 0x64 && (_0x28806c = 0x5, powerupHP = _0x30ad80['hp'] = _0x4a966d[_0x1204('0x7')](0x1, 0x3), bubbleHP = _0x48f705 = _0x4a966d[_0x1204('0x7')](0x1, 0x3), _0x101244[_0x1204('0x21')] < _0x28806c && (0.02 > _0x4a966d[_0x1204('0x7')](0x1) && _0x101244[_0x1204('0x83')](new Bubble(_0x2c2c27['x'], _0x2c2c27['y'], _0x2c2c27['vy'], _0x48f705, _0x2c2c27[_0x1204('0x17')], _0x4a966d[_0x1204('0x7d')]))));
-                        _0x4a966d[_0x1204('0x4c')] > 0x64 && (_0x28806c = 0x8, !_0x54b171 && _0x22a4d6[_0x1204('0x83')]('plateSweep'), _0x54b171 = !![], powerupHP = _0x30ad80['hp'] = _0x4a966d[_0x1204('0x7')](0x3, 0x4), bubbleHP = _0x48f705 = _0x4a966d[_0x1204('0x7')](0x3, 0x4), _0x101244[_0x1204('0x21')] < _0x28806c && (0.03 > _0x4a966d[_0x1204('0x7')](0x1) && _0x101244[_0x1204('0x83')](new Bubble(_0x2c2c27['x'], _0x2c2c27['y'], _0x2c2c27['vy'], _0x48f705, _0x2c2c27[_0x1204('0x17')], _0x4a966d[_0x1204('0x7d')]))));
-                        _0x4a966d[_0x1204('0x4c')] > 0xc8 && (_0x28806c = 0x8, powerupHP = _0x30ad80['hp'] = _0x4a966d[_0x1204('0x7')](0x4, 0x6), bubbleHP = _0x48f705 = _0x4a966d[_0x1204('0x7')](0x4, 0x6), _0x101244[_0x1204('0x21')] < _0x28806c && (0.03 > _0x4a966d['random'](0x1) && _0x101244['push'](new Bubble(_0x2c2c27['x'], _0x2c2c27['y'], _0x2c2c27['vy'], _0x48f705, _0x2c2c27[_0x1204('0x17')], _0x4a966d[_0x1204('0x7d')]))));
-                        for (var _0x31bf77 = 0x0; _0x31bf77 < _0x22a4d6[_0x1204('0x21')]; _0x31bf77++) {
-                            if (0.03 > _0x4a966d[_0x1204('0x7')](0x1)) {
-                                if (!_0x482a6c) {
-                                    if (_0x2d8504 != _0x22a4d6[_0x31bf77]) {
-                                        _0x30ad80[_0x1204('0x3c')] = _0x22a4d6[_0x31bf77];
-                                        if (_0x22a4d6[_0x31bf77] == _0x1204('0x90')) _0x26cd6f[_0x1204('0x83')](new Powerup(_0x30ad80['x'], _0x30ad80['y'], _0x30ad80['vy'], _0x30ad80['r'], _0x30ad80[_0x1204('0x6c')], _0x30ad80[_0x1204('0x54')], _0x30ad80['hp'], _0x30ad80[_0x1204('0x3c')], _0x4a966d['trippleBullets']));
-                                        else {
-                                            if (_0x22a4d6[_0x31bf77] == 'doubleBullets') _0x26cd6f[_0x1204('0x83')](new Powerup(_0x30ad80['x'], _0x30ad80['y'], _0x30ad80['vy'], _0x30ad80['r'], _0x30ad80[_0x1204('0x6c')], _0x30ad80[_0x1204('0x54')], _0x30ad80['hp'], _0x30ad80[_0x1204('0x3c')], _0x4a966d[_0x1204('0xb5')]));
-                                            else {
-                                                if (_0x22a4d6[_0x31bf77] == _0x1204('0x14')) _0x26cd6f['push'](new Powerup(_0x30ad80['x'], _0x30ad80['y'], _0x30ad80['vy'], _0x30ad80['r'], _0x30ad80['width'], _0x30ad80[_0x1204('0x54')], _0x30ad80['hp'], _0x30ad80['type'], _0x4a966d[_0x1204('0x14')]));
-                                                else _0x22a4d6[_0x31bf77] == 'plateSweep' && _0x26cd6f[_0x1204('0x83')](new Powerup(_0x30ad80['x'], _0x30ad80['y'], _0x30ad80['vy'], _0x30ad80['r'], _0x30ad80[_0x1204('0x6c')], _0x30ad80[_0x1204('0x54')], _0x30ad80['hp'], _0x30ad80[_0x1204('0x3c')], _0x4a966d[_0x1204('0x14')]));
-                                            }
-                                        }
-                                        _0x482a6c = !![], _0x2d8504 = _0x30ad80[_0x1204('0x3c')], powerupShowText = !![];
-                                    }
-                                }
-                            }
-                        }
-                        for (_0x31bf77 = 0x0; _0x31bf77 < _0x26cd6f[_0x1204('0x21')]; _0x31bf77++) {
-                            _0x26cd6f[_0x31bf77][_0x1204('0x6e')](_0x4a966d), _0xdb262a++;
-                        }
-                        for (var _0x31bf77 = 0x0; _0x31bf77 < _0x101244[_0x1204('0x21')]; _0x31bf77++) {
-                            for (var _0x3b1006 = 0x0; _0x3b1006 < _0x4457b2[_0x1204('0x21')]; _0x3b1006++) {
-                                var _0x4e9dde = _0x101244[_0x31bf77][_0x1204('0xbb')](_0x4a966d, _0x4457b2[_0x3b1006]);
-                                if (_0x4e9dde) {
-                                    _0x101244[_0x31bf77][_0x1204('0x94')] -= 0x1, _0x4457b2['splice'](_0x3b1006, 0x1);
-                                    if (_0x101244[_0x31bf77]['bubbleHittable'] > 0x0) break;
-                                    else {
-                                        if (_0x101244[_0x31bf77][_0x1204('0x94')] < 0x0) {
-                                            _0x4a966d[_0x1204('0xa0')] = 0x0, _0x1fe5c1['x'] = _0x4a966d['random'](_0x101244[_0x31bf77]['x'], _0x101244[_0x31bf77]['x']), _0x1fe5c1['y'] = _0x4a966d[_0x1204('0x7')](_0x101244[_0x31bf77]['y'], _0x101244[_0x31bf77]['y']), _0x38944d[_0x1204('0x50')] = _0x101244[_0x31bf77][_0x1204('0x50')];
-                                            if (!_0x60fed4) _0x4a966d[_0x1204('0x4c')] += _0x4a966d['round'](bubbleHP);
-                                            else _0x60fed4 && (_0x4a966d['score'] += _0x4a966d[_0x1204('0x69')](bubbleHP) * 0x2);
-                                            _0x101244[_0x1204('0x60')](_0x31bf77, 0x1);
-                                            for (_0x31bf77 = 0x0; _0x31bf77 < 0xf; _0x31bf77++) {
-                                                _0x1fe5c1[_0x1204('0x17')] = _0x4a966d[_0x1204('0x7')](0x2, 0xa), _0x1fe5c1['vx'] = _0x4a966d[_0x1204('0x7')](-0x3, 0x3), _0x1fe5c1['vy'] = _0x4a966d[_0x1204('0x7')](-0x3, 0x3), _0x38944d[_0x1204('0x83')](new Particle(_0x1fe5c1['x'], _0x1fe5c1['y'], _0x1fe5c1['vx'], _0x1fe5c1['vy'], _0x1fe5c1[_0x1204('0x17')], _0x38944d[_0x1204('0x50')]));
-                                            }
-                                        }
-                                    }
-                                    break;
-                                } else _0x4457b2[_0x3b1006]['y'] < 0x0 && _0x4457b2['splice'](_0x3b1006, 0x1);
-                            }
-                        }
-                        for (_0x31bf77 = 0x0; _0x31bf77 < _0x26cd6f[_0x1204('0x21')]; _0x31bf77++) {
-                            for (var _0x3b1006 = 0x0; _0x3b1006 < _0x4457b2[_0x1204('0x21')]; _0x3b1006++) {
-                                var _0x4e9dde;
-                                if (_0x26cd6f[_0x1204('0x21')] > 0x0) {
-                                    hitten = _0x26cd6f[_0x31bf77][_0x1204('0xbb')](_0x4a966d, _0x4457b2[_0x3b1006]);
-                                    if (hitten) {
-                                        _0x4457b2['splice'](_0x3b1006, 0x1);
-                                        if (_0x26cd6f[_0x31bf77]['hp'] > 0x0) _0x26cd6f[_0x31bf77]['hp'] -= 0x1;
-                                        else {
-                                            if (_0x26cd6f[_0x31bf77]['hp'] < 0x0) {
-                                                for (var _0xcc5d64 = 0x0; _0xcc5d64 < _0x22a4d6[_0x1204('0x21')]; _0xcc5d64++) {
-                                                    if (_0x26cd6f[_0x31bf77]['type'] == _0x22a4d6[_0xcc5d64]) {
-                                                        if (_0x22a4d6[_0xcc5d64] == _0x1204('0x90')) _0x1e0d8f = !![];
-                                                        else {
-                                                            if (_0x26cd6f[_0x31bf77][_0x1204('0x3c')] == _0x1204('0xb5')) _0x35dddf = !![];
-                                                            else {
-                                                                if (_0x26cd6f[_0x31bf77][_0x1204('0x3c')] == _0x1204('0x14')) _0x60fed4 = !![];
-                                                                else _0x26cd6f[_0x31bf77][_0x1204('0x3c')] == _0x1204('0x91') && (_0x15343e = !![]);
-                                                            }
-                                                        }
-                                                        _0x4a966d[_0x1204('0x4c')] += powerupHP, isPoweredUp = !![], _0x482a6c = !![];
-                                                    }
-                                                }
-                                                _0x26cd6f['splice'](_0x31bf77, 0x1);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        _0x1e0d8f == !![] && (_0x118dbd(_0x4a966d, _0x1204('0xb2')), _0x4a966d[_0x1204('0xa1')] % 0x5 == 0x0 && _0x4457b2[_0x1204('0x83')](new Bullet(_0x1ddbdd['x'] + 0x18, _0x1ddbdd['y'], _0x2dd015['vy'], _0x2dd015['vx'], _0x44e19f, _0x2dd015[_0x1204('0x17')], _0x399b6f)), _0x4a966d[_0x1204('0xa1')] % 0x5 == 0x0 && _0x4457b2['push'](new Bullet(_0x1ddbdd['x'] + 0x18, _0x1ddbdd['y'], _0x2dd015['vy'], _0x2dd015['vx'], _0x1de2e4, _0x2dd015[_0x1204('0x17')], _0x399b6f)), _0x148a18++, _0x148a18 > 0x190 && (_0x1e0d8f = ![], _0x482a6c = ![], isPoweredUp = ![], _0x4a966d['textFrames'] = 0x0, _0x148a18 = 0x0, _0x4457b2 = []));
-                        _0x35dddf && (_0x118dbd(_0x4a966d, 'Double\x20Bullets'), _0x2dd015['spawnRate'] = 0x2, _0x2dd015['vy'] = 0x14, _0x148a18 += 0x1, _0x148a18 > 0x190 && (_0x35dddf = ![], isPoweredUp = ![], _0x482a6c = ![], _0x2dd015[_0x1204('0x38')] = 0x5, _0x2dd015['vy'] = 0xa, _0x4a966d[_0x1204('0x63')] = 0x0, _0x148a18 = 0x0, _0x4457b2 = []));
-                        _0x60fed4 && (_0x118dbd(_0x4a966d, _0x1204('0xb')), _0x148a18++, _0x148a18 > 0x190 && (_0x482a6c = ![], _0x60fed4 = ![], isPoweredUp = ![], _0x148a18 = 0x0, _0x4a966d[_0x1204('0x63')] = 0x0));
-                        if (_0x15343e) {
-                            _0x118dbd(_0x4a966d, _0x1204('0x5e'));
-                            for (var _0x31bf77 = 0x0; _0x31bf77 < _0x101244[_0x1204('0x21')]; _0x31bf77++) {
-                                _0x1fe5c1['x'] = _0x4a966d['random'](_0x101244[_0x31bf77]['x'], _0x101244[_0x31bf77]['x']), _0x1fe5c1['y'] = _0x4a966d['random'](_0x101244[_0x31bf77]['y'], _0x101244[_0x31bf77]['y']), _0x38944d[_0x1204('0x50')] = _0x101244[_0x31bf77][_0x1204('0x50')], _0x101244[_0x1204('0x60')](_0x31bf77, 0x1);
-                            }
-                            if (_0x101244[_0x1204('0x21')] > 0x0) {
-                                _0x4a966d[_0x1204('0x4c')] += _0x4a966d[_0x1204('0x69')](bubbleHP);
-                                for (_0x31bf77 = 0x0; _0x31bf77 < 0xf; _0x31bf77++) {
-                                    _0x1fe5c1[_0x1204('0x17')] = _0x4a966d[_0x1204('0x7')](0x2, 0xa), _0x1fe5c1['vx'] = _0x4a966d['random'](-0x3, 0x3), _0x1fe5c1['vy'] = _0x4a966d[_0x1204('0x7')](-0x3, 0x3), _0x38944d[_0x1204('0x83')](new Particle(_0x1fe5c1['x'], _0x1fe5c1['y'], _0x1fe5c1['vx'], _0x1fe5c1['vy'], _0x1fe5c1[_0x1204('0x17')], _0x38944d[_0x1204('0x50')]));
-                                }
-                            }
-                            _0x148a18++, _0x148a18 > 0x64 && _0x101244[_0x1204('0x21')] <= 0x0 && (_0x482a6c = ![], _0x15343e = ![], isPoweredUp = ![], _0x148a18 = 0x0, _0x4a966d[_0x1204('0x63')] = 0x0);
-                        }
-                    }
-                }
 
-                function _0x118dbd(_0x2ebc75, _0x3a5320) {
-                    _0x2ebc75[_0x1204('0x63')] == 0x0 && (_0x2ebc75[_0x1204('0x48')] = _0x2ebc75[_0x1204('0x54')] / 0x2 - 0x32, _0x2ebc75[_0x1204('0x2e')] = 0x0, textFillColor = _0x399b6f[Math[_0x1204('0x3d')](Math[_0x1204('0x7')]() * _0x399b6f['length'])], opacity = 0xff);
-                    _0x2ebc75[_0x1204('0x63')]++;
-                    _0x2ebc75['textColor'] < 0xff && (opacity -= 0x3);
-                    opacity < 0x0 && (opacity = 0x0);
-                    var _0x3a1ee2 = _0x2ebc75[_0x1204('0x49')](textFillColor);
-                    darkMode ? _0x2ebc75[_0x1204('0x96')](_0x1204('0x85')) : _0x2ebc75[_0x1204('0x96')]('#fff');
-                    _0x3a1ee2[_0x1204('0x3b')](opacity), _0x2ebc75[_0x1204('0x68')](0x32), _0x2ebc75[_0x1204('0x37')](_0x3a1ee2);
-                    var _0x277b8f = _0x2ebc75['textWidth'](_0x3a5320),
-                        _0x27352b = _0x2ebc75[_0x1204('0x6c')] / 0x2 + _0x277b8f / 0x14;
-                    _0x2ebc75['text'](_0x3a5320, _0x27352b, _0x2ebc75[_0x1204('0x48')]), _0x2ebc75[_0x1204('0x63')] % 0x5a == 0x0 && (_0x2ebc75[_0x1204('0x48')] = -0x64);
-                }
-                _0x4a966d['playerIsDead'] && (_0x206701++, _0x206701 % 0x78 == 0x0 && ($(_0x1204('0x55'))[_0x1204('0x57')]('middle-card-img'), $(_0x1204('0x2f'))[_0x1204('0x57')](_0x1204('0x18')), $(_0x1204('0x2f'))[_0x1204('0x34')]({
-                    'left': '0',
-                    'top': '0',
-                    'opacity': '1'
-                }), _0x482a6c = ![], _0x15343e = ![], _0x1e0d8f = ![], _0x35dddf = ![], _0x60fed4 = ![], isPoweredUp = ![], _0x4a966d[_0x1204('0xa2')] = ![], _0x4a966d[_0x1204('0x4c')] = 0x0, _0x46fb08 = ![], _0x101244 = [], _0x57cb18 = [], _0x4457b2 = [], _0x38944d = [], _0x26cd6f = []));
-            }, $(document)[_0x1204('0x33')](function () {
-                $(window)[_0x1204('0xae')](function () {
-                    var _0x40e38f = $(_0x1204('0x31')),
-                        _0x240311 = _0x40e38f[_0x1204('0x3')]() - 0x1e,
-                        _0x4196fa = _0x40e38f['innerHeight'](),
-                        _0x2dfb46 = _0x40e38f['position']();
-                    _0x4a966d[_0x1204('0x41')](_0x240311, _0x4196fa), canvas['position'](_0x2dfb46[_0x1204('0x88')] + 0x27, _0x2dfb46['top'] + cards_top);
-                });
-            });
-        }
-    },
-    sonicSketch = _0x2ffea0 => {
-        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i ['test'](navigator['userAgent'])) {
-            var _0x49a65a, _0x1549b0, _0x1549b0 = [],
-                _0x2b7b55 = [],
-                _0x2ffba2 = [],
-                _0x2e1ffd = 0x2,
-                _0x121ce2 = 0x2,
-                _0x7a7807 = !![],
-                _0x1b94b7 = ![];
-            _0x2ffea0[_0x1204('0xa2')] = ![], _0x2ffea0[_0x1204('0x11')] = ![], _0x2ffea0['isTimerDone'] = ![];
-            var _0x3d4ff0 = ![],
-                _0x51a5a8;
-            _0x2ffea0[_0x1204('0x98')];
-            var _0xff0fad = 0x0;
-            _0x2ffea0[_0x1204('0x4c')] = 0x0;
-            var _0xe5c396, _0x11e0c4 = 0x2,
-                _0x49a65a = {
-                    'r': 0x32,
-                    'x': 0x0,
-                    'y': 0x0,
-                    'vx': 0x4
-                },
-                _0x1549b0 = {
-                    'img': null,
-                    'x': 0x0,
-                    'y': 0x0,
-                    'vx': 0xa,
-                    'w': 0x14,
-                    'h': 0x0
-                },
-                _0x3d5a0b = 0xa,
-                _0x84a0ba = {
-                    'img': null,
-                    'x': 0x0,
-                    'y': 0x0,
-                    'vx': 0x2,
-                    'distance': 0x1,
-                    'w': 0x3c,
-                    'h': 0x28
-                },
-                _0x221d09 = {
-                    'r': 0x1e,
-                    'x': 0x0,
-                    'y': 0x0,
-                    'vx': 0xa
-                };
-            _0x2ffea0[_0x1204('0x76')] = function () {
-                _0x2ffea0[_0x1204('0x47')] = _0x2ffea0[_0x1204('0x1b')](_0x1204('0x1d')), _0x2ffea0[_0x1204('0x8d')] = _0x2ffea0[_0x1204('0x1b')](_0x1204('0x4e')), _0x2ffea0[_0x1204('0x8e')] = _0x2ffea0['loadImage'](_0x1204('0xa5')), _0x2ffea0[_0x1204('0x1c')] = _0x2ffea0[_0x1204('0x1b')](_0x1204('0x5f')), _0x2ffea0[_0x1204('0x39')] = _0x2ffea0[_0x1204('0x1b')]('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/sonic_jump_1.png'), _0x2ffea0[_0x1204('0x78')] = _0x2ffea0['loadImage'](_0x1204('0x7c')), _0x2ffea0['game_over_img'] = _0x2ffea0[_0x1204('0x1b')](_0x1204('0x46')), _0x2ffea0['cactus_img'] = _0x2ffea0[_0x1204('0x1b')](_0x1204('0x5c')), _0x2ffea0[_0x1204('0x52')] = _0x2ffea0[_0x1204('0x1b')]('https://raw.githubusercontent.com/m0inur/m0inur.github.io/master/js/sonic/assets/colored_cloud.png'), _0x2ffea0['ground_img'] = _0x2ffea0[_0x1204('0x1b')](_0x1204('0x4a')), _0x2ffea0[_0x1204('0x3f')] = _0x2ffea0['loadFont'](_0x1204('0xaf')), _0x2ffea0['numberFont'] = _0x2ffea0['loadFont']('../fonts/Superstar-M54.ttf');
-            }, _0x2ffea0[_0x1204('0x84')] = function () {
-                var _0xbe256a = $('#last-card'),
-                    _0xc0cda7 = _0xbe256a[_0x1204('0x3')]() - 0x1e,
-                    _0x31075d = _0xbe256a[_0x1204('0x16')](),
-                    _0x5a1f67 = _0xbe256a[_0x1204('0x13')]();
-                _0x2ffea0[_0x1204('0x7f')] = _0x2ffea0[_0x1204('0x1a')](_0xc0cda7, _0x31075d), _0x2ffea0[_0x1204('0x7f')]['parent'] = $(_0x1204('0x10')), _0x2ffea0[_0x1204('0x7f')][_0x1204('0x13')](_0x5a1f67[_0x1204('0x88')] + 0x27, _0x5a1f67[_0x1204('0x9d')] + cards_top), _0x1549b0[_0x1204('0xbc')] = _0x51a5a8, _0x1549b0['x'] = 0x14, _0x1549b0['y'] = _0x2ffea0[_0x1204('0x54')] - 0x1e, _0x1549b0['w'] = _0x2ffea0[_0x1204('0x6c')], _0x1549b0['h'] = 0x14, _0x1549b0 = new Ground(_0x2ffea0, _0x51a5a8), $(_0x1204('0x99'))[_0x1204('0x62')](function () {
-                    !_0x3d4ff0 && (_0x3d4ff0 = !![], _0x1b94b7 = !![]), $(_0x1204('0x99'))[_0x1204('0xa7')]('hidden'), $(_0x1204('0x99'))[_0x1204('0x57')]('show');
-                }), _0x49a65a = new Sonic(_0x2ffea0), _0x2ffea0[_0x1204('0x23')](_0x2ffea0[_0x1204('0x2d')], _0x2ffea0[_0x1204('0x2d')]);
-            }, _0x2ffea0[_0x1204('0x6e')] = function () {
-                darkMode ? _0x2ffea0[_0x1204('0x4b')](_0x1204('0x85')) : _0x2ffea0[_0x1204('0x4b')](_0x1204('0x9b'));
-                if (_0x1b94b7) {
-                    if (!d134c5982c6d4bc0d3bdb96a2bf5af49) {
-                        !_0x2ffea0[_0x1204('0x67')] && (_0x2ffea0[_0x1204('0x68')](0x28), _0x11e0c4 > 0x0 && (_0x2ffea0[_0x1204('0x5b')](_0x2ffea0[_0x1204('0xa8')]), darkMode ? _0x2ffea0[_0x1204('0x37')](_0x1204('0x26')) : _0x2ffea0['fill']('#333'), _0x2ffea0[_0x1204('0x0')]('' + _0x11e0c4, _0x2ffea0[_0x1204('0x6c')] / 0x2, _0x2ffea0[_0x1204('0x54')] / 0x2)), _0x2ffea0[_0x1204('0xa1')] % 0x3c == 0x0 && _0x11e0c4 > 0x0 && (_0x11e0c4 -= 0x1, _0x2ffea0[_0x1204('0x5b')](_0x2ffea0['numberFont']), darkMode ? _0x2ffea0[_0x1204('0x37')](_0x1204('0x26')) : _0x2ffea0[_0x1204('0x37')](_0x1204('0xf')), _0x2ffea0['text']('' + _0x11e0c4, _0x2ffea0[_0x1204('0x6c')] / 0x2, _0x2ffea0['height'] / 0x2)), _0x11e0c4 == 0x0 && (_0x2ffea0[_0x1204('0x67')] = !![]));
-                        if (_0x2ffea0[_0x1204('0x67')]) {
-                            if (_0x2ffea0[_0x1204('0xa1')] % 0xa == 0x0) {
-                                !_0x2ffea0[_0x1204('0xa2')] && _0x2ffea0['score']++;
-                                if (_0x2ffea0['score'] > 0xa && _0x2ffea0[_0x1204('0x4c')] < 0x14) _0x121ce2 = 1.75, speed = 0xc;
-                                else {
-                                    if (_0x2ffea0[_0x1204('0x4c')] > 0x14 && _0x2ffea0[_0x1204('0x4c')] < 0x1e) _0x121ce2 = 1.5, speed = 0xe;
-                                    else {
-                                        if (_0x2ffea0[_0x1204('0x4c')] > 0x1e && _0x2ffea0[_0x1204('0x4c')] < 0x28) _0x121ce2 = 1.25, speed = 0x10;
-                                        else {
-                                            if (_0x2ffea0[_0x1204('0x4c')] > 0x28 && _0x2ffea0[_0x1204('0x4c')] < 0x3c) _0x121ce2 = 0x1, speed = 0x12;
-                                            else {
-                                                if (_0x2ffea0['score'] > 0x3c && _0x2ffea0[_0x1204('0x4c')] < 0x64) _0x121ce2 = 0.75, speed = 0x14;
-                                                else _0x2ffea0[_0x1204('0x4c')] > 0x64 && (_0x121ce2 = 0.5, speed = 0x16);
-                                            }
-                                        }
-                                    }
-                                }
-                            }!_0x2ffea0['playerIsDead'] && (_0x2ffea0[_0x1204('0x68')](0x11), _0x2ffea0[_0x1204('0x5b')](_0x2ffea0[_0x1204('0x3f')]), _0x2ffea0['text']('Score:\x20' + _0x2ffea0[_0x1204('0x4c')], _0x2ffea0[_0x1204('0x6c')] - 0x46, 0x19));
-                            _0x221d09['x'] = _0x2ffea0['width'], _0x221d09['y'] = _0x2ffea0[_0x1204('0x54')] - _0x221d09['r'] - 0x46, _0x84a0ba['x'] = _0x2ffea0[_0x1204('0x6c')], _0x84a0ba['y'] = _0x2ffea0[_0x1204('0x7')](_0x2ffea0['height'] - 0x64, 0x0), _0x1549b0[_0x1204('0x6e')](), _0x1549b0[_0x1204('0x74')](_0x3d5a0b);
-                            0.005 > _0x2ffea0[_0x1204('0x7')](0x1) && (_0x84a0ba[_0x1204('0x82')] = _0x2ffea0['random'](0x32, 0x64), _0x2ffba2['push'](new Cloud(_0x84a0ba['x'], _0x84a0ba['y'], _0x84a0ba['vx'], _0x84a0ba['spaceBetween'], _0x84a0ba['w'], _0x84a0ba['h'])));
-                            for (var _0xf541d3 of _0x2ffba2) {
-                                _0xf541d3[_0x1204('0x6e')](_0x2ffea0), _0xf541d3['move'](), _0xf541d3['x'] < -0x32 && _0x2ffba2[_0x1204('0x60')](_0x920925, 0x1);
-                            }
-                            _0x49a65a[_0x1204('0x6e')](_0x2ffea0, _0x84a0ba['vx'], _0x221d09['vx'], _0x3d5a0b), _0x49a65a[_0x1204('0x74')](_0x2ffea0);
-                            0.01 > _0x2ffea0['random'](0x1) && (_0x7a7807 && (_0x2b7b55[_0x1204('0x83')](new Cactus(_0x221d09['r'], _0x221d09['x'], _0x221d09['y'], _0x221d09['vx'], _0x221d09[_0x1204('0x79')])), _0x7a7807 = ![]));
-                            !_0x7a7807 && (_0x2ffea0[_0x1204('0xa1')] % 0xf == 0x0 && (_0x2e1ffd -= 0.25, _0x2e1ffd <= 0x0 && (_0x7a7807 = !![], _0x2e1ffd = _0x121ce2)));
-                            for (var _0x920925 = 0x0; _0x920925 < _0x2b7b55[_0x1204('0x21')]; _0x920925++) {
-                                _0x49a65a['hits'](_0x2b7b55[_0x920925], _0x2ffea0), _0x2b7b55[_0x920925][_0x1204('0x6e')](_0x2ffea0), _0x2b7b55[_0x920925][_0x1204('0x74')](_0x2ffea0), _0x2b7b55[_0x920925]['x'] < -0x19 && _0x2b7b55[_0x1204('0x60')](_0x920925, 0x1);
-                            }
-                            _0x2ffea0[_0x1204('0xa2')] && (_0xff0fad++, _0xff0fad % 0x78 == 0x0 && (_0x2ffea0[_0x1204('0xa2')] = ![], _0x2ffea0[_0x1204('0x11')] = !![], _0x3d4ff0 = ![], _0x1b94b7 = ![], _0x2ffea0[_0x1204('0x67')] = ![], _0x2ffea0[_0x1204('0x4c')] = 0x0, _0x11e0c4 = 0x2, _0x2b7b55 = [], _0x2ffba2 = [], $(_0x1204('0x56'))[_0x1204('0x57')](_0x1204('0x66')), $(_0x1204('0x40'))[_0x1204('0x57')](_0x1204('0x8b')), $(_0x1204('0x40'))[_0x1204('0x34')]({
-                                'opacity': 0x1
-                            }), $(_0x1204('0xd'))[_0x1204('0x34')]({
-                                'left': '10px',
-                                'opacity': 0x1
-                            }), $('#contact-info')[_0x1204('0x34')]({
-                                'top': _0x1204('0x53')
-                            })));
-                        }
-                    }
-                }
-            }, $(document)[_0x1204('0x33')](function () {
-                $(window)[_0x1204('0xae')](function () {
-                    var _0x225982 = $(_0x1204('0x10')),
-                        _0x3bc406 = _0x225982[_0x1204('0x3')]() - 0x1e,
-                        _0x2ae3f1 = _0x225982[_0x1204('0x16')](),
-                        _0x258057 = _0x225982[_0x1204('0x13')]();
-                    _0x2ffea0[_0x1204('0x41')](_0x3bc406, _0x2ae3f1), _0x2ffea0[_0x1204('0x7f')][_0x1204('0x13')](_0x258057[_0x1204('0x88')] + 0x27, _0x258057[_0x1204('0x9d')] + cards_top);
-                });
-            }), _0x2ffea0['keyPressed'] = function () {
-                _0x2ffea0[_0x1204('0x77')] == '\x20' && _0x49a65a[_0x1204('0x1f')]();
-            }, _0x2ffea0[_0x1204('0x4d')] = function () {
-                _0x2ffea0['mouseX'] < _0x2ffea0[_0x1204('0x6c')] && _0x2ffea0[_0x1204('0x36')] > 0x0 && _0x2ffea0[_0x1204('0x45')] < _0x2ffea0[_0x1204('0x54')] && _0x2ffea0[_0x1204('0x45')] > 0x0 && _0x49a65a[_0x1204('0x1f')](_0x2ffea0);
-            };
-        }
-    },
-    snakeSketch = _0x3a3ee6 => {
-        var _0x23ceae, _0x55825f, _0x892dc6 = 0x1;
-        _0x3a3ee6['score'] = 0x0, _0x3a3ee6[_0x1204('0x75')] = ![], _0x3a3ee6[_0x1204('0x27')] = ![], _0x3a3ee6[_0x1204('0x72')] = 0x0, _0x3a3ee6[_0x1204('0x28')] = ![], _0x3a3ee6[_0x1204('0x76')] = function () {
-            _0x3a3ee6[_0x1204('0x51')] = _0x3a3ee6[_0x1204('0x1b')](_0x1204('0x5a')), _0x3a3ee6[_0x1204('0x3f')] = _0x3a3ee6['loadFont']('../fonts/Orbitron-Bold.ttf'), _0x3a3ee6[_0x1204('0xa8')] = _0x3a3ee6[_0x1204('0x1e')](_0x1204('0xe'));
-        }, _0x3a3ee6[_0x1204('0x84')] = function () {
-            var _0x277a76 = $(_0x1204('0x6b')),
-                _0xbe6a83 = _0x277a76[_0x1204('0x3')]() - 0x1e,
-                _0x4bd2e6 = _0x277a76['innerHeight'](),
-                _0x1622fa = _0x277a76[_0x1204('0x13')]();
-            _0x3a3ee6['cnvs'] = _0x3a3ee6[_0x1204('0x1a')](_0xbe6a83, _0x4bd2e6), _0x3a3ee6[_0x1204('0xb1')][_0x1204('0x87')] = $(_0x1204('0x6b')), _0x3a3ee6[_0x1204('0xb1')][_0x1204('0x13')](_0x1622fa[_0x1204('0x88')] + 0x27, _0x1622fa[_0x1204('0x9d')]), isPlaying = !![], _0x23ceae = new Snake(_0x3a3ee6, 0xc, 0xc, 0xff), _0x23ceae['x'] = 0x2, _0x23ceae['y'] = 0x2, _0x55825f = new Food(_0x3a3ee6, 0xf, 0xf, [0xff, 0x0, 0x64], !![]), _0x3a3ee6[_0x1204('0x59')](0xd);
-        }, _0x3a3ee6[_0x1204('0x5')] = function () {
-            _0x3a3ee6['isPlaying'] == ![] && ((keys['w'] || keys['s'] || keys['a'] || keys['d'] || _0x3a3ee6[_0x1204('0x2c')] || _0x3a3ee6['DOWN_ARROW'] || _0x3a3ee6[_0x1204('0xb0')] || _0x3a3ee6[_0x1204('0x4f')]) && (_0x3a3ee6[_0x1204('0x70')] = !![]));
-            switch (_0x3a3ee6[_0x1204('0x8')]) {
-                case keys['w']:
-                case _0x3a3ee6[_0x1204('0x2c')]: {
-                    _0x23ceae['dir'](0x0, -_0x892dc6);
-                    break;
-                }
-                case keys['s']:
-                case _0x3a3ee6[_0x1204('0x93')]: {
-                    _0x23ceae[_0x1204('0xc')](0x0, _0x892dc6);
-                    break;
-                }
-                case keys['a']:
-                case _0x3a3ee6[_0x1204('0xb0')]: {
-                    _0x23ceae[_0x1204('0xc')](-_0x892dc6, 0x0);
-                    break;
-                }
-                case keys['d']:
-                case _0x3a3ee6[_0x1204('0x4f')]: {
-                    _0x23ceae[_0x1204('0xc')](_0x892dc6, 0x0);
-                    break;
-                }
-                default: {
-                    return ![];
-                    break;
-                }
+            if (darkMode) {
+                c.background("#383358")
+            } else {
+                c.background("#fff")
             }
-        }, _0x3a3ee6['draw'] = function () {
-            if (_0x3a3ee6[_0x1204('0x70')]) {
-                var _0x500765 = $('#fourth-card'),
-                    _0x8155a1 = _0x500765[_0x1204('0x3')]() - 0x1e,
-                    _0x5b8814 = _0x500765[_0x1204('0x16')](),
-                    _0x349307 = _0x500765[_0x1204('0x13')]();
-                _0x3a3ee6['resizeCanvas'](_0x8155a1, _0x5b8814), _0x3a3ee6[_0x1204('0xb1')][_0x1204('0x13')](_0x349307[_0x1204('0x88')] + 0x27, _0x349307[_0x1204('0x9d')]), _0x3a3ee6[_0x1204('0x75')] = !![];
-            }
-            if (_0x892dc6 > 0xa) _0x892dc6 = 0x2;
-            else {
-                if (_0x892dc6 > 0x14) _0x892dc6 = 0x3;
-                else {
-                    if (_0x892dc6 > 0x1e) _0x892dc6 = 0x4;
-                    else {
-                        if (_0x892dc6 > 0x1e) _0x892dc6 = 0x5;
-                        else {
-                            if (_0x892dc6 > 0x1e) _0x892dc6 = 0x6;
-                            else {
-                                if (_0x892dc6 > 0x1e) _0x892dc6 = 0x7;
-                                else {
-                                    if (_0x892dc6 > 0x1e) _0x892dc6 = 0x8;
-                                    else {
-                                        if (_0x892dc6 > 0x1e) _0x892dc6 = 0x9;
-                                        else _0x892dc6 > 0x1e && (_0x892dc6 = 0xa);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            _0x3a3ee6[_0x1204('0xa1')] % 0x1 == 0x0 && _0x3a3ee6[_0x1204('0x9a')]();
-            if (_0x3a3ee6[_0x1204('0x75')]) {
+
+            if (isPlaying) {
                 if (!d134c5982c6d4bc0d3bdb96a2bf5af49) {
-                    _0x3a3ee6[_0x1204('0x19')]();
-                    _0x23ceae['eat'](_0x55825f) && (_0x3a3ee6[_0x1204('0x4c')]++, _0x23ceae[_0x1204('0x9e')]++, _0x55825f[_0x1204('0x92')](_0x3a3ee6));
-                    for (var _0x5e360d = 0x0; _0x5e360d < _0x23ceae['tail'][_0x1204('0x21')]; _0x5e360d++) {
-                        var _0x39a598 = _0x23ceae[_0x1204('0xb3')][_0x5e360d]['x'],
-                            _0x16ddc8 = _0x23ceae[_0x1204('0xb3')][_0x5e360d]['y'],
-                            _0x492d85 = _0x3a3ee6[_0x1204('0x8f')](_0x39a598, _0x16ddc8, _0x55825f['x'], _0x55825f['y']);
-                        _0x492d85 < 0x7 && _0x55825f['rewind'](_0x3a3ee6);
-                        if (_0x23ceae[_0x1204('0x64')](_0x3a3ee6, _0x39a598, _0x16ddc8)) {
-                            _0x23ceae[_0x1204('0xac')]();
-                            break;
-                        } else _0x3a3ee6[_0x1204('0x19')](), !darkMode ? _0x3a3ee6[_0x1204('0x37')](_0x1204('0xaa')) : _0x3a3ee6[_0x1204('0x37')](_0x1204('0x7e')), _0x3a3ee6['rect'](_0x39a598, _0x16ddc8, _0x23ceae['w'], _0x23ceae['h']);
+                    if (!c.isTimerDone) {
+                        c.textSize(40)
+                        if (timer > 0) {
+                            c.textFont(c.numberFont)
+                            if (darkMode) {
+                                c.fill("#e5e5ea");
+                            } else {
+                                c.fill("#333")
+                            }
+                            c.text("" + timer, c.width / 2, c.height / 2);
+                        }
+                        if (c.frameCount % 60 == 0 && timer > 0) { // if the c.frameCount is divisible by 60, then a second has passed. it will stop at 0
+                            timer -= 1;
+                            c.textFont(c.numberFont)
+                            if (darkMode) {
+                                c.fill("#e5e5ea");
+                            } else {
+                                c.fill("#333")
+                            }
+                            c.text("" + timer, c.width / 2, c.height / 2);
+                        }
+                        if (timer == 0) {
+                            c.isTimerDone = true;
+                        }
                     }
-                    _0x23ceae[_0x1204('0xb8')](_0x3a3ee6), !_0x3a3ee6[_0x1204('0x27')] && _0x23ceae['update'](_0x3a3ee6), _0x55825f['show'](_0x3a3ee6);
+                    if (c.isTimerDone) {
+                        //         // c.Score increments per second
+                        if (c.frameCount % 10 == 0) {
+                            if (!c.playerIsDead) {
+                                c.score++;
+                            }
+                            if (c.score > 10 && c.score < 20) {
+                                minCactusWaitTime = 1.75;
+                                speed = 12
+                            } else if (c.score > 20 && c.score < 30) {
+                                minCactusWaitTime = 1.5;
+                                speed = 14
+                            } else if (c.score > 30 && c.score < 40) {
+                                minCactusWaitTime = 1.25;
+                                speed = 16
+                            } else if (c.score > 40 && c.score < 60) {
+                                minCactusWaitTime = 1;
+                                speed = 18
+                            } else if (c.score > 60 && c.score < 100) {
+                                minCactusWaitTime = 0.75;
+                                speed = 20
+                            } else if (c.score > 100) {
+                                minCactusWaitTime = 0.5;
+                                speed = 22
+                            }
+                        }
+                        if (!c.playerIsDead) {
+                            c.textSize(17);
+                            c.textFont(c.orbi)
+                            c.text('Score: ' + c.score, c.width - 70, 25);
+                        }
+
+                        // Object Properties
+
+                        // Cactus
+                        cactus.x = c.width;
+                        cactus.y = c.height - cactus.r - 70;
+                        // cactus.y = random(cactus.y, cactus.y + 15);
+
+                        // Cloud Properties
+                        cloud.x = c.width;
+                        cloud.y = c.random(c.height - 100, 0);
+
+
+                        // Ground
+
+                        ground.draw();
+                        ground.move(groundVel);
+                        // Cloud
+                        if (0.005 > c.random(1)) {
+                            cloud.spaceBetween = c.random(50, 100);
+                            clouds.push(new Cloud(cloud.x, cloud.y, cloud.vx, cloud.spaceBetween, cloud.w, cloud.h));
+                        }
+
+                        for (var cl of clouds) {
+                            cl.draw(c);
+                            cl.move();
+
+                            if (cl.x < -50) {
+                                clouds.splice(i, 1);
+                            }
+                        }
+
+                        // Sonic
+                        sonic.draw(c, cloud.vx, cactus.vx, groundVel);
+                        sonic.move(c);
+
+                        // Cactus
+                        if (0.01 > c.random(1)) {
+                            if (isCactusTime) {
+                                cactuses.push(new Cactus(cactus.r, cactus.x, cactus.y, cactus.vx, cactus.distance));
+                                isCactusTime = false;
+                            }
+                        }
+
+                        if (!isCactusTime) {
+                            if (c.frameCount % 15 == 0) {
+                                cactusWaitime -= 0.25;
+
+                                if (cactusWaitime <= 0) {
+                                    isCactusTime = true;
+                                    cactusWaitime = minCactusWaitTime;
+                                }
+                            }
+                        }
+
+                        for (var i = 0; i < cactuses.length; i++) {
+                            // Collision Detection
+
+                            sonic.hits(cactuses[i], c);
+
+                            cactuses[i].draw(c);
+                            cactuses[i].move(c);
+
+                            if (cactuses[i].x < -25) {
+                                cactuses.splice(i, 1);
+                            }
+                        }
+
+                        if (c.playerIsDead) {
+                            frameCounter++;
+                            if (frameCounter % 120 == 0) {
+                                c.playerIsDead = false;
+                                c.hasReloaded = true;
+                                isGameLaunched = false;
+                                isPlaying = false;
+                                c.isTimerDone = false;
+                                c.score = 0;
+                                timer = 2;
+
+                                cactuses = [];
+                                clouds = [];
+                                // $("#last-play-btn").click(function () {
+                                //     c.setup();
+                                //     $("#last-play-btn").toggleClass("hidden");
+                                // });
+
+                                $("#third-card-fade").removeClass("third-card")
+                                $("#last-card-fade").removeClass("last-card");
+
+                                $("#last-card-fade").animate({
+                                    opacity: 1
+                                });
+
+                                $("#contact-brand").animate({
+                                    left: "10px",
+                                    opacity: 1
+                                });
+
+                                $("#contact-info").animate({
+                                    top: '0px'
+                                });
+                            }
+
+                        }
+                    }
                 }
             }
-        }, $(document)[_0x1204('0x33')](function () {
-            $(window)[_0x1204('0xae')](function () {
-                var _0x3db1da = $(_0x1204('0x6b')),
-                    _0x297dbf = _0x3db1da[_0x1204('0x3')]() - 0x1e,
-                    _0x550059 = _0x3db1da[_0x1204('0x16')](),
-                    _0x32cf89 = _0x3db1da[_0x1204('0x13')]();
-                _0x3a3ee6[_0x1204('0x41')](_0x297dbf, _0x550059), _0x3a3ee6[_0x1204('0xb1')]['position'](_0x32cf89[_0x1204('0x88')] + 0x27, _0x32cf89[_0x1204('0x9d')]);
+        }
+
+        $(document).ready(function () {
+            $(window).resize(function () {
+                var lastCard = $("#last-card");
+                var lastW = lastCard.innerWidth() - 30;
+                var lastH = lastCard.innerHeight();
+
+                var lastX = lastCard.position();
+
+                c.resizeCanvas(lastW, lastH);
+                c.canvas3.position(lastX.left + 39, lastX.top + cards_top);
             });
         });
-    };
-var myp5_bubblePopperSketch = new p5(bubblePopperSketch),
-    myp5_snakeSketch = new p5(snakeSketch),
-    myp5_sonicSketch = new p5(sonicSketch),
-    myp5_brickBreakerSketch = new p5(brickBreakerSketch);
+        // User Inputs
+
+        c.keyPressed = function () {
+            if (c.key == ' ') {
+                sonic.jump();
+            }
+        }
+
+        c.mousePressed = function () {
+            if (c.mouseX < c.width && c.mouseX > 0 && c.mouseY < c.height && c.mouseY > 0) {
+                sonic.jump(c);
+            }
+        }
+    }
+}
+// Snake
+const snakeSketch = c => {
+    var snake, food;
+    var speed = 1;
+    c.score = 0;
+    c.isPlaying = false;
+    c.playerHasDied = false;
+    c.deadCounter = 0;
+    c.initObjects = false
+
+    c.preload = function () {
+        c.heart = c.loadImage('../img/heart.png')
+
+        c.orbi = c.loadFont('../fonts/Orbitron-Bold.ttf');
+        c.numberFont = c.loadFont('../fonts/Superstar-M54.ttf');
+    }
+    c.setup = function () {
+        var snakeCard = $("#snake-card");
+        var snakeW = snakeCard.innerWidth() - 30;
+        var snakeH = snakeCard.innerHeight();
+
+        var snakeX = snakeCard.position();
+        c.cnvs = c.createCanvas(snakeW, snakeH);
+        c.cnvs.parent = $('#snake-card');
+
+        c.cnvs.position(snakeX.left + 39, snakeX.top);
+
+        isPlaying = true;
+
+        snake = new Snake(c, 12, 12, 255);
+        snake.x = 2;
+        snake.y = 2;
+        food = new Food(c, 15, 15, [255, 0, 100], true);
+        c.frameRate(13);
+    }
+    c.keyPressed = function () {
+        if (c.isPlaying == false) {
+            if (keys.w || keys.s || keys.a || keys.d || c.UP_ARROW || c.DOWN_ARROW || c.LEFT_ARROW || c.RIGHT_ARROW) {
+                c.setCanvas = true;
+            }
+        }
+
+        switch (c.keyCode) {
+            case keys.w:
+            case c.UP_ARROW: {
+                snake.dir(0, -speed);
+                break;
+            }
+            case keys.s:
+            case c.DOWN_ARROW: {
+                snake.dir(0, speed);
+                break;
+            }
+            case keys.a:
+            case c.LEFT_ARROW: {
+                snake.dir(-speed, 0);
+                break;
+            }
+            case keys.d:
+            case c.RIGHT_ARROW: {
+                snake.dir(speed, 0);
+                break;
+            }
+            default: {
+                return false;
+                break;
+            }
+        }
+
+    }
+    c.draw = function () {
+
+        if (c.setCanvas) {
+            var snakeCard = $("#snake-card");
+            var snakeW = snakeCard.innerWidth() - 30;
+            var snakeH = snakeCard.innerHeight();
+
+            var snakeX = snakeCard.position();
+
+            c.resizeCanvas(snakeW, snakeH);
+            c.cnvs.position(snakeX.left + 39, snakeX.top);
+
+            c.isPlaying = true;
+        }
+
+        if (speed > 10) {
+            speed = 2
+        } else if (speed > 20) {
+            speed = 3
+        } else if (speed > 30) {
+            speed = 4
+        } else if (speed > 30) {
+            speed = 5
+        } else if (speed > 30) {
+            speed = 6
+        } else if (speed > 30) {
+            speed = 7
+        } else if (speed > 30) {
+            speed = 8
+        } else if (speed > 30) {
+            speed = 9
+        } else if (speed > 30) {
+            speed = 10
+        }
+
+        if (c.frameCount % 1 == 0) {
+            c.clear();
+        }
+        if (c.isPlaying) {
+            if (!d134c5982c6d4bc0d3bdb96a2bf5af49) {
+                if (snake.eat(food)) {
+                    c.score++;
+                    snake.rise++;
+                    food.rewind(c);
+                }
+
+                for (var i = 0; i < snake.tail.length; i++) {
+                    var xTail = snake.tail[i].x;
+                    var yTail = snake.tail[i].y;
+                    var diff = c.dist(xTail, yTail, food.x, food.y);
+
+                    if (diff < 7) {
+                        food.rewind(c);
+                    }
+
+                    if (snake.crash(c, xTail, yTail)) {
+                        snake.death();
+                        break;
+                    } else {
+                        c.noStroke();
+                        if (!darkMode) {
+                            c.fill("#01C2FF")
+                        } else {
+                            c.fill("#44abff")
+                        }
+                        c.rect(xTail, yTail, snake.w, snake.h);
+                    }
+                }
+
+                snake.show(c);
+                if (!c.playerHasDied) {
+                    snake.update(c);
+                }
+                food.show(c);
+            }
+        }
+    }
+
+    $(document).ready(function () {
+        $(window).resize(function () {
+            var snakeCard = $("#snake-card");
+            var snakeW = snakeCard.innerWidth() - 30;
+            var snakeH = snakeCard.innerHeight();
+
+            var snakeX = snakeCard.position();
+
+            c.resizeCanvas(snakeW, snakeH);
+            c.cnvs.position(snakeX.left + 39, snakeX.top);
+        });
+    });
+}
+var myp5_bubblePopperSketch = new p5(bubblePopperSketch);
+var myp5_snakeSketch = new p5(snakeSketch);
+var myp5_sonicSketch = new p5(sonicSketch);
+var myp5_brickBreakerSketch = new p5(brickBreakerSketch);

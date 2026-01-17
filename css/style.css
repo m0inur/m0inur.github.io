@@ -6,6 +6,10 @@
   --link-dark: #4DA3FF;
   --link-light: #1A73E8;
   --link-hover-gold: #D9B441;
+  --card-shadow: 0 3px 12px rgba(255, 255, 255, 0.12),
+    0 0 15px rgba(255, 255, 255, 0.08);
+  --card-shadow-hover: 0 6px 18px rgba(255, 255, 255, 0.16),
+    0 0 21px rgba(255, 255, 255, 0.1);
   
   --subtitle-color: var(--subtitle-dark);
   --section-color: var(--section-dark);
@@ -16,12 +20,20 @@
   --subtitle-color: var(--subtitle-light);
   --section-color: var(--section-light);
   --link-color: var(--link-light);
+  --card-shadow: 0 3px 12px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(0, 0, 0, 0.12);
+  --card-shadow-hover: 0 6px 18px rgba(0, 0, 0, 0.24),
+    0 0 21px rgba(0, 0, 0, 0.14);
 }
 
 .bg-darkMode {
   --subtitle-color: var(--subtitle-dark);
   --section-color: var(--section-dark);
   --link-color: var(--link-dark);
+  --card-shadow: 0 3px 12px rgba(255, 255, 255, 0.12),
+    0 0 15px rgba(255, 255, 255, 0.08);
+  --card-shadow-hover: 0 6px 18px rgba(255, 255, 255, 0.16),
+    0 0 21px rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -126,8 +138,7 @@ body {
 /* Card */
 
 .last-card:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: var(--card-shadow-hover);
 }
 
 .first-card {
@@ -167,15 +178,13 @@ body {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: var(--card-shadow);
   border: white;
   /* background-color: #333; */
 }
 
 .card:hover {
-  box-shadow: 0 12 24 0 rgba(0, 0, 0, 0.2),
-    0 8px 22px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: var(--card-shadow-hover);
 }
 
 /* Card */
@@ -294,17 +303,17 @@ canvas {
   font-weight: large;
 }
 
-.hide-fourth-card {
+.hide-snake-card {
   height: 0px;
   max-height: 0px;
   min-height: 0px;
 }
 
-.show-fourth-card {
+.show-snake-card {
   height: 150px;
 }
 
-.hide-fourth-card {
+.hide-snake-card {
   height: 0px;
 }
 

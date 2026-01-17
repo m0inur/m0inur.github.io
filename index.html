@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <!-- MIDDLE CARD -->
+    <!-- PROJECTS CARD -->
     <div class="container" style="margin-top: 20px;">
       <div class="row justify-content-center">
         <div class="ml-4 col-xl-8 col-lg-10 col-sm-12 col-12" id="middle-card">
@@ -141,7 +141,21 @@
                   </p>
 
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- SKILLS CARD -->
+    <div class="container" style="margin-top: 20px;">
+      <div class="row justify-content-center">
+        <div class="ml-4 col-xl-8 col-lg-10 col-sm-12 col-12" id="middle-card">
+          <div class="second-card-img">
+            <div class="card second-card-img" id="middle-card-fade">
+
+              <div class="card-body">
 
                 <!-- SKILLS -->
                 <p class="section-text d-block custom_tooltip mt-3" id="second-card-btn">
@@ -153,7 +167,7 @@
 
                   <p class="subtitle-text mb-0">Software Engineering</p>
                   <p class="project-desc mb-0">
-                    End-to-end system design, modular architecture, state management, performance optimization
+                    System design, modular architecture, state management, performance optimization
                   </p>
 
                   <hr class="paragraph-separator">
@@ -188,8 +202,6 @@
                   <p class="project-desc mb-0">
                     Git, GitHub, debugging, profiling, production issue fixing
                   </p>
-
-
                 </div>
 
               </div>
@@ -199,7 +211,7 @@
       </div>
     </div>
 
-    <!-- LAST CARD -->
+    <!-- PROFILES CARD -->
     <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
       <div class="row justify-content-center">
         <div class="ml-4 col-xl-8 col-lg-10 col-sm-12 col-12" id="last-card">
@@ -257,8 +269,8 @@
   
   <div class="container" style="background-color: transparent;">
     <div class="row justify-content-center">
-      <div class="ml-4 col-xl-8 col-lg-10 col-sm-12 col-12" id="fourth-card">
-        <div class="card hide-fourth-card" id="fourth-card-show" style="opacity: 0;">
+      <div class="ml-4 col-xl-8 col-lg-10 col-sm-12 col-12" id="snake-card">
+        <div class="card hide-snake-card" id="snake-card-game" style="opacity: 0;">
 
 
 
@@ -351,7 +363,7 @@
     }
 
 
-    // $("#fourth-card-show").css("opacity", "0");
+    // $("#snake-card-game").css("opacity", "0");
 
     $("#logo").click(function () {
       if (calc_crypted_full_name == crypted_full_name) {
@@ -426,10 +438,10 @@
             e.view.event.preventDefault();
           }
 
-          if ($("#fourth-card-show").hasClass("hide-fourth-card")) {
+          if ($("#snake-card-game").hasClass("hide-snake-card")) {
             if (keycode == '119' || keycode == '97' || keycode == '100' || keycode == '115') {
-              $("#fourth-card-show").removeClass("hide-fourth-card")
-              $("#fourth-card-show").toggleClass("show-fourth-card")
+              $("#snake-card-game").removeClass("hide-snake-card")
+              $("#snake-card-game").toggleClass("show-snake-card")
 
               setTimeout(removeHeart, 500)
 
