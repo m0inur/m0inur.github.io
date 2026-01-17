@@ -87,7 +87,7 @@ const brickBreakerSketch = c => {
                     if (!c.isDead) {
                         paddle.move(c)
                     }
-                    
+
                     didAlreadyCollide = false
                     for (let i = bricks.length - 1; i >= 0; i--) {
                         if (collidable) {
@@ -400,7 +400,7 @@ const bubblePopperSketch = c => {
         c.textFrames = 0;
         c.increaseOpacity = -1;
 
-        var lastPowerup;
+        var profilePowerup;
         var showingPowerup = false;
         var showMaxBubbles = 8;
         var allPowerups = [
@@ -610,7 +610,7 @@ const bubblePopperSketch = c => {
                     for (var i = 0; i < allPowerups.length; i++) {
                         if (0.03 > c.random(1)) {
                             if (!showingPowerup) {
-                                if (lastPowerup != allPowerups[i]) {
+                                if (profilePowerup != allPowerups[i]) {
                                     powerup.type = allPowerups[i]
 
                                     if (allPowerups[i] == "trippleBullets") {
@@ -628,7 +628,7 @@ const bubblePopperSketch = c => {
                                     }
 
                                     showingPowerup = true;
-                                    lastPowerup = powerup.type
+                                    profilePowerup = powerup.type
                                     powerupShowText = true;
                                 }
                             }
@@ -946,7 +946,7 @@ const sonicSketch = c => {
         // Collsion
         c.score = 0;
         var cnv;
-        var timer = 2;
+        var timer = 3;
 
         // Object Properies
         var sonic = {
@@ -1004,16 +1004,16 @@ const sonicSketch = c => {
             c.numberFont = c.loadFont('../fonts/Superstar-M54.ttf');
         };
         c.setup = function () {
-            var lastCard = $("#last-card");
-            var lastW = lastCard.innerWidth() - 30;
-            var lastH = lastCard.innerHeight();
+            var profileCard = $("#profile-card");
+            var profileW = profileCard.innerWidth() - 30;
+            var profileH = profileCard.innerHeight();
 
-            var lastX = lastCard.position();
+            var profileX = profileCard.position();
 
-            c.canvas3 = c.createCanvas(lastW, lastH);
-            c.canvas3.parent = $('#last-card');
+            c.canvas3 = c.createCanvas(profileW, profileH);
+            c.canvas3.parent = $('#profile-card');
 
-            c.canvas3.position(lastX.left + 39, lastX.top + cards_top);
+            c.canvas3.position(profileX.left + 39, profileX.top + cards_top);
             // c.canvas3.style('z-index', -1);
 
             // Ground Properties
@@ -1030,19 +1030,19 @@ const sonicSketch = c => {
             //         isGameLaunched = true;
             //         isPlaying = true;
 
-            //         $("#last-play-btn").toggleClass("hidden");
+            //         $("#profile-play-btn").toggleClass("hidden");
             //     }
             // }
 
-            $("#last-play-btn").click(function () {
+            $("#profile-play-btn").click(function () {
 
                 if (!isGameLaunched) {
                     isGameLaunched = true;
                     isPlaying = true;
 
                 }
-                $("#last-play-btn").toggleClass("hidden");
-                $("#last-play-btn").removeClass("show")
+                $("#profile-play-btn").toggleClass("hidden");
+                $("#profile-play-btn").removeClass("show")
             });
 
             // Sonic 
@@ -1085,6 +1085,7 @@ const sonicSketch = c => {
                         }
                         if (timer == 0) {
                             c.isTimerDone = true;
+                            c.text("", c.width / 2, c.height / 2);
                         }
                     }
                     if (c.isTimerDone) {
@@ -1199,24 +1200,24 @@ const sonicSketch = c => {
 
                                 cactuses = [];
                                 clouds = [];
-                                // $("#last-play-btn").click(function () {
+                                // $("#profile-play-btn").click(function () {
                                 //     c.setup();
-                                //     $("#last-play-btn").toggleClass("hidden");
+                                //     $("#profile-play-btn").toggleClass("hidden");
                                 // });
 
-                                $("#third-card-fade").removeClass("third-card")
-                                $("#last-card-fade").removeClass("last-card");
+                                $("#profile-card-fade").removeClass("profile-card")
+                                $("#profile-card-fade").removeClass("profile-card");
 
-                                $("#last-card-fade").animate({
+                                $("#profile-card-fade").animate({
                                     opacity: 1
                                 });
 
-                                $("#contact-brand").animate({
+                                $("#profile-brand").animate({
                                     left: "10px",
                                     opacity: 1
                                 });
 
-                                $("#contact-info").animate({
+                                $("#profile-info").animate({
                                     top: '0px'
                                 });
                             }
@@ -1229,14 +1230,14 @@ const sonicSketch = c => {
 
         $(document).ready(function () {
             $(window).resize(function () {
-                var lastCard = $("#last-card");
-                var lastW = lastCard.innerWidth() - 30;
-                var lastH = lastCard.innerHeight();
+                var profileCard = $("#profile-card");
+                var profileW = profileCard.innerWidth() - 30;
+                var profileH = profileCard.innerHeight();
 
-                var lastX = lastCard.position();
+                var profileX = profileCard.position();
 
-                c.resizeCanvas(lastW, lastH);
-                c.canvas3.position(lastX.left + 39, lastX.top + cards_top);
+                c.resizeCanvas(profileW, profileH);
+                c.canvas3.position(profileX.left + 39, profileX.top + cards_top);
             });
         });
         // User Inputs

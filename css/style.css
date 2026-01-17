@@ -10,7 +10,7 @@
     0 0 15px rgba(255, 255, 255, 0.08);
   --card-shadow-hover: 0 6px 18px rgba(255, 255, 255, 0.16),
     0 0 21px rgba(255, 255, 255, 0.1);
-  
+
   --subtitle-color: var(--subtitle-dark);
   --section-color: var(--section-dark);
   --link-color: var(--link-dark);
@@ -63,7 +63,8 @@ canvas {
   border: none;
   height: 1px;
   background-color: rgb(157, 157, 157);
-  margin: 0.75rem 0; /* top & bottom */
+  margin: 0.75rem 0;
+  /* top & bottom */
 }
 
 /* Tooltip */
@@ -137,7 +138,7 @@ body {
 
 /* Card */
 
-.last-card:hover {
+.profile-card:hover {
   box-shadow: var(--card-shadow-hover);
 }
 
@@ -149,7 +150,7 @@ body {
   z-index: -1;
 }
 
-.last-card {
+.profile-card {
   z-index: -1;
 }
 
@@ -163,7 +164,7 @@ body {
   border: white;
 }
 
-.third-card-img {
+.profile-card-img {
   background-image: url(../img/card-bg/hideout.png);
   border: white;
 }
@@ -208,7 +209,8 @@ body {
 }
 
 .project-desc {
-  opacity: 0.8;      /* this is the key */
+  opacity: 0.8;
+  /* this is the key */
   line-height: 1.55;
   margin-top: 6px;
 }
@@ -290,7 +292,7 @@ canvas {
   margin-top: 25px;
 }
 
-.contact-brand {
+.profile-brand {
   margin-left: 0px;
   margin-top: 0px;
   font-size: 30px;
@@ -415,10 +417,12 @@ canvas {
   z-index: 999;
 }
 
-#contact-info {
+#profile-info {
   display: flex;
-  gap: 24px;          /* space between links */
-  flex-wrap: wrap;    /* allows wrapping on small screens */
+  gap: 24px;
+  /* space between links */
+  flex-wrap: wrap;
+  /* allows wrapping on small screens */
   align-items: center;
   justify-content: center;
 }
@@ -490,7 +494,7 @@ canvas {
     font-weight: 185;
   }
 
-  #contact-info {
+  #profile-info {
     margin-left: 8px;
   }
 
@@ -512,7 +516,7 @@ canvas {
     margin-top: 3px;
   }
 
-  .third-card-img .card .container {
+  .profile-card-img .card .container {
     width: 100%;
   }
 
