@@ -40,12 +40,12 @@
 
   <div class="body-particles">
 
-    <!-- FIRST CARD -->
-    <div class="container" id="first_card">
+    <!-- HERO CARD -->
+    <div class="container" id="hero_card">
       <div class="row justify-content-center" style="padding-top: 30px;">
-        <div class="ml-4 col-xl-8 col-lg-10 col-sm-12 col-12" id="first-card">
-          <div id="first-canvas-background">
-            <div class="card first-card-img" id="first-card-fade">
+        <div class="ml-4 col-xl-8 col-lg-10 col-sm-12 col-12" id="hero-card">
+          <div id="hero-canvas-background">
+            <div class="card hero-card-img" id="hero-card-fade">
 
               <div class="card-body" style="text-align:center;">
                 <img id="logo" src="img/icon.png" class="icon">
@@ -136,7 +136,7 @@
                   </p>
 
                   <p class="project-desc mb-0">
-                    Implemented offline-first application architecture, AI opponents,
+                    Implemented offline-hero application architecture, AI opponents,
                     and optimized UI systems with focus on stability and performance
                   </p>
 
@@ -186,7 +186,7 @@
 
                   <p class="subtitle-text mb-0">Application Development</p>
                   <p class="project-desc mb-0">
-                    Android applications, interactive systems, offline-first logic, AI-driven behavior
+                    Android applications, interactive systems, offline-hero logic, AI-driven behavior
                   </p>
 
                   <hr class="paragraph-separator">
@@ -367,15 +367,15 @@
 
     $("#logo").click(function () {
       if (calc_crypted_full_name == crypted_full_name) {
-        $("#first-card-fade").toggleClass("first-card")
+        $("#hero-card-fade").toggleClass("hero-card")
 
-        $("#first-canvas-background").addClass("first-card-img")
+        $("#hero-canvas-background").addClass("hero-card-img")
         $("#logo").animate({
           left: "-18",
           top: "125",
         });
 
-        $("#first-card-fade").animate({
+        $("#hero-card-fade").animate({
           opacity: 0
         });
 
@@ -457,7 +457,7 @@
       });
     }
     // let renderer = createCanvas(sketchWidth, sketchHeight);
-    // renderer.parent("first_card");
+    // renderer.parent("hero_card");
   </script>
 
   <script src="js/main-sketch.js"></script>
