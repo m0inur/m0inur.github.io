@@ -376,7 +376,6 @@ const bubblePopperSketch = c => {
             icon: null
         }
 
-
         var shipBub = {
             r: 13
         }
@@ -414,7 +413,6 @@ const bubblePopperSketch = c => {
         c.playerIsDead = false;
         // Images
         c.preload = function () {
-
             c.player_img = c.loadImage('../img/bubblepopper/spaceship.png');
             c.bullet_img = c.loadImage('../img/bubblepopper/bullet.png');
             c.trippleBullets = c.loadImage('../img/bubblepopper/tripple_bullet.png');
@@ -427,20 +425,20 @@ const bubblePopperSketch = c => {
         }
 
         c.setup = function () {
-            var middleCard = $("#middle-card");
-            var middleW = middleCard.innerWidth() - 30;
-            var middleH = middleCard.innerHeight();
+            var projectCard = $("#project-card");
+            var projectW = projectCard.innerWidth() - 30;
+            var projectH = projectCard.innerHeight();
 
-            var middleX = middleCard.position();
-            canvas = c.createCanvas(middleW, middleH);
-            canvas.parent = $('#middle-card');
+            var projectX = projectCard.position();
+            canvas = c.createCanvas(projectW, projectH);
+            canvas.parent = $('#project-card');
             // c.canvas = canvas
 
-            canvas.position(middleX.left + 39, middleX.top + cards_top);
+            canvas.position(projectX.left + 39, projectX.top + cards_top);
             // canvas.style('z-index', 1);
 
             playerProps.x = c.width / 2 - 30;
-            playerProps.y = $("#middle-card").innerHeight() / 1.3;
+            playerProps.y = $("#project-card").innerHeight() / 1.3;
 
             player = new Player(playerProps.x, playerProps.y, playerProps.w, playerProps.h, playerProps.type);
             playerClone = new Player(playerCloneProps.x, playerCloneProps.y, playerCloneProps.w, playerCloneProps.h, playerCloneProps.type);
@@ -453,7 +451,7 @@ const bubblePopperSketch = c => {
             c.textFont(c.orbi);
             c.textAlign(c.CENTER, c.CENTER);
 
-            $("#second-card-btn").click(function () {
+            $("#project-card-btn").click(function () {
                 isPlaying = true;
             });
             c.angleMode(c.DEGREES);
@@ -662,6 +660,7 @@ const bubblePopperSketch = c => {
 
                                     break;
 
+                                    // If bubble burst
                                 } else if (bubbles[i].bubbleHittable < 0) {
                                     c.particlesFps = 0
                                     bParticle.x = c.random(bubbles[i].x, bubbles[i].x);
@@ -873,10 +872,10 @@ const bubblePopperSketch = c => {
 
                 gameEndingFrames++;
                 if (gameEndingFrames % 120 == 0) {
-                    $("#middle-canvas-background").removeClass("middle-card-img")
-                    $("#middle-card-fade").removeClass("middle-card")
+                    $("#project-canvas-background").removeClass("project-card-img")
+                    $("#project-card-fade").removeClass("project-card")
 
-                    $("#middle-card-fade").animate({
+                    $("#project-card-fade").animate({
                         left: "0",
                         top: "0",
                         opacity: '1'
@@ -905,18 +904,19 @@ const bubblePopperSketch = c => {
 
         $(document).ready(function () {
             $(window).resize(function () {
-                var middleCard = $("#middle-card");
-                var middleW = middleCard.innerWidth() - 30;
-                var middleH = middleCard.innerHeight();
+                var projectCard = $("#project-card");
+                var projectW = projectCard.innerWidth() - 30;
+                var projectH = projectCard.innerHeight();
 
-                var middleX = middleCard.position();
+                var projectX = projectCard.position();
 
-                c.resizeCanvas(middleW, middleH);
-                canvas.position(middleX.left + 39, middleX.top + cards_top);
+                c.resizeCanvas(projectW, projectH);
+                canvas.position(projectX.left + 39, projectX.top + cards_top);
             });
         });
     }
 }
+
 // Sonic 
 const sonicSketch = c => {
     if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -1073,7 +1073,7 @@ const sonicSketch = c => {
                             }
                             c.text("" + timer, c.width / 2, c.height / 2);
                         }
-                        if (c.frameCount % 60 == 0 && timer > 0) { // if the c.frameCount is divisible by 60, then a second has passed. it will stop at 0
+                        if (c.frameCount % 60 == 0 && timer > 0) { // if the c.frameCount is divisible by 60, then a project has passed. it will stop at 0
                             timer -= 1;
                             c.textFont(c.numberFont)
                             if (darkMode) {
@@ -1089,7 +1089,7 @@ const sonicSketch = c => {
                         }
                     }
                     if (c.isTimerDone) {
-                        //         // c.Score increments per second
+                        //         // c.Score increments per project
                         if (c.frameCount % 10 == 0) {
                             if (!c.playerIsDead) {
                                 c.score++;
@@ -1255,6 +1255,7 @@ const sonicSketch = c => {
         }
     }
 }
+
 // Snake
 const snakeSketch = c => {
     var snake, food;
@@ -1416,6 +1417,7 @@ const snakeSketch = c => {
         });
     });
 }
+
 var myp5_bubblePopperSketch = new p5(bubblePopperSketch);
 var myp5_snakeSketch = new p5(snakeSketch);
 var myp5_sonicSketch = new p5(sonicSketch);

@@ -65,14 +65,17 @@
     <!-- PROJECTS CARD -->
     <div class="container" style="margin-top: 20px;">
       <div class="row justify-content-center">
-        <div class="ml-4 col-xl-8 col-lg-10 col-sm-12 col-12" id="middle-card">
-          <div class="second-card-img">
-            <div class="card second-card-img" id="middle-card-fade">
+        <div class="ml-4 col-xl-8 col-lg-10 col-sm-12 col-12" id="project-card">
+          <div class="project-card-img">
+            <div class="card project-card-img" id="project-card-fade">
 
               <div class="card-body">
 
                 <!-- PROJECTS -->
-                <p class="section-text d-block"><i class="fa fa-cog"></i> Projects</p>
+                <p class="section-text d-block custom_tooltip" id="project-card-btn">
+                  <i class="fa fa-cog"></i> Projects
+                  <span class="tooltiptext">Click Me!</span>
+                </p>
                 <div style="margin-left: 30px; margin-right: 30px;">
 
                   <a class="card-text-link project-title"
@@ -148,16 +151,15 @@
     <!-- SKILLS CARD -->
     <div class="container" style="margin-top: 20px;">
       <div class="row justify-content-center">
-        <div class="ml-4 col-xl-8 col-lg-10 col-sm-12 col-12" id="middle-card">
-          <div class="second-card-img">
-            <div class="card second-card-img" id="middle-card-fade">
+        <div class="ml-4 col-xl-8 col-lg-10 col-sm-12 col-12" id="skill-card">
+          <div class="skill-card-img">
+            <div class="card skill-card-img" id="skill-card-fade">
 
               <div class="card-body">
 
                 <!-- SKILLS -->
-                <p class="section-text d-block custom_tooltip mt-3" id="second-card-btn">
+                <p class="section-text d-block mt-3">
                   <i class="fa fa-cog"></i> Skills
-                  <span class="tooltiptext">Click Me!</span>
                 </p>
 
                 <div style="margin-left: 30px; margin-right: 30px;">
@@ -323,39 +325,6 @@
         keys[e.keyCode] = false;
       },
       false);
-    var uncrypted_full_name = $(".full-name").text();
-    var d134c5982c6d4bc0d3bdb96a2bf5af49 = false;
-
-    var calc_crypted_full_name = calcMD5(uncrypted_full_name);
-    var crypted_full_name = "d17db9ad73b89294bb67de3074769ff1";
-
-    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      $(".custom_tooltip").hover(function () {
-        setTimeout(function () {
-          $(".custom_tooltip").toggleClass("tooltip-fixed");
-        }, 800);
-      });
-
-      $('.custom_tooltip').mouseleave(function () {
-        console.log($(".tooltiptext").offset())
-      });
-
-      $("#second-card-btn").click(function () {
-
-        if (calc_crypted_full_name == crypted_full_name) {
-
-          $("#middle-card-fade").toggleClass("middle-card")
-          $("#profile-canvas-background").addClass("profile-card-img")
-
-          $("#profile-canvas-background").css("box-shadow", "10px 10px 40px #FFC900");
-          $("#middle-card-fade").animate({
-            opacity: '0'
-          });
-        }
-      });
-    }
-
-
     // $("#snake-card-game").css("opacity", "0");
 
     $("#logo").click(function () {
@@ -390,6 +359,37 @@
       }
     });
 
+    var uncrypted_full_name = $(".full-name").text();
+    var d134c5982c6d4bc0d3bdb96a2bf5af49 = false;
+
+    var calc_crypted_full_name = calcMD5(uncrypted_full_name);
+    var crypted_full_name = "d17db9ad73b89294bb67de3074769ff1";
+
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      $(".custom_tooltip").hover(function () {
+        setTimeout(function () {
+          $(".custom_tooltip").toggleClass("tooltip-fixed");
+        }, 800);
+      });
+
+      $('.custom_tooltip').mouseleave(function () {
+        console.log($(".tooltiptext").offset())
+      });
+
+      $("#project-card-btn").click(function () {
+        if (calc_crypted_full_name == crypted_full_name) {
+
+          $("#project-card-fade").toggleClass("project-card")
+          $("#profile-canvas-background").addClass("profile-card-img")
+
+          $("#profile-canvas-background").css("box-shadow", "10px 10px 40px #FFC900");
+          $("#project-card-fade").animate({
+            opacity: '0'
+          });
+        }
+      });
+    }
+
 
     if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 
@@ -397,7 +397,7 @@
         if (calc_crypted_full_name == crypted_full_name) {
           $("#profile-card-fade").addClass("profile-card")
 
-          $("#second-canvas-background").addClass("second-card-img")
+          $("#project-canvas-background").addClass("project-card-img")
           $("#profile-card-fade").animate({
             opacity: 0
           });

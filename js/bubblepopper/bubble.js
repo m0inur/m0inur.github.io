@@ -18,9 +18,7 @@ class Bubble {
     } else {
       this.y += this.vy - 1.5;
     }
-
   }
-
 
   hitPlayer(c, bubble, player) {
     //     var x1 = player.x + player.width * 0.42;
