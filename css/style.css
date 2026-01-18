@@ -406,8 +406,8 @@ canvas {
 }
 
 .hackerrank-image {
-  -webkit-mask-image: url("../img/hackerrank.svg");
-  mask-image: url("../img/hackerrank.svg");
+  -webkit-mask-image: url("../img/hackerranklogo.svg");
+  mask-image: url("../img/hackerranklogo.svg");
 }
 
 .leetcode-image {
